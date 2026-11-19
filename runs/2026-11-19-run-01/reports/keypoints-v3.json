@@ -1,0 +1,10 @@
+{
+  "target": "attempts/keypoints-v3.md",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-keypoints runs/2026-11-19-run-01/attempts/keypoints-v3.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "判定 pass：程式檢查沒有錯誤，必須修 0 項，建議 0 項。範圍照指派，只驗 H1 要求修改的 K19、K23。（1）diff：和 keypoints.md（v2 通過版）比較，只有兩行不同，第 89 行在 K19、第 107 行在 K23；其他 23 個重點、所有標題與 wiki 屬性一字未改，也沒有隱藏字元或空白差異。（2）K19 第 3 點對照 topics/evaluation.md「題目是不是早就看過」：前半「OptiMUS 承認，取自教科書的題目可能已經出現在 LLM 的訓練資料中」與 Wiki 第 47 行一字不差，補回了「OptiMUS 承認」這個出處；後半「OptiGuide 的團隊自己寫題目，避免 LLM 在訓練時看過」與第 48 行一字不差。「因此」已刪除，兩件事用分號分開、各自標出是誰的說法，不再寫成因果關係，和 Wiki 把兩點分列的寫法一致，沒有新的錯誤。（3）K23 第 2 點對照 topics/training-and-data.md「效果」：已在開頭補上「綜述以統一方式重測，」，整句和 Wiki 第 22 行一字不差（只少了 [S1] 標記）；42.9%、59.5%、IndustryOR、ComplexLP、ORLM-LLaMA-3 8B 都沒有變，沒有新的錯誤。補上這句後，K23 和 K21、K22「不同考卷與 LLM 的數字不能直接比」的提醒不再互相矛盾。v2 報告其餘 6 項建議（K14 兩項、K16、K18、K02、K09）不在這次修改範圍，使用者在 H1 選擇只修 K19、K23，所以不重新列出。"
+}

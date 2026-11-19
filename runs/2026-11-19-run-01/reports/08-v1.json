@@ -1,0 +1,17 @@
+{
+  "target": "attempts/08-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/08-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "第 4 個列點（下方 <ul class=\"mt\"> 的第一點）",
+      "problem": "任務單這一點寫的是「極限：漏掉限制式、語法錯誤修得好……」，草稿拿掉了「極限：」。標題有「但只修得了小錯」，大致看得懂；但下方兩點緊接在三個系統後面，新手可能以為是第四種做法，或分不清這兩點講的是整個驗證回圈的極限。",
+      "fix": "在第一點開頭加回「極限：」（多 2 個中文字，全張 170 字，仍在 180 字內），不要再加其他字。"
+    }
+  ],
+  "summary": "程式檢查通過（中文 168 字、5 個 <li>），補充的版面檢查也確認放得進 1280×720。角色、標題、data-wiki、data-points 和任務單一致，5 個重點都有；逐句對照 system/04-verify-and-repair.md、system/02-modeling.md、topics/glossary.md 都正確（「一開始就想錯的模型修不了」出自 02-modeling.md）；單元測試、評估器、反向反思、Safeguard 第一次出現都有白話解釋，單元測試保留「自製術語表」，GPT-3.5 用了 nw；沒有講 OPRO 的分數回饋、指揮者與彙整器、把題目換句話說多跑幾次；元件合規，沒有自己寫 <footer>。只有 1 項建議，判定通過。"
+}

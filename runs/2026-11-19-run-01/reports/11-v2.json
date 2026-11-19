@@ -1,0 +1,29 @@
+{
+  "target": "attempts/11-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/11-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/11-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "新增的 <p class=\"note\">「三種角色都有「試、檢查、再改」的回圈。」的位置",
+      "problem": "這句是用來說明「翻譯者標的是第 1～3 站，但 OptiMUS、Chain-of-Experts 在第 08、15 張也做驗證修正」。現在它排在三個選角色的列點之後，離三欄裡的「第 1～3 站」比較遠，讀者比較不容易把兩者連起來。llm-roles.md 的順序是角色表 → 共同點（這一句）→ 怎麼用這張表。",
+      "fix": "可選。把這一行移到三欄正下方、<ul class=\"mt\"> 之前，改成 <p class=\"note mt\">，字數不變。V2 在 /tmp 試過（沒加 --run），render-slide 通過。"
+    },
+    {
+      "level": "建議",
+      "where": "解說員欄的「what-if」",
+      "problem": "what-if 沒有包 nw。目前桌面和手機都沒有斷開，render-slide 也通過。第 19 張這次已經把 what-if 包進 nw，slide-rules 第 4 節也規定帶連字號的名稱用 nw。",
+      "fix": "可選。改成 <span class=\"nw\">what-if</span>，字數不變。"
+    },
+    {
+      "level": "建議",
+      "where": "tasks/11.md、outline.md 第 70～75 行（不屬於草稿本身）",
+      "problem": "任務單和大綱沒有新增的那一句，和投影片不一樣。",
+      "fix": "不用退回 L7。請 C 在任務單與大綱補上這一句，並記在 run-log。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。和 slides/11.html 相比只多了一行 <p class=\"note\">「三種角色都有「試、檢查、再改」的回圈。」，字數從 152 增加到 166。這句是否照 wiki/topics/llm-roles.md：是。它和「共同點」第 2 點的原句一字不差，引號也是原本的「」，沒有多加推論。deck-v1 針對這張的那一項已修好。Wiki 用的正是這一句來說明三種角色都會反覆修正。第 4 站的 Wiki 頁標題也是「驗證與修正：試、檢查、再改」，第 08 張的標題「錯了就帶著錯誤訊息重寫」講的也是這個回圈。所以新手看到第 08、15 張 OptiMUS、Chain-of-Experts 出現在驗證修正那一欄，不會再以為和「翻譯者：第 1～3 站」互相矛盾。這句和第 09 張（OptiGuide 可以重複幾步）、第 12 張（OPRO 的回圈流程圖）也一致，沒有產生新的衝突。照任務單：角色 concept、標題、data-wiki、data-points（K16）都一致，5 個重點都有講；三欄放角色，選角色放 ul.mt，「本 Wiki 的整理」放在 p.small。新句是 Whole 依 deck-v1 指派加的，不是 B 自己加的。忠實：逐句對照 llm-roles.md 都正確，沒有講 OPRO 怎麼運作，也沒有出現數字。翻譯者、最佳化器、解說員第一次出現都有白話解釋。元件合規，沒有自己寫 <footer>。V2 在 /tmp 截圖看過（沒加 --run）：桌面最下方還有空間，手機沒有橫向捲動，Chain-of-Experts 沒有斷行。必須修 0 項，判定通過。"
+}

@@ -1,0 +1,17 @@
+{
+  "target": "attempts/03-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/03-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "<h2> 標題",
+      "problem": "標題寫成「先備知識：模型有三個部分，交給求解器來算」，任務單與大綱是「先備知識：最佳化模型的三個部分與求解器」。新標題的內容在 data-wiki 裡都有（02-modeling.md「一個最佳化模型有三個部分」、03-code-and-solver.md 說求解器負責算），沒有講錯，也沒有提前講 LLM 寫程式；但和任務單不一致，而且拿掉了「最佳化」，新手看標題不知道是哪一種模型。",
+      "fix": "改回任務單的標題「先備知識：最佳化模型的三個部分與求解器」。兩個標題都是 18 個中文字，改完全張仍是 176 字。如果認為新標題比較好，請 Agent C 同步改大綱與任務單 03。"
+    }
+  ],
+  "summary": "程式檢查通過。角色、data-wiki、data-points（K07 K10 K02）和任務單一致；決策變數、目標函數、限制式、求解器、線性規劃（LP）、混合整數規劃都和 Wiki 原文一致（只把「我們」改成「你」），6 個新術語第一次出現都有白話解釋，也保留了「自製術語表」字樣；元件只用 cols、part var/obj/con、ul.mt 與 note，沒有標準式 f(x)，也沒有手搖飲的完整題目。只有 1 項建議（標題用字和任務單不同），判定通過。"
+}

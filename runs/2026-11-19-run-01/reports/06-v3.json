@@ -1,0 +1,17 @@
+{
+  "target": "attempts/06-v3.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/06-v3.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/06-v3.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "tasks/06.md、outline.md 第 34 行（不屬於草稿本身）",
+      "problem": "任務單和大綱還是寫「準確率：比賽第一名 UIUC-NLP 0.899」，和這次改寫後的投影片不一樣。",
+      "fix": "不用退回 L7。請 C 把任務單與大綱改成「建模第一名 UIUC-NLP」，並記在 run-log。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。和 slides/06.html、attempts/06-v2.html 相比只改了一個地方：表格第 1 列的「比賽第一名」改成「建模第一名」，字數不變，仍是 165 字。deck-v1 針對這張的那一項是可選修法，現在已經做了。「建模第一名」夠不夠：夠。(1) 這幾個字已經寫出這是「建模」那一項的第一名，和 05 的「標出 6 種元素」那一項不同。兩張的站別（第 1 站、第 2 站）和指標（F1 分數、準確率）也都不同。(2) 和 Wiki 一致：system/02-modeling.md 把 NL4Opt 子任務 2 放在「第 2 站 建模」，表格寫「比賽第一名 UIUC-NLP 0.899」；comparisons/systems.md 也寫「子任務 2 第一名 0.899」。(3) deck-v1 原本建議寫「建模這一項的第一名」，少了「這一項的」不影響意思，因為「建模」本身就是項目名稱。版本差異裡的「比第一名高 2.8 個百分點」就在表格正下方，指的是上一列，不會混淆。(4) 桌面和手機上「建模第一名 UIUC-NLP」都在同一行，表格欄位沒有被拆開。副作用是「比賽」這兩個字從第 06 張拿掉了，處理建議寫在 05-v2 的報告裡；06 的欄太窄，不必改這張。照任務單：角色 concept、標題、data-wiki、data-points（K08 K09）都一致，6 個重點都有講，2.8 與 2 個百分點兩個都寫了，UIUC-NLP、gpt-3.5-turbo、Chain-of-Experts 都有用 nw。忠實：逐句對照 02-modeling.md 都正確，沒有出現基準模型、BART、0.610、Markdown、指揮者、彙整器。意義表示第一次出現就有白話解釋。元件合規，沒有自己寫 <footer>。和 05、07 說法一致，沒有新問題。必須修 0 項，判定通過。"
+}

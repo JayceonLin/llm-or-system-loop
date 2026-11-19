@@ -1,0 +1,23 @@
+{
+  "target": "attempts/16-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/16-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面（split 右欄的 6 個列點）",
+      "problem": "內容超出 1280×720（S5）。版面預覽實測 .slide-body 超出 185px，有 2 段文字跑出投影片範圍：split 讓右欄只剩約 700px 寬，6 個列點都換成 2～3 行，第 5 點（Chain-of-Experts 的數字）後半被截斷，第 6 點「基礎模型、考卷不同，數字不能直接比……」完全看不到；第 6 點也是第 18 張 Q3 的答案出處之一。check-slide 只查字數與列點數，所以沒有抓到。（量測方式：V2 在專案外的 /tmp 用 slides/template.html 和 build 相同的頁尾產生方式組出暫時預覽，再用 check.py render 的 DESKTOP_JS 在 1280×720 量測並截圖；沒有加 --run，專案內沒有寫任何檔案。）另外，專案新增的 python3 loop/check.py render-slide 在 2026-11-19T13:33:01+08:00 對這張的檢查（不是本 V2 執行的，結果在 checks.jsonl）也得到相同結論，錯誤原文：「桌面 1280×720 16-v1.html「評估：考卷不一定可靠，數字不」內容超出版面（高 185px、寬 0px）（S5）」；「桌面 1280×720 16-v1.html「評估：考卷不一定可靠，數字不」有文字跑出投影片範圍（S5）」",
+      "fix": "拿掉 <div class=\"split\"> 與大數字，6 點都放在一般的 <ul>，把 54.0% 併入第 1 點，例如「<strong>基準資料集</strong>是大家共用的考卷。綜述請 11 位專家重新檢查：錯誤率至少有 NL4Opt 26.4%、IndustryOR 54.0%；除了 EasyLP，每份都超過 15%」，其餘 5 點不變。V2 實測這個寫法：169 個中文字、6 個列點、check-slide 無錯誤、超出 0px（版面用到 95%），也保留了「至少」。任務單寫的是大數字「可用」，改成一般列點仍符合任務單。"
+    },
+    {
+      "level": "建議",
+      "where": "第 3 個列點（比目標值）",
+      "problem": "「只比最佳值」沒有說跟什麼比。topics/evaluation.md 寫的是「只比較求解器算出的最佳值和標準答案」，新手第一次看到「比目標值」，可能看不出是在拿什麼比對。",
+      "fix": "改成「只比最佳值和標準答案」，多 5 個中文字；照上一項的改法全張約 174 字，這一點仍是一行。"
+    }
+  ],
+  "summary": "程式檢查通過；角色、標題、data-wiki、data-points 與任務單一致，6 項重點都有講，數字（含「至少」）與說法都和 topics/evaluation.md 一致，三個新術語都有白話解釋，元件合規；但版面實測超出 185px，第 5、6 點被截斷，必須修 1 項、建議 1 項，判定 fail。"
+}

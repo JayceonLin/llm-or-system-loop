@@ -1,0 +1,29 @@
+{
+  "target": "attempts/14-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/14-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/14-v1.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "p.problem 的「奶茶另要 150 毫升鮮奶」；第 5 站的「茶葉多進到 6,000 公克」",
+      "problem": "這是上一份報告的建議，草稿沒改，所以仍然成立。任務單與 examples/tea-shop.md 寫的是「奶茶每杯另要 150 毫升鮮奶」「茶葉每天多進到 6,000 公克」。少了「每杯」，新手可能以為奶茶總共只要 150 毫升；少了「每天」，就看不清楚 what-if 改的是哪個量。",
+      "fix": "加回「每杯」「每天」（4 個字）。現在版面還有空間，改完重跑 render-slide 確認。"
+    },
+    {
+      "level": "建議",
+      "where": "第 3 站「PuLP 3.3.2 實際執行過」",
+      "problem": "這是上一份報告的建議，草稿沒改，所以仍然成立。任務單寫的是「程式用 PuLP 3.3.2 實際執行過」，草稿拿掉了「程式用」，新手看不出被執行的是什麼。",
+      "fix": "改成「程式用 PuLP 3.3.2 實際執行過」，或意思相同的短句。"
+    },
+    {
+      "level": "建議",
+      "where": "div.model 裡的「第 2 站：」",
+      "problem": "這是上一份報告的建議，草稿沒改，所以仍然成立。截圖中它還是等寬字型、字距很鬆的「第　2　站：」，和左上方「第 1 站：」的樣子不一致；手機上「x₂ = 奶茶杯數」也被擠到下一行。",
+      "fix": "把「第 2 站：」移到模型框外，和第 1 站一樣用 p.small 當小標。"
+    }
+  ],
+  "summary": "複查：程式檢查兩項都通過（中文 155 字、3 個 <li>）。上一份報告的必須修已不存在：先前超出 191px，第 5 站與結論被切掉，還蓋到操作列；現在 render-slide 沒有錯誤，截圖中題目、模型、三步與結論都完整，沒有蓋到按鈕，手機版也正常，所以不需要由 C 調整任務單的內容量。之前被切掉的第 5 站 what-if（6,000 公克、400 杯、200 杯、14,000 元）對照 examples/tea-shop.md 一致；結論「手搖飲這題就是一個線性規劃」也和 topics/glossary.md 的「手搖飲範例就是一個線性規劃」一致。其餘內容判斷沿用上一份報告。0 項必須修、3 項建議（都是上一份報告的建議，草稿沒改），判定通過。（版面目視：V2 在專案外的 /tmp 用和 render-slide 相同的組法（slides/template.html 加自動頁尾）截圖，桌面 1280×720 與手機 390×844 都看過；專案內除了 checks.jsonl 沒有寫任何檔案。）"
+}

@@ -1,0 +1,22 @@
+<section class="slide" data-role="concept" data-wiki="system/01-problem-input.md topics/glossary.md" data-points="K05 K06 K02">
+  <div class="slide-body">
+    <h2>第 1 站：把文字題整理成有結構的資料</h2>
+    <div class="cols two">
+      <div class="part">
+        <h3>NL4Opt 競賽</h3>
+        <ul>
+          <li>在題目裡標出 6 種元素：變數、<strong>參數</strong>（題目給的數字）、目標方向、目標名稱、限制方向、限制上限</li>
+          <li>這一項的第一名，<strong><span class="nw">F1</span></strong> 分數是 0.939；<span class="nw">F1</span> 同時考慮「標得準」和「沒漏標」，越接近 1 越好</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h3>OptiMUS</h3>
+        <ul>
+          <li>使用者填一份有 6 個欄位的 <strong><span class="nw">SNOP</span></strong>，數值資料另存成 <strong><span class="nw">JSON</span></strong> 檔（用「名稱：值」存資料的文字格式，自製術語表）</li>
+          <li>好處：很長的數據表不用塞進提示；代價：不能直接用一般文字輸入</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note mt">這就是<strong>抽象模型</strong>：參數先用符號表示，數據之後再給；<strong>具體模型</strong>則把數值直接寫在題目裡。</p>
+  </div>
+</section>

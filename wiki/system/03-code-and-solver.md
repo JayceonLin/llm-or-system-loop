@@ -33,6 +33,9 @@ OptiGuide 讓資料一直留在求解器與資料庫，只有問題與 LLM 產�
 
 ## 成本
 
+下面的 token 是 LLM 計算用量的單位，見[新手術語表](../topics/glossary.md)。
+
+
 OptiMUS 成功的執行平均用掉 4117.1 ± 1509.7 個 token，不含求解器時間，每次都在 7 分鐘內完成 [S3]。
 
 上一站：[建模](02-modeling.md)　下一站：[驗證與修正](04-verify-and-repair.md)。

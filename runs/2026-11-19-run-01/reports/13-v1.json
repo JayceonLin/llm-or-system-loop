@@ -1,0 +1,17 @@
+{
+  "target": "attempts/13-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/13-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "p.answer 裡的 <strong>綜述</strong>",
+      "problem": "p.answer 整段本來就是粗體，所以「綜述」這個新術語在畫面上看不出被標出來（預覽截圖確認）。不影響正確性，也不影響程式檢查。",
+      "fix": "可以不改。如果想讓術語比較明顯，可以把「綜述（整理整個領域的方法、資料集與未來方向的論文）」這句移到 p.answer 前面，獨立成一句一般段落；但要先確認版面仍放得下。"
+    }
+  ],
+  "summary": "程式檢查通過（150 字、0 個 <li>）。照任務單：角色、標題、data-wiki、data-points 都一致，五個重點都有講到，也沒有寫 OR-Instruct、LLMOPT、KTO、MILP-Evolve 或強化學習獎勵的建議；「綜述以統一方式重測」有保留。忠實：三種做法的白話、42.9%、59.5%、在較難的資料集上勝過 Chain-of-Experts、兩個還沒解決的問題，都和 topics/training-and-data.md 一致；「綜述」的白話出自 overview.md，「考卷」出自 topics/evaluation.md。新術語資料合成、監督式微調、對齊、綜述都在第一次出現時用白話解釋（前面 01～12 張的草稿都沒有出現「綜述」）。元件合規，沒有自己寫 footer。用 /tmp 的暫時預覽量過，桌面 1280×720 剛好放得下。只有 1 項建議，判定通過。"
+}

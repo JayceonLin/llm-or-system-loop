@@ -1,0 +1,17 @@
+{
+  "target": "attempts/05-v3.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/05-v3.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/05-v3.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "tasks/05.md 的「建議元件」與「注意」（不屬於草稿本身）",
+      "problem": "任務單還寫「左欄 part 標題只寫『NL4Opt』……（欄標題不放中文字）」，和這次照 deck-v2 改成「NL4Opt 競賽」的投影片相反。之後的 B 或 V2 照字面判斷，可能又改回去。「注意：大綱這張約 177 個中文字」剛好和投影片現在的字數相同（177 字），但大綱有「NL4Opt 競賽：」「OptiMUS：」開頭，算法不同，只是數字湊巧一樣。依指示，這是指定的修改，不判為必須修。outline.md 第 5 張第 1 個列點本來就寫「NL4Opt 競賽：……」，文字不用改。",
+      "fix": "不用退回 L7。請 C 把任務單的建議元件改成「左欄標題寫『NL4Opt 競賽』（依據 01-problem-input.md 的『NL4Opt 競賽把這一步定義成……』），右欄標題只寫『OptiMUS』」，刪掉「（欄標題不放中文字）」；注意改成「投影片 177 字，只剩 3 字空間」。大綱維持原樣即可，同步後記在 run-log。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過，check-slide 與 render-slide 都是 0 個錯誤、0 個警告。和 slides/05.html 相比只改了一個地方：左欄 <h3> 從「NL4Opt」改成「NL4Opt 競賽」，和 deck-v2 的修法一字不差。中文字從 175 增加到 177，和 deck-v2 的估計相同，仍是 4 個 <li>。deck-v2 這一項已解決：第 05 張是整份簡報第一次出現 NL4Opt，欄標題現在就說明它是一場競賽。緊接著的「這一項的第一名」也看得出這場競賽分成好幾項，第 06 張的「建模第一名」「合併任務」也接得上；deck-v2 說第 06 張不用改，V2 同意。說法也和第 20 張書目的「S2 NL4Opt 競賽」一致。忠實：「NL4Opt 競賽」出自 system/01-problem-input.md 的「NL4Opt 競賽把這一步定義成『辨識語意實體』」，這一頁已在 data-wiki 裡。其餘沒改的句子也逐句重新對過：6 種元素和「參數＝題目給的數字」對應元素表；0.939 與 F1 的白話對應「這個子任務的第一名 F1 分數是 0.939……越接近 1 越好」；SNOP 的 6 個欄位、JSON 另存、好處與代價出自同一頁；JSON 的「名稱：值」出自 glossary.md，並標了「自製術語表」；抽象模型、具體模型對應「抽象模型與具體模型」一節。沒有出現基準模型或 0.906。照任務單：角色 concept、標題、data-wiki、data-points（K05 K06 K02）都一致，5 個重點都有講。新術語參數、F1、SNOP、JSON、抽象模型、具體模型第一次出現都有白話解釋，F1、SNOP、JSON 都包了 nw。元件只用 cols two、part、h3、ul、p.note.mt，沒有自己寫 <footer>。版面：V2 在 /tmp/v2-l8-batch 用和 render-slide 相同的組法量測並截圖（沒有寫進專案）。「NL4Opt 競賽」在桌面與手機都是一行；其他每一塊的行數和正式版完全相同；內容底部桌面 516px、手機 652px，也和正式版相同。沒有截斷，也沒有橫向捲動。必須修 0 項、建議 1 項，判定 pass。"
+}

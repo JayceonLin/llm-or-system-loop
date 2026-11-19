@@ -1,0 +1,25 @@
+<section class="slide" data-role="concept" data-wiki="topics/llm-roles.md" data-points="K16">
+  <div class="slide-body">
+    <h2>LLM 的三種角色：翻譯者、最佳化器、解說員</h2>
+    <div class="cols">
+      <div class="part">
+        <p><strong>翻譯者</strong>：把文字題變成模型與程式，交給求解器算。</p>
+        <p class="small">第 1～3 站｜NL4Opt、OptiMUS、<span class="nw">Chain-of-Experts</span></p>
+      </div>
+      <div class="part">
+        <p><strong>最佳化器</strong>：不寫模型，自己提出解，看分數再改進。</p>
+        <p class="small">不走五站｜OPRO</p>
+      </div>
+      <div class="part">
+        <p><strong>解說員</strong>：模型已經有了，幫不會寫程式的人問 what-if，再翻成白話。</p>
+        <p class="small">第 3～5 站｜OptiGuide</p>
+      </div>
+    </div>
+    <ul class="mt">
+      <li>新問題、要從頭建模：用翻譯者。</li>
+      <li>只能評分的問題：可以考慮最佳化器，但它在大問題上有限制。</li>
+      <li>公司已經有模型：用解說員。</li>
+    </ul>
+    <p class="small">這個分法是本 Wiki 的整理，不是某一篇論文提出的。</p>
+  </div>
+</section>

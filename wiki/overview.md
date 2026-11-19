@@ -32,7 +32,7 @@ updated: 2026-11-19
 | OPRO | 不走這五站，讓 LLM 直接找解 | [S5] |
 | 綜述 | 整理整個領域的方法、資料集與未來方向 | [S1] |
 
-完整比較見[系統比較表](comparisons/systems.md)。
+完整比較見[系統比較表](comparisons/systems.md)，所有論文的書目見[資料來源](references.md)。
 
 ## 跨站的主題
 
@@ -42,6 +42,7 @@ updated: 2026-11-19
 - [怎麼評估一個系統](topics/evaluation.md)
 - [訓練與資料合成](topics/training-and-data.md)：讓 LLM 本身更會建模。
 - [限制、風險與設計建議](topics/risks-and-design.md)
+- [新手術語表](topics/glossary.md)：自製的白話解釋，遇到看不懂的詞先查這裡。
 
 ## 建議閱讀順序
 

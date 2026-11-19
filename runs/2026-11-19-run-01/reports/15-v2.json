@@ -1,0 +1,10 @@
+{
+  "target": "attempts/15-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/15-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/15-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。上一份報告的 2 項必須修都已修好：(1) 桌面超出 142px：v2 的內容和 v1 相同，外框更新後就放得下（checks.jsonl 13:37 重量 v1 時桌面已沒有錯誤），render-slide 量到 0px；V2 在 /tmp 用相同組法截圖看過（沒加 --run，沒有寫進專案），代表數字、版本差異與結論都完整顯示，內容底部離版面下緣約 21px。(2) 手機表頭「解釋結果」被拆行：已改成 <span class=\"nw\">解釋結果</span>，手機版不再報錯，表格在 table-wrap 裡左右捲動，整頁沒有橫向捲動。照任務單：角色、標題、data-wiki、data-points 一致；表格說明在表格上方，表頭與 5 列每一格（含 OPRO 的 colspan=\"5\"）都和任務單一字不差；代表數字在表格下方，版本差異用 p.note，最後一點用 p.answer。忠實：涵蓋範圍、代表數字「接近基本提示的兩倍」、67%／接近兩倍／91% 三種說法、「借每一站的做法」與 <strong>不能拿來比誰比較強</strong> 都出自 comparisons/systems.md；沒有寫其他系統的數字或三種角色。這張沒有新術語。元件合規，沒有自己寫 <footer>。沒有必須修，判定通過。"
+}

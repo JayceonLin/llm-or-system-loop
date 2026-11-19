@@ -1,0 +1,17 @@
+{
+  "target": "attempts/20-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/20-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/20-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "S4 與 S6 兩個列點的換行（桌面 1280×720）",
+      "problem": "V2 在 /tmp 截圖看到：S4 第一行最後是「ICLR」，「2024」被擠到第二行開頭，會議名稱和年份分開；S6 第二行只剩「（2023）」一小段。render-slide 的拆行規則不檢查「ICLR 2024」這種中間是空格的名稱，所以沒報錯，也不影響閱讀正確性。",
+      "fix": "可以把「ICLR 2024」包成 <span class=\"nw\">ICLR 2024</span>，S6 的 nw 擴大成 <span class=\"nw\">arXiv:2307.03875（2023）</span>。文字一個字都不用改，篇名仍不要包 nw。這兩處只是排版，不改也可以。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。上一份報告的必須修（桌面超出 282px，S5、S6 與自製說明看不到）已修好：照更新後的任務單改用 <ul class=\"refs\">，自製說明用 <p class=\"note mt\">，render-slide 量到 0px；V2 在 /tmp 用相同組法截圖看過（沒加 --run，沒有寫進專案），6 篇與自製說明都完整顯示，下方還剩約 118px，手機版也沒有橫向捲動。上一份的建議（S3 用「；」）已在任務單與大綱改好，草稿也照寫。照任務單：角色 refs、標題、data-wiki 一致，不寫 data-points；6 個 <li> 去掉標籤後和任務單 6 行逐字相同；nw 只用在 5 個 arXiv 編號和開頭簡稱 Chain-of-Experts，篇名沒有包 nw；自製說明是 p.note，不是第 7 個 <li>。忠實：篇名、會議、arXiv 編號、年份都和 wiki/references.md 一字不差，簡稱出自 overview.md，沒有 references.md 沒寫的書目資訊，也沒有講各篇用在第幾站。這張沒有新術語。元件合規（ul.refs 已列在 slide-rules 第 4 節），沒有自己寫 <footer>。只有 1 項排版建議，判定通過。"
+}

@@ -1,0 +1,23 @@
+{
+  "target": "attempts/20-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/20-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面（6 個 <li> 與最後的自製說明）",
+      "problem": "內容超出 1280×720（S5）。版面預覽實測超出 282px，有 8 段文字跑出投影片範圍：畫面只看得到 S1～S4，S5、S6 與「手搖飲範例與新手術語表是自製內容」那句完全看不到。任務單 20 允許的補救（自製說明改用 <p class=\"small\">）實測只省 14px，仍超出 268px。B 回報時也說沒有確認 1280×720。（量測方式：V2 在專案外的 /tmp 用 slides/template.html 和 build 相同的頁尾產生方式組出暫時預覽，再用 check.py render 的 DESKTOP_JS 在 1280×720 量測並截圖；沒有加 --run，專案內沒有寫任何檔案。）另外，專案新增的 python3 loop/check.py render-slide 在 2026-11-19T13:33:15+08:00 對這張的檢查（不是本 V2 執行的，結果在 checks.jsonl）也得到相同結論，錯誤原文：「桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」內容超出版面（高 282px、寬 0px）（S5）」；「桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」有文字跑出投影片範圍（S5）」；「桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」操作元件「.nav」蓋到投影片文字（S5）」",
+      "fix": "照目前的任務單，B 無法同時做到「6 篇都寫作者、完整篇名、會議、arXiv 編號、年份」又放進 1280×720，所以請 C 先改任務單 20（必要時請 Whole 改 slide-rules），再請 B 重寫。V2 實測幾種做法：(1) 改用 slides/template.html 已有、但 slide-rules 第 4 節沒列的 <ul class=\"refs\">（23px，手機另有樣式），自製說明用 <p class=\"small\">：仍超出 57px；(2) 在 (1) 之外再拿掉 6 篇的作者：超出 0px；(3) 在 (1) 之外只拿掉 S3 的「後續版本發表於 ICML 2024」：仍超出 57px，沒有幫助。要用哪一種，或改用其他寫法，由 C 決定並寫進任務單；如果採用 ul.refs，要把它補進 slide-rules 第 4 節。目前 6 個篇名、年份、arXiv 編號都和 references.md 一字不差，重寫時不要動。"
+    },
+    {
+      "level": "建議",
+      "where": "S3 那一行「arXiv:2310.06116（2023）；後續版本發表於 ICML 2024」（使用者指定判斷）",
+      "problem": "任務單「這張要講」寫的是「（2023），後續版本」，草稿照 wiki/references.md 寫成「（2023）；後續版本」，這是草稿和任務單唯一不同的地方（逐字比對過）。任務單的建議元件與書目出處都說機構、會議、arXiv 編號、年份要「照 references.md 的寫法」，references.md 也是這張列出的依據頁面；分號把「2023 年的 arXiv 版」和「後續版本發表於 ICML 2024」分成兩件事，意思沒變，也和 Wiki 一致。判定可以接受，不列為必須修。另外 S6 省略了 references.md 在篇名後的標記「（OptiGuide）」，這是照任務單，簡稱已寫在開頭「S6 OptiGuide：」，也可以接受。",
+      "fix": "這張不用改。建議 C 把任務單 20 與 outline.md 第 20 張 S3 那一行的「，」改成「；」，和 references.md 一致，下一個 B 或 V2 就不用再判斷一次。"
+    }
+  ],
+  "summary": "程式檢查通過（63 字、6 個列點）；角色、標題、data-wiki 與任務單一致，6 個篇名（含副標、大小寫、彎引號）、年份、arXiv 編號都和 references.md 一字不差，S3 的分號照 references.md 可以接受；但版面實測超出 282px，S5、S6 與自製說明看不到，而且照目前的任務單修不好，必須修 1 項（要先改任務單）、建議 1 項，判定 fail。"
+}

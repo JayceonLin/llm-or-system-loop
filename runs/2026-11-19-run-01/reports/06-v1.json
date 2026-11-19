@@ -1,0 +1,17 @@
+{
+  "target": "attempts/06-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/06-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面（NL4Opt 欄的表格與版本差異）",
+      "problem": "S5：內容放不進 1280×720。補充的 render 檢查報「內容超出版面（高 278px）」「有文字跑出投影片範圍」。三欄每欄只剩約 310px 寬，NL4Opt 欄塞了說明、表格和版本差異，ChatGPT 0.927 那一列只露出上半，版本差異（2.8 與 2 個百分點）整段看不到；表頭「準確率」也被擠成「準確／率」兩行。任務單要求講的 ChatGPT 準確率與版本差異，在畫面上等於沒講。（補充檢查方法：check-slide 不量版面，我把這張接上頁尾、套進 slides/template.html 存到 /tmp，用 python3 loop/check.py render /tmp/檔名.html 量 1280×720；沒有加 --run，不寫入專案。L9 的 render 會報出同樣的錯誤。）",
+      "fix": "不要在窄欄裡放表格。任務單的三欄只是「建議元件」，可以改排。例如改成沒有表頭的全寬表格，三列依序是 NL4Opt、OptiMUS、Chain-of-Experts（第一欄只寫系統名稱），第二欄寫做法；Chain-of-Experts 的四位專家寫成一句話，不拆成 <li>。表格下方一行寫「NL4Opt 準確率：比賽第一名 UIUC-NLP 0.899；ChatGPT（gpt-3.5-turbo）合併任務 0.927」，再接版本差異的 <p class=\"note\">。我在 /tmp 試排過這個版本：中文 168 字、0 個 <li>，放得下，下方還剩約 112px。保留 <strong>意義表示</strong> 與緊跟的白話解釋、UIUC-NLP 與 gpt-3.5-turbo 的 <span class=\"nw\">；不要加回基準模型、BART、0.610、Markdown。改完照上面的補充檢查方法自己量一次，確認沒有超出。"
+    }
+  ],
+  "summary": "程式檢查通過（中文 165 字、4 個 <li>）。內容逐句對照 system/02-modeling.md 都正確：任務單 6 個重點都有，版本差異 2.8 與 2 個百分點兩個都寫了，意義表示第一次出現就有白話解釋，也沒有出現基準模型、BART、0.610、Markdown、指揮者、彙整器；元件合規，沒有自己寫 <footer>。但補充的版面檢查發現三欄放不下，超出 278px，ChatGPT 那一列被切掉、版本差異整段看不到。1 項必須修，判定不通過。"
+}

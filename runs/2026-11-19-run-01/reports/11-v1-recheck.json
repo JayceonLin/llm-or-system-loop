@@ -1,0 +1,10 @@
+{
+  "target": "attempts/11-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/11-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/11-v1.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "複查：程式檢查兩項都通過（中文 152 字、3 個 <li>）。上一份報告的必須修（超出 15px）已不存在：render-slide 沒有錯誤；截圖中三欄、三個列點與「這個分法是本 Wiki 的整理」都完整，下方還有空間，手機版也正常。上一份報告就指出沒有文字被切掉，所以沒有先前被遮住的內容要補看。其餘內容判斷沿用上一份報告。0 項必須修，判定通過。（版面目視：V2 在專案外的 /tmp 用和 render-slide 相同的組法（slides/template.html 加自動頁尾）截圖，桌面 1280×720 與手機 390×844 都看過；專案內除了 checks.jsonl 沒有寫任何檔案。）"
+}

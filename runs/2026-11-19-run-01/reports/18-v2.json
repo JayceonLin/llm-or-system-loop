@@ -1,0 +1,17 @@
+{
+  "target": "attempts/18-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/18-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/18-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "tasks/18.md、outline.md 第 122 行（不屬於草稿本身）",
+      "problem": "任務單和大綱的 Q3 答案還是寫「基礎模型不同、考卷不同」，和投影片不一樣。",
+      "fix": "不用退回 L7。請 C 改成「用的 LLM 不同、考卷不同」，並記在 run-log。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。和 slides/18.html 相比只改了 Q3 的答案：「基礎模型不同」改成「用的 LLM 不同」，字數從 138 變成 136。deck-v1 針對這張的那一項已修好。這張和第 16 張都不再使用「基礎模型」，兩張的說法一致：16 寫「用的 LLM、考卷不同，數字不能直接比」，18 寫「用的 LLM 不同、考卷不同，數字不能直接比」。第 16 張現在寫明「Chain-of-Experts 的準確率：原論文……；綜述改用 GPT-4o 重測」，Q3 的「兩篇論文的準確率」可以直接對到那一點。三題的答案都能在前面找到：Q1 在第 07 張，Q2 在第 08 張，Q3 在第 16 張（第 15 張也有）。照任務單：角色 quiz、標題、data-wiki、data-points（K10 K13 K21）都一致，三題的題目和答案都照任務單寫，用的是 details/summary；Q2 沒有加「模型寫錯是最難修的錯」。忠實：Q3 的答案出自 evaluation.md，其他兩題沒有改。這張沒有新術語。元件合規，沒有自己寫 <footer>。V2 在 /tmp 把三題全部打開截圖（沒加 --run；render-slide 不會打開 details）：桌面與手機都放得下，沒有超出，頁尾連結也沒有在連字號處斷開。必須修 0 項，判定通過。"
+}

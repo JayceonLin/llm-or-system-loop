@@ -1,0 +1,12 @@
+<section class="slide" data-role="summary" data-wiki="overview.md system/03-code-and-solver.md system/04-verify-and-repair.md topics/risks-and-design.md topics/llm-roles.md topics/evaluation.md" data-points="K01 K10 K13 K25 K16 K21">
+  <div class="slide-body">
+    <h2>總結：做 LLM × OR 系統的五個重點</h2>
+    <ul>
+      <li>系統拆成五站：問題輸入、建模、寫程式交給求解器、驗證與修正、解釋結果與 <span class="nw">what-if</span>。</li>
+      <li>LLM 擅長讀懂文字，負責寫模型與程式；計算交給<strong>求解器</strong>，不讓 LLM 心算。</li>
+      <li>驗證回圈只修得了小錯，一開始就想錯的模型修不了。</li>
+      <li>驗證交給不是 LLM 的程式，設定重試上限、能停下來回報，保留人的判斷。</li>
+      <li>設計時先決定 LLM 當<strong>翻譯者</strong>、<strong>最佳化器</strong>還是<strong>解說員</strong>；評估時先確認考卷可不可靠，數字不能直接比。</li>
+    </ul>
+  </div>
+</section>

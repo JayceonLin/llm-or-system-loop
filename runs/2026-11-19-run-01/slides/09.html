@@ -1,0 +1,26 @@
+<section class="slide" data-role="concept" data-wiki="system/05-explain-and-whatif.md" data-points="K14 K15">
+  <div class="slide-body">
+    <h2>第 5 站：把結果翻成白話，回答 what-if 問題</h2>
+    <p class="lead">例如：某個需求改向供應商 B，成本會怎麼變？</p>
+    <ol class="flow">
+      <li>使用者用文字問 what-if</li>
+      <li><strong>Coder</strong> 組成提示，LLM 寫程式</li>
+      <li class="solver"><strong>Safeguard</strong> 檢查後交給求解器或資料庫</li>
+      <li><strong>Interpreter</strong> 讀取紀錄，寫成人看得懂的回答</li>
+    </ol>
+    <p class="note">組提示、寫程式、檢查與執行這幾步可以重複，直到結果令人滿意。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>情況</th><th><span class="nw">GPT-4</span> 準確率</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>沒有給範例</td><td class="num">59%</td></tr>
+          <tr><td>同類型題目，給 5 或 10 個範例</td><td class="num">92–93%</td></tr>
+          <tr><td>不同類型題目，給 10 個範例</td><td class="num">84%（隨機挑）、80%（挑最相近的）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">實際部署：用在 Azure 的伺服器供應鏈；以前回答一個 what-if 問題，需要超過 3 位作業人員加上 1 位待命工程師。</p>
+  </div>
+</section>

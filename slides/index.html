@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>怎麼做出一個用到 LLM 的 OR 系統：教學簡報</title>
+<meta name="description" content="給完全新手的教學簡報：一個用到 LLM 的作業研究系統，從問題輸入、建模、求解、驗證到解釋結果的五站。內容全部取自本專案的 LLM Wiki。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --frame: #27313c;
+  --paper: #fbfcfd;
+  --ink: #1d2733;
+  --muted: #55616e;
+  --line: #d3dae2;
+  --soft: #eef2f6;
+  --translate: #2457b8;
+  --optimize: #8f5500;
+  --explain: #17704f;
+  --hl-var: #d9e6ff;
+  --hl-obj: #ffe2a3;
+  --hl-con: #cdeedd;
+  --serif: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC", serif;
+  --sans: "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--frame); color: var(--ink); font-family: var(--sans); }
+a { color: var(--translate); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+
+/* ---------- 投影片舞台：固定 1280×720，依視窗縮放 ---------- */
+.deck {
+  position: absolute; left: 50%; top: 50%;
+  width: 1280px; height: 720px; margin: -360px 0 0 -640px;
+  background: var(--paper); overflow: hidden;
+  transform-origin: 50% 50%;
+}
+.rail {
+  position: absolute; top: 0; left: 0; right: 0; height: 40px;
+  display: flex; gap: 6px; padding: 14px 80px 0; margin: 0; list-style: none;
+}
+.rail li { flex: 1; font-size: 13px; color: var(--muted); border-top: 3px solid var(--line); padding-top: 4px; }
+.rail li.done { border-top-color: #9fb0c3; }
+.rail li.now { border-top-color: var(--ink); color: var(--ink); font-weight: 700; }
+
+.slide { position: absolute; inset: 0; display: none; }
+.slide.active { display: block; }
+.slide-body {
+  position: absolute; top: 66px; left: 80px; right: 80px; bottom: 64px;
+  overflow: hidden; font-size: 25px; line-height: 1.55;
+}
+.slide-src {
+  position: absolute; left: 80px; right: 300px; bottom: 16px; white-space: nowrap; overflow: hidden;
+  font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px;
+}
+.slide-src a { margin-right: 10px; color: var(--muted); white-space: nowrap; }
+
+h1, h2, h3 { font-family: var(--serif); margin: 0; letter-spacing: 0.01em; }
+h1 { font-size: 76px; line-height: 1.15; font-weight: 900; }
+h2 { font-size: 40px; line-height: 1.3; font-weight: 900; margin-bottom: 18px; }
+h3 { font-size: 25px; font-weight: 600; margin-bottom: 6px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 1.3em; }
+li { margin-bottom: 8px; }
+.lead { font-size: 27px; color: var(--ink); max-width: 30em; }
+.note { font-size: 21px; color: var(--muted); }
+.small { font-size: 19px; color: var(--muted); }
+
+/* 螢光筆：決策變數、目標、限制式各一種顏色，整份簡報固定 */
+mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowrap; }
+.nw { white-space: nowrap; }
+.var { background: var(--hl-var); }
+.obj { background: var(--hl-obj); }
+.con { background: var(--hl-con); }
+
+/* 封面 */
+.cover h1 { margin-top: 36px; }
+.cover .sub { font-size: 33px; color: var(--muted); margin: 16px 0 44px; }
+.translate { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: center; gap: 18px; }
+.translate .src { font-size: 25px; line-height: 1.9; margin: 0; padding: 18px 22px; border: 1px solid var(--line); background: #fff; }
+.translate .arrow { text-align: center; font-size: 15px; color: var(--muted); line-height: 1.3; }
+.translate .arrow b { display: block; font-size: 34px; color: var(--ink); }
+.math { font-family: var(--mono); font-size: 25px; line-height: 2; margin: 0; }
+.math span { padding: 2px 6px; border-radius: 3px; }
+.cover .meta { position: absolute; bottom: 0; left: 0; font-size: 21px; color: var(--muted); margin: 0; }
+
+/* 三欄 */
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.cols.two { grid-template-columns: repeat(2, 1fr); }
+.part { padding: 16px 18px; border-radius: 4px; }
+.part p { margin: 0; }
+.part .eg { font-size: 20px; color: var(--muted); margin-top: 8px; }
+
+/* 流程 */
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 40px; margin: 18px 0 22px; padding: 0; list-style: none; }
+.flow li { position: relative; margin: 0; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 4px; font-size: 21px; background: #fff; }
+.flow li:not(:last-child)::after { content: "→"; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.flow.loop::after { content: "↺ 做完最後一步，回到第一步"; flex-basis: 100%; color: var(--muted); font-size: 17px; }
+.flow li.solver { background: var(--ink); color: #fff; }
+
+/* 角色 */
+.role { border-top: 6px solid; padding: 16px 4px 0; }
+.role.t { border-color: var(--translate); }
+.role.o { border-color: var(--optimize); }
+.role.e { border-color: var(--explain); }
+.role h3 { font-size: 28px; }
+.role.t h3 { color: var(--translate); }
+.role.o h3 { color: var(--optimize); }
+.role.e h3 { color: var(--explain); }
+.role .who { font-size: 19px; color: var(--muted); margin-top: 10px; }
+.tag { display: inline-block; font-size: 17px; font-family: var(--sans); font-weight: 700; padding: 2px 10px; border-radius: 3px; color: #fff; vertical-align: middle; margin-right: 10px; }
+.tag.t { background: var(--translate); }
+.tag.o { background: var(--optimize); }
+.tag.e { background: var(--explain); }
+
+/* 數字 */
+.stat { font-family: var(--serif); font-size: 88px; font-weight: 900; line-height: 1; }
+.stat-label { font-size: 21px; color: var(--muted); margin-top: 8px; }
+.split { display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: start; }
+
+/* 步驟 */
+.steps { list-style: none; padding: 0; counter-reset: s; }
+.steps li { counter-increment: s; position: relative; padding-left: 52px; margin-bottom: 12px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 36px; height: 36px; border-radius: 50%; background: var(--translate); color: #fff; font-weight: 700; text-align: center; line-height: 36px; font-size: 20px; }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 20px; }
+th, td { text-align: left; padding: 7px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 700; border-bottom: 2px solid var(--ink); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* 程式碼與模型 */
+pre { margin: 0; padding: 16px 20px; background: var(--soft); font-family: var(--mono); font-size: 17px; line-height: 1.5; overflow-x: auto; border-radius: 4px; }
+.model { font-family: var(--mono); font-size: 21px; line-height: 1.8; padding: 14px 20px; background: #fff; border: 1px solid var(--line); }
+.problem { font-size: 21px; line-height: 1.7; padding: 16px 20px; background: #fff; border-left: 5px solid var(--ink); }
+
+/* 測驗 */
+details { border: 1.5px solid var(--line); border-radius: 4px; padding: 12px 18px; margin-bottom: 12px; background: #fff; }
+details[open] { border-color: var(--ink); }
+summary { cursor: pointer; font-weight: 500; }
+details p { margin: 10px 0 0; color: var(--explain); }
+
+.mt { margin-top: 16px; }
+.caption { font-size: 19px; color: var(--muted); margin: 0 0 6px; }
+.soft { background: var(--soft); }
+.answer { font-weight: 700; border-left: 5px solid var(--explain); padding-left: 14px; }
+.refs { font-size: 19px; line-height: 1.45; }
+.refs li { margin-bottom: 10px; }
+
+/* 操作列 */
+.nav { position: absolute; right: 80px; bottom: 12px; display: flex; gap: 8px; align-items: center; z-index: 5; }
+.nav button { font: inherit; font-size: 16px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 3px; background: var(--paper); color: var(--ink); cursor: pointer; }
+.nav button:hover { border-color: var(--ink); }
+.nav button:disabled { color: var(--muted); border-color: var(--soft); cursor: default; }
+.nav .count { color: var(--muted); font-size: 16px; min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* ---------- 手機：改成由上往下閱讀 ---------- */
+@media (max-width: 760px) {
+  body { background: var(--paper); }
+  .deck { position: static; width: auto; height: auto; margin: 0; transform: none !important; overflow: visible; }
+  .rail, .nav { display: none; }
+  .slide { position: static; display: block; padding: 28px 18px 18px; border-bottom: 8px solid var(--soft); }
+  .slide-body { position: static; overflow: visible; font-size: 17px; }
+  .slide-src { position: static; margin-top: 14px; font-size: 13px; white-space: normal; }
+  mark { white-space: normal; }
+  .refs { font-size: 15px; }
+  h1 { font-size: 38px; }
+  h2 { font-size: 25px; margin-bottom: 14px; }
+  h3 { font-size: 19px; }
+  .lead { font-size: 18px; }
+  .note, .small, .stat-label, .role .who, .part .eg { font-size: 15px; }
+  .cover h1 { margin-top: 0; }
+  .cover .sub { font-size: 19px; margin-bottom: 20px; }
+  .cover .meta { position: static; margin-top: 16px; font-size: 14px; }
+  .translate { grid-template-columns: 1fr; }
+  .translate .src, .math, .model, .problem { font-size: 16px; }
+  .translate .arrow b { display: inline; font-size: 22px; }
+  .cols, .cols.two, .split { grid-template-columns: 1fr; gap: 14px; }
+  .stat { font-size: 54px; }
+  .role h3 { font-size: 21px; }
+  .flow li { font-size: 15px; padding: 6px 10px; }
+  table { font-size: 14px; }
+  table.wide { min-width: 560px; }
+  .table-wrap:has(table.wide)::after { content: "← 表格可以左右滑動 →"; display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  table.wide td:not(:last-child), table.wide th:not(:last-child) { white-space: nowrap; }
+  th, td { padding: 6px 8px; }
+  pre { font-size: 13px; }
+  .steps li { padding-left: 44px; }
+  .steps li::before { width: 30px; height: 30px; line-height: 30px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  details[open] p { animation: show 0.25s ease-out; }
+  @keyframes show { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+}
+</style>
+</head>
+<body>
+<main class="deck" id="deck" aria-roledescription="簡報">
+<ol class="rail" id="rail" aria-hidden="true"></ol>
+
+<section class="slide" data-role="cover" data-wiki="overview.md">
+  <div class="slide-body cover">
+    <h1>怎麼做出一個用到 LLM 的 OR 系統</h1>
+    <p class="sub"><strong>作業研究</strong>（OR）系統是幫人做決策的程式：把排產、配送、選址這類問題寫成數學模型，再算出最好的做法。</p>
+    <p class="sub">加入<strong>大型語言模型</strong>（LLM）之後，系統可以自己讀懂文字、寫出模型與程式。</p>
+    <p class="meta">教材來源：本專案的 Wiki，整理自來源論文與自製範例</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
+</section>
+
+<section class="slide" data-role="goals" data-wiki="overview.md" data-points="K01">
+  <div class="slide-body">
+    <h2>學習目標：看完這份簡報，你能做到的事</h2>
+    <ul>
+      <li>說出用到 LLM 的 OR 系統有哪五站，每一站在做什麼</li>
+      <li>用自製的手搖飲範例，看懂一題怎麼從文字走到答案，再回答 <span class="nw">what-if</span>（如果改成這樣會怎樣）</li>
+      <li>分辨 LLM 在系統裡的三種角色：翻譯者、最佳化器、解說員</li>
+      <li>說出怎麼評估一個系統，以及做這種系統的限制與設計建議</li>
+    </ul>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
+</section>
+
+<section class="slide" data-role="prereq" data-wiki="system/02-modeling.md system/03-code-and-solver.md topics/glossary.md" data-points="K07 K10 K02">
+  <div class="slide-body">
+    <h2>先備知識：模型有三個部分，交給求解器來算</h2>
+    <div class="cols">
+      <div class="part var"><p><strong>決策變數</strong>：你能決定的量，例如每天做幾杯紅茶。</p></div>
+      <div class="part obj"><p><strong>目標函數</strong>：想讓它越大或越小越好的式子，例如利潤。</p></div>
+      <div class="part con"><p><strong>限制式</strong>：不能違反的條件，例如茶葉每天只有這麼多。</p></div>
+    </div>
+    <ul class="mt">
+      <li><strong>求解器</strong>：專門解最佳化模型的軟體，例如 Gurobi。它保證算出最好的答案，或告訴你這題無解。</li>
+      <li><strong>線性規劃</strong>（LP）：目標函數和限制式都是一次式，變數可以是小數。</li>
+      <li><strong>混合整數規劃</strong>：在線性規劃上，再規定某些變數只能是整數。</li>
+    </ul>
+    <p class="note">後兩點的白話解釋出自自製術語表。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="overview.md" data-points="K01">
+  <div class="slide-body">
+    <h2>用到 LLM 的 OR 系統可以拆成五站</h2>
+    <div class="split">
+      <div>
+        <div class="stat">81%</div>
+        <p class="stat-label">Gurobi 的使用者具研究所學歷</p>
+      </div>
+      <ul>
+        <li>過去寫模型需要專家。加入 LLM 後，系統可以自己讀懂文字、寫出模型與程式。</li>
+      </ul>
+    </div>
+    <ol class="flow mt">
+      <li>問題輸入</li>
+      <li>建模</li>
+      <li class="solver">寫程式交給求解器</li>
+      <li>驗證與修正</li>
+      <li>解釋結果與 <strong>what-if</strong>（如果改成這樣會怎樣）</li>
+    </ol>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="system/01-problem-input.md topics/glossary.md" data-points="K05 K06 K02">
+  <div class="slide-body">
+    <h2>第 1 站：把文字題整理成有結構的資料</h2>
+    <div class="cols two">
+      <div class="part">
+        <h3>NL4Opt 競賽</h3>
+        <ul>
+          <li>在題目裡標出 6 種元素：變數、<strong>參數</strong>（題目給的數字）、目標方向、目標名稱、限制方向、限制上限</li>
+          <li>這一項的第一名，<strong><span class="nw">F1</span></strong> 分數是 0.939；<span class="nw">F1</span> 同時考慮「標得準」和「沒漏標」，越接近 1 越好</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h3>OptiMUS</h3>
+        <ul>
+          <li>使用者填一份有 6 個欄位的 <strong><span class="nw">SNOP</span></strong>，數值資料另存成 <strong><span class="nw">JSON</span></strong> 檔（用「名稱：值」存資料的文字格式，自製術語表）</li>
+          <li>好處：很長的數據表不用塞進提示；代價：不能直接用一般文字輸入</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note mt">這就是<strong>抽象模型</strong>：參數先用符號表示，數據之後再給；<strong>具體模型</strong>則把數值直接寫在題目裡。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/01-problem-input.md">01-problem-input</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="system/02-modeling.md" data-points="K08 K09">
+  <div class="slide-body">
+    <h2>第 2 站：把元素寫成模型的三種做法</h2>
+    <div class="cols">
+      <div class="part soft">
+        <h3>NL4Opt</h3>
+        <p>先產生<strong>意義表示</strong>，也就是邏輯形式的中間表示，再轉成求解器能讀的格式。</p>
+        <div class="table-wrap">
+          <table>
+            <tr><th>方法</th><th class="num"><span class="nw">準確率</span></th></tr>
+            <tr><td>建模第一名 <span class="nw">UIUC-NLP</span></td><td class="num">0.899</td></tr>
+            <tr><td>ChatGPT（<span class="nw">gpt-3.5-turbo</span>）合併任務</td><td class="num">0.927</td></tr>
+          </table>
+        </div>
+        <p class="note">版本差異：依表格數字，ChatGPT 比第一名高 2.8 個百分點；論文討論段寫的是高 2 個百分點。</p>
+      </div>
+      <div class="part soft">
+        <h3>OptiMUS</h3>
+        <p>讓 LLM 寫出變數、限制式與目標。</p>
+        <p>輸出是給人和下一站都看得懂的模型文件。</p>
+      </div>
+      <div class="part soft">
+        <h3><span class="nw">Chain-of-Experts</span></h3>
+        <p>把建模拆給好幾位專家：</p>
+        <ul>
+          <li>術語解釋</li>
+          <li>各部分擷取</li>
+          <li>建模知識補充</li>
+          <li>建模專家：寫出完整的數學模型，通常是混合整數規劃</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="system/03-code-and-solver.md topics/glossary.md" data-points="K10 K11 K02">
+  <div class="slide-body">
+    <h2>第 3 站：LLM 寫程式，真正的計算交給求解器</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>系統</th><th>LLM 寫什麼</th></tr></thead>
+        <tbody>
+          <tr><td>OptiMUS</td><td>用 Gurobi 或 cvxpy 寫 Python 程式</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td><strong>LP 格式檔</strong>（求解器可以直接讀的模型文字檔，自製術語表）與 Gurobi 程式</td></tr>
+          <tr><td>OptiGuide</td><td><strong>Coder</strong> 把問題、背景與範例組成提示，讓 LLM 寫程式</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="mt">
+      <li>為什麼分工：LLM 擅長讀懂文字，求解器擅長精確計算</li>
+      <li>LLM 會算錯，也會重複產生以前的解</li>
+      <li>讓 LLM 直接找解的 OPRO，問題變大後就輸給專門的方法</li>
+    </ul>
+    <p class="note">成本：OptiMUS 成功的執行，不含求解器時間，每次都在 7 分鐘內完成；平均用掉 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字時的計算單位，用得越多，通常花的時間與費用也越多，自製術語表）。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="system/04-verify-and-repair.md system/02-modeling.md topics/glossary.md" data-points="K12 K13 K02">
+  <div class="slide-body">
+    <h2>第 4 站：錯了就帶著錯誤訊息重寫，但只修得了小錯</h2>
+    <ul>
+      <li>OptiMUS：LLM 自己產生<strong>單元測試</strong>（一小段自動檢查的程式，自製術語表），把執行錯誤與沒通過的測試交回 LLM 修正</li>
+      <li>Chain-of-Experts：<strong>評估器</strong>執行程式與測試案例，它不是 LLM；錯了用<strong>反向反思</strong>，把專家倒過來逐一檢查</li>
+      <li>OptiGuide：<strong>Safeguard</strong> 檢查 LLM 產生的程式，觸發自我除錯，或停下來回報錯誤</li>
+    </ul>
+    <ul class="mt">
+      <li>漏掉限制式、語法錯誤修得好；一開始就想錯的模型修不了</li>
+      <li>用 <span class="nw">GPT-3.5</span> 時，自動產生的測試常常誤導；多做一兩次改寫或除錯後，效果就不太再提升</li>
+    </ul>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/04-verify-and-repair.md">04-verify-and-repair</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="system/05-explain-and-whatif.md" data-points="K14 K15">
+  <div class="slide-body">
+    <h2>第 5 站：把結果翻成白話，回答 what-if 問題</h2>
+    <p class="lead">例如：某個需求改向供應商 B，成本會怎麼變？</p>
+    <ol class="flow">
+      <li>使用者用文字問 what-if</li>
+      <li><strong>Coder</strong> 組成提示，LLM 寫程式</li>
+      <li class="solver"><strong>Safeguard</strong> 檢查後交給求解器或資料庫</li>
+      <li><strong>Interpreter</strong> 讀取紀錄，寫成人看得懂的回答</li>
+    </ol>
+    <p class="note">組提示、寫程式、檢查與執行這幾步可以重複，直到結果令人滿意。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>情況</th><th><span class="nw">GPT-4</span> 準確率</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>沒有給範例</td><td class="num">59%</td></tr>
+          <tr><td>同類型題目，給 5 或 10 個範例</td><td class="num">92–93%</td></tr>
+          <tr><td>不同類型題目，給 10 個範例</td><td class="num">84%（隨機挑）、80%（挑最相近的）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">實際部署：用在 Azure 的伺服器供應鏈；以前回答一個 what-if 問題，需要超過 3 位作業人員加上 1 位待命工程師。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/05-explain-and-whatif.md">05-explain-and-whatif</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="topics/multi-agent.md topics/glossary.md" data-points="K17 K24 K02">
+  <div class="slide-body">
+    <h2>多代理人：讓好幾個代理人各負責一件事</h2>
+    <p class="lead"><strong>代理人</strong>是會自己決定下一步、使用工具的 AI 程式。</p>
+    <div class="cols two">
+      <div class="part soft">
+        <h3>OptiMUS</h3>
+        <p>一個代理人照固定流程做：寫模型、寫程式、執行、測試、修正。</p>
+      </div>
+      <div class="part soft">
+        <h3><span class="nw">Chain-of-Experts</span></h3>
+        <ul>
+          <li><strong>指揮者</strong>：一個 LLM，決定下一步請哪位專家</li>
+          <li><strong>彙整器</strong>：把各專家的意見合成最後答案</li>
+          <li><strong>評估器</strong>：不是 LLM，執行程式與測試案例，把結果轉成回饋</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note mt"><span class="nw">Chain-of-Experts</span> 的代價：</p>
+    <ul>
+      <li>專家意見多了，會超過<strong>上下文長度</strong>（LLM 一次能讀進來的文字上限，自製術語表）</li>
+      <li>步驟越多，推理時間與 <strong>API 呼叫</strong>（程式透過網路請 LLM 服務做一次工作，自製術語表）越多</li>
+    </ul>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/multi-agent.md">multi-agent</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="topics/llm-roles.md" data-points="K16">
+  <div class="slide-body">
+    <h2>LLM 的三種角色：翻譯者、最佳化器、解說員</h2>
+    <div class="cols">
+      <div class="part">
+        <p><strong>翻譯者</strong>：把文字題變成模型與程式，交給求解器算。</p>
+        <p class="small">第 1～3 站｜NL4Opt、OptiMUS、<span class="nw">Chain-of-Experts</span></p>
+      </div>
+      <div class="part">
+        <p><strong>最佳化器</strong>：不寫模型，自己提出解，看分數再改進。</p>
+        <p class="small">不走五站｜OPRO</p>
+      </div>
+      <div class="part">
+        <p><strong>解說員</strong>：模型已經有了，幫不會寫程式的人問 what-if，再翻成白話。</p>
+        <p class="small">第 3～5 站｜OptiGuide</p>
+      </div>
+    </div>
+    <ul class="mt">
+      <li>新問題、要從頭建模：用翻譯者。</li>
+      <li>只能評分的問題：可以考慮最佳化器，但它在大問題上有限制。</li>
+      <li>公司已經有模型：用解說員。</li>
+    </ul>
+    <p class="note">三種角色都有「試、檢查、再改」的回圈。</p>
+    <p class="small">這個分法是本 Wiki 的整理，不是某一篇論文提出的。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/llm-roles.md">llm-roles</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="topics/llm-as-optimizer.md system/03-code-and-solver.md" data-points="K18">
+  <div class="slide-body">
+    <h2><span class="tag o">最佳化器</span>另一條路：OPRO 讓 LLM 直接提出解，看分數再改進</h2>
+    <p class="lead">提示裡放問題描述，以及之前產生過的解和分數，這就是<strong>元提示</strong>。</p>
+    <ol class="flow loop">
+      <li>LLM 根據元提示產生新的解，每一步最多 8 個</li>
+      <li>計算新解的分數</li>
+      <li>把新解與分數加進元提示，進入下一輪</li>
+    </ol>
+    <ul class="mt">
+      <li><strong>旅行推銷員問題</strong>：拜訪每個城市一次、總路程最短</li>
+      <li>OPRO（<span class="nw">gpt-4</span>）和最佳解的差距：10 個城市 0.0%、50 個城市 11.0%；從 20 個城市開始，專門的方法（最遠插入法）比較好</li>
+      <li>最主要的用途是最佳化提示詞；作者說它不是要贏過專門的求解器，大問題也放不進提示</li>
+    </ul>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/llm-as-optimizer.md">llm-as-optimizer</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a></footer>
+</section>
+
+<section class="slide" data-role="concept" data-wiki="topics/training-and-data.md topics/evaluation.md overview.md" data-points="K23">
+  <div class="slide-body">
+    <h2>另一條研究路線：訓練 LLM 本身更會建模</h2>
+    <div class="cols">
+      <div class="part soft"><p><strong>資料合成</strong>：自動產生更多「題目＋模型」的練習資料。</p></div>
+      <div class="part soft"><p><strong>監督式微調</strong>：用這些資料再訓練 LLM。</p></div>
+      <div class="part soft"><p><strong>對齊</strong>：讓模型的輸出更符合偏好。</p></div>
+    </div>
+    <p class="answer mt"><strong>綜述</strong>（整理整個領域的方法、資料集與未來方向的論文）以統一方式重測：微調過的 <span class="nw">ORLM-LLaMA-3 8B</span> 在 IndustryOR 得到 42.9%、在 ComplexLP 得到 59.5%（兩份都是評估用的考卷），在較難的資料集上勝過 Chain-of-Experts。</p>
+    <p class="note">還沒解決：長的推理過程很難標註；針對最佳化建模的訓練技術研究還不夠。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/training-and-data.md">training-and-data</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/evaluation.md">evaluation</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
+</section>
+
+<section class="slide" data-role="example" data-wiki="examples/tea-shop.md topics/glossary.md" data-points="K03 K04">
+  <div class="slide-body">
+    <h2>自製範例：手搖飲店一題走完五站</h2>
+    <p class="problem">紅茶每杯利潤 20 元、奶茶 30 元；每杯都用 10 公克茶葉，每天最多 5,000 公克；奶茶另要 150 毫升鮮奶，每天最多 30,000 毫升。</p>
+    <div class="cols two mt">
+      <div class="part">
+        <p class="small">第 1 站：標出變數、目標方向、參數與限制。</p>
+        <div class="model">第 2 站：<mark class="var">x₁</mark> = 紅茶杯數，<mark class="var">x₂</mark> = 奶茶杯數<br>最大化 <mark class="obj">20x₁ + 30x₂</mark><br>限制 <mark class="con">10x₁ + 10x₂ ≤ 5000</mark>、<mark class="con">150x₂ ≤ 30000</mark>、<mark class="con">x₁, x₂ ≥ 0</mark></div>
+      </div>
+      <div class="part">
+        <ol class="steps">
+          <li>第 3 站：求解器算出紅茶 300 杯、奶茶 200 杯，利潤 12,000 元；PuLP 3.3.2 實際執行過</li>
+          <li>第 4 站：代回去，茶葉和鮮奶都剛好用完</li>
+          <li>第 5 站 what-if：茶葉多進到 6,000 公克，紅茶變成 400 杯、奶茶仍是 200 杯，利潤變成 14,000 元</li>
+        </ol>
+      </div>
+    </div>
+    <p class="answer">手搖飲這題就是一個<strong>線性規劃</strong>。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/examples/tea-shop.md">tea-shop</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+
+<section class="slide" data-role="compare" data-wiki="comparisons/systems.md overview.md" data-points="K22">
+  <div class="slide-body">
+    <h2>系統比較：沒有一個系統五站全包</h2>
+    <p class="caption">每個系統涵蓋哪幾站</p>
+    <div class="table-wrap">
+      <table class="wide">
+        <thead>
+          <tr><th>系統</th><th>問題輸入</th><th>建模</th><th>寫程式</th><th>驗證修正</th><th><span class="nw">解釋結果</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><td>NL4Opt</td><td>✓</td><td>✓</td><td>轉成求解器格式</td><td>—</td><td>—</td></tr>
+          <tr><td>OptiMUS</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td>—</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td>OptiGuide</td><td>使用者的 <span class="nw">what-if</span> 問題</td><td>沿用既有模型</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>OPRO</td><td colspan="5">不走五站，LLM 直接提出解，用分數回饋</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note mt">OptiMUS 的代表數字：解出的題目接近基本提示的兩倍。</p>
+    <p class="note">版本差異：v1 摘要寫多解出 67%，v2 摘要寫接近兩倍，內文寫提高 91%。</p>
+    <p class="answer">做系統時，可以從不同來源借每一站的做法。各系統的數字來自不同考卷、不同 LLM，<strong>不能拿來比誰比較強</strong>。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/comparisons/systems.md">systems</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
+</section>
+
+<section class="slide" data-role="pitfall" data-wiki="topics/evaluation.md" data-points="K19 K20 K21">
+  <div class="slide-body">
+    <h2>評估：考卷不一定可靠，數字不能直接比</h2>
+    <div class="split">
+      <div>
+        <div class="stat">54.0%</div>
+        <p class="stat-label">IndustryOR 的錯誤率至少有這麼多</p>
+      </div>
+      <ul>
+        <li><strong>基準資料集</strong>是大家共用的考卷。綜述請 11 位專家重新檢查：NL4Opt 錯誤率至少 26.4%；除了 EasyLP，每份都超過 15%</li>
+        <li>錯誤來源：題目有邏輯漏洞、參數定義不清、標準答案本身是錯的</li>
+        <li><strong>比目標值</strong>：只比最佳值；模型錯了也可能剛好算出相同的值</li>
+        <li><strong>比模型</strong>：比較模型的係數，或算相似分數</li>
+        <li>Chain-of-Experts 的準確率：原論文用 <span class="nw">GPT-4</span>，基礎題 LPWP 64.2%、複雜題 ComplexOR 31.4%；綜述改用 <span class="nw">GPT-4o</span> 重測，EasyLP 94.4%</li>
+        <li>用的 LLM、考卷不同，數字不能直接比。先確認考卷可不可靠，再說明用了哪個 LLM、哪份考卷</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/evaluation.md">evaluation</a></footer>
+</section>
+
+<section class="slide" data-role="pitfall" data-wiki="topics/risks-and-design.md" data-points="K24 K25">
+  <div class="slide-body">
+    <h2>限制與設計建議：計算交給求解器，驗證交給程式</h2>
+    <div class="cols two">
+      <div class="part">
+        <h3>限制</h3>
+        <ul>
+          <li>模型可能一開始就想錯；題目越複雜，正確率越低</li>
+          <li>把公司資料直接交給 LLM 有外流風險；OptiGuide 讓資料留在求解器與資料庫</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h3>設計建議</h3>
+        <ul>
+          <li>計算交給求解器，不讓 LLM 心算</li>
+          <li>驗證交給不是 LLM 的程式；錯了要帶著錯誤訊息重做</li>
+          <li>設定重試上限、能停下來回報、保留人的判斷，並用可靠的題目評估</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note mt">做這份簡報的流程也照這些建議設計：產生者和驗證者分開、每一步都有重做次數上限、關鍵處停下來給人確認。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/risks-and-design.md">risks-and-design</a></footer>
+</section>
+
+<section class="slide" data-role="quiz" data-wiki="system/03-code-and-solver.md system/04-verify-and-repair.md system/02-modeling.md topics/evaluation.md" data-points="K10 K13 K21">
+  <div class="slide-body">
+    <h2>小測驗：計算、驗證與評估</h2>
+    <p class="note">先想一想，再點題目看答案。</p>
+    <details><summary>Q1　LLM 寫好程式之後，為什麼真正的計算要交給求解器？</summary><p>LLM 擅長讀懂文字，求解器擅長精確計算；LLM 會算錯。</p></details>
+    <details><summary>Q2　驗證回圈修得好哪種錯、修不了哪種錯？</summary><p>漏掉限制式、語法錯誤修得好；一開始就想錯的模型修不了。</p></details>
+    <details><summary>Q3　兩篇論文的準確率，可以直接拿來比誰比較強嗎？</summary><p>不行。用的 LLM 不同、考卷不同，數字不能直接比。</p></details>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/04-verify-and-repair.md">04-verify-and-repair</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/evaluation.md">evaluation</a></footer>
+</section>
+
+<section class="slide" data-role="summary" data-wiki="overview.md system/03-code-and-solver.md system/04-verify-and-repair.md topics/risks-and-design.md topics/llm-roles.md topics/evaluation.md" data-points="K01 K10 K13 K25 K16 K21">
+  <div class="slide-body">
+    <h2>總結：做 LLM × OR 系統的五個重點</h2>
+    <ul>
+      <li>系統拆成五站：問題輸入、建模、寫程式交給求解器、驗證與修正、解釋結果與 <span class="nw">what-if</span>。</li>
+      <li>LLM 擅長讀懂文字，負責寫模型與程式；計算交給<strong>求解器</strong>，不讓 LLM 心算。</li>
+      <li>驗證回圈只修得了小錯，一開始就想錯的模型修不了。</li>
+      <li>驗證交給不是 LLM 的程式，設定重試上限、能停下來回報，保留人的判斷。</li>
+      <li>設計時先決定 LLM 當<strong>翻譯者</strong>、<strong>最佳化器</strong>還是<strong>解說員</strong>；評估時先確認考卷可不可靠，數字不能直接比。</li>
+    </ul>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/04-verify-and-repair.md">04-verify-and-repair</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/risks-and-design.md">risks-and-design</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/llm-roles.md">llm-roles</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/evaluation.md">evaluation</a></footer>
+</section>
+
+<section class="slide" data-role="refs" data-wiki="references.md overview.md examples/tea-shop.md topics/glossary.md">
+  <div class="slide-body">
+    <h2>資料來源：6 篇來源，加上自製的範例與術語表</h2>
+    <ul class="refs">
+      <li>S1 綜述：Ziyang Xiao 等，“A Survey of Optimization Modeling Meets LLMs: Progress and Future Directions”，IJCAI 2025，<span class="nw">arXiv:2508.10047</span></li>
+      <li>S2 NL4Opt 競賽：Rindranirina Ramamonjison 等，“NL4Opt Competition: Formulating Optimization Problems Based on Their Natural Language Descriptions”，NeurIPS 2022 競賽報告，<span class="nw">arXiv:2303.08233</span></li>
+      <li>S3 OptiMUS：Ali AhmadiTeshnizi 等，“OptiMUS: Optimization Modeling Using MIP Solvers and large language models”，<span class="nw">arXiv:2310.06116</span>（2023）；後續版本發表於 ICML 2024</li>
+      <li>S4 <span class="nw">Chain-of-Experts</span>：Ziyang Xiao 等，“<span class="nw">Chain-of-Experts</span>: When LLMs Meet Complex Operations Research Problems”，<span class="nw">ICLR 2024</span></li>
+      <li>S5 OPRO：Chengrun Yang 等，“Large Language Models as Optimizers”，Google DeepMind，<span class="nw">arXiv:2309.03409</span>（2023）</li>
+      <li>S6 OptiGuide：Beibin Li 等，“Large Language Models for Supply Chain Optimization”，Microsoft，<span class="nw">arXiv:2307.03875（2023）</span></li>
+    </ul>
+    <p class="note mt">手搖飲範例與新手術語表是自製內容，不是來自這 6 篇來源。</p>
+  </div>
+  <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/references.md">references</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/examples/tea-shop.md">tea-shop</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
+</section>
+<div class="nav" data-ui role="group" aria-label="切換投影片（也可以用鍵盤的左右鍵）">
+  <button type="button" id="prev" aria-label="上一張" aria-keyshortcuts="ArrowLeft">‹ 上一張</button>
+  <span class="count" id="count" aria-live="polite"></span>
+  <button type="button" id="next" aria-label="下一張" aria-keyshortcuts="ArrowRight">下一張 ›</button>
+</div>
+</main>
+
+<script>
+(function () {
+  var deck = document.getElementById("deck");
+  var slides = Array.prototype.slice.call(document.querySelectorAll("section.slide"));
+  var rail = document.getElementById("rail");
+  var count = document.getElementById("count");
+  var prev = document.getElementById("prev");
+  var next = document.getElementById("next");
+  var reading = window.matchMedia("(max-width: 760px)");
+  var SECTIONS = [
+    ["開場", ["cover", "goals"]], ["先備知識", ["prereq"]], ["概念", ["concept"]],
+    ["例子", ["example"]], ["比較", ["compare"]], ["注意", ["pitfall"]],
+    ["測驗", ["quiz"]], ["總結", ["summary", "refs"]]
+  ];
+  var current = 0;
+
+  SECTIONS.forEach(function (s) {
+    var li = document.createElement("li");
+    li.textContent = s[0];
+    rail.appendChild(li);
+  });
+
+  function sectionOf(role) {
+    for (var k = 0; k < SECTIONS.length; k++) if (SECTIONS[k][1].indexOf(role) >= 0) return k;
+    return 0;
+  }
+
+  function fit() {
+    if (reading.matches) { deck.style.transform = ""; return; }
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    deck.style.transform = "scale(" + s + ")";
+  }
+
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (el, k) {
+      el.classList.toggle("active", k === current);
+      el.setAttribute("aria-hidden", reading.matches || k === current ? "false" : "true");
+    });
+    var sec = sectionOf(slides[current].getAttribute("data-role"));
+    Array.prototype.forEach.call(rail.children, function (li, k) {
+      li.className = k < sec ? "done" : k === sec ? "now" : "";
+    });
+    count.textContent = (current + 1) + " / " + slides.length;
+    prev.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+    if (history.replaceState) history.replaceState(null, "", "#" + (current + 1));
+    if (reading.matches) slides[current].scrollIntoView();
+  }
+
+  prev.addEventListener("click", function () { go(current - 1); });
+  next.addEventListener("click", function () { go(current + 1); });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "SUMMARY") { if (e.key === " " || e.key === "Enter") return; }
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); go(current + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); go(current - 1); }
+    else if (e.key === "Home") { go(0); }
+    else if (e.key === "End") { go(slides.length - 1); }
+  });
+  window.addEventListener("resize", fit);
+  window.addEventListener("hashchange", function () {
+    var k = parseInt((location.hash || "").slice(1), 10);
+    if (!isNaN(k) && k - 1 !== current) go(k - 1);
+  });
+  reading.addEventListener ? reading.addEventListener("change", function () { fit(); go(current); }) : null;
+
+  var start = parseInt((location.hash || "").slice(1), 10);
+  fit();
+  go(isNaN(start) ? 0 : start - 1);
+  window.deck = { go: go, count: slides.length };
+})();
+</script>
+</body>
+</html>

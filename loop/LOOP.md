@@ -79,7 +79,7 @@ flowchart TD
 | L5 | C | `keypoints.md`、slide-rules、`wiki/` | `attempts/outline-vK.md`、`tasks/NN.md` |
 | L6 | V2 | 大綱、重點清單、`wiki/` | `reports/outline-vK.json` |
 | L7 | B（投影片撰寫） | `tasks/NN.md`、slide-rules、任務單指定的 Wiki 頁面 | `attempts/NN-vK.html` |
-| L8 | V2 | 這一張、任務單、Wiki 頁面 | `reports/NN-vK.json` |
+| L8 | V2 | 這一張、任務單、Wiki 頁面；程式 `check-slide` 與 `render-slide` | `reports/NN-vK.json` |
 | L9 | C、V2 | `slides/NN.html`、全部報告 | `slides/index.html`、`screens/`、`reports/deck-vK.json`、`report-to-whole.md` |
 | L10 | Whole | 以上全部 | `run-log.md` 的終檢結果 |
 
@@ -144,5 +144,7 @@ Agent Whole 確認下面五項都成立，Loop 才算完成：
 
 - **子 agent 不能再開子 agent。** 所以 Agent C 的「指派」寫成任務單 `tasks/NN.md`，由 Agent Whole 所在的主對話照任務單啟動新的 B 與 V2，報告放回 C 的資料夾 `reports/`。接受或退回只照第 4 節的判定規則，不由主對話自行判斷。
 - **程式檢查：** `python3 loop/check.py <指令> --run runs/<run>`，結果自動附加到 `checks.jsonl`。指令說明在 [check.py](check.py) 開頭。
+- **版面檢查提前到 L8：** run-01 原本只在 L9 量版面，結果 20 張裡有 12 張在組裝前就放不下。現在 B 寫完、V2 驗證時都要跑 `render-slide`，把單張套進外框實際量版面。
 - **組裝：** 投影片只寫 `<section>` 本身，頁尾的 Wiki 連結由 `check.py build` 依 `data-wiki` 自動產生，外框、樣式與操作列都在 [`slides/template.html`](../slides/template.html)。
+- **用量：** 每個子 agent 都要從頭讀規範與 Wiki，同時開太多會撞到帳號的用量上限（run-01 實際發生過）。所以 L7 一次最多 5 張分批進行；L8 可以由一個 V2 一次驗一批，但每張仍各自寫一份報告、各自判定，產生與驗證仍然分開。
 - **紀錄：** Whole 在 `run-log.md` 寫每個節點的經過；程式檢查自動寫進 `checks.jsonl`；所有草稿與報告留在 `attempts/`、`reports/`。

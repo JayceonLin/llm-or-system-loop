@@ -1,0 +1,20 @@
+<section class="slide" data-role="example" data-wiki="examples/tea-shop.md topics/glossary.md" data-points="K03 K04">
+  <div class="slide-body">
+    <h2>自製範例：手搖飲店一題走完五站</h2>
+    <p class="problem">紅茶每杯利潤 20 元、奶茶 30 元；每杯都用 10 公克茶葉，每天最多 5,000 公克；奶茶另要 150 毫升鮮奶，每天最多 30,000 毫升。</p>
+    <div class="cols two mt">
+      <div class="part">
+        <p class="small">第 1 站：標出變數、目標方向、參數與限制。</p>
+        <div class="model">第 2 站：<mark class="var">x₁</mark> = 紅茶杯數，<mark class="var">x₂</mark> = 奶茶杯數<br>最大化 <mark class="obj">20x₁ + 30x₂</mark><br>限制 <mark class="con">10x₁ + 10x₂ ≤ 5000</mark>、<mark class="con">150x₂ ≤ 30000</mark>、<mark class="con">x₁, x₂ ≥ 0</mark></div>
+      </div>
+      <div class="part">
+        <ol class="steps">
+          <li>第 3 站：求解器算出紅茶 300 杯、奶茶 200 杯，利潤 12,000 元；PuLP 3.3.2 實際執行過</li>
+          <li>第 4 站：代回去，茶葉和鮮奶都剛好用完</li>
+          <li>第 5 站 what-if：茶葉多進到 6,000 公克，紅茶變成 400 杯、奶茶仍是 200 杯，利潤變成 14,000 元</li>
+        </ol>
+      </div>
+    </div>
+    <p class="answer">手搖飲這題就是一個<strong>線性規劃</strong>。</p>
+  </div>
+</section>

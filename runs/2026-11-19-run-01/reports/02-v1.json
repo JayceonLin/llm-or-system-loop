@@ -1,0 +1,17 @@
+{
+  "target": "attempts/02-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/02-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "第 2 個列點的「what-if」",
+      "problem": "整份簡報裡 what-if 第一次出現在這張（封面沒有），白話解釋要到第 04 張才出現。任務單 02 明寫這張只列名稱、不解釋術語，B 照任務單做，所以不算這張的錯；不過 slide-rules 第 2 節要求術語第一次出現就用一句白話解釋。",
+      "fix": "可以在 what-if 後面加 overview.md 的「（如果改成這樣會怎樣）」，多 9 個中文字（全張約 114 字），data-wiki 不用改。加不加由 Agent C 決定，加的話要一起改任務單 02；不加的話，L9 整份檢查時再確認。"
+    }
+  ],
+  "summary": "程式檢查通過。角色、標題、data-wiki、data-points 都和任務單一致；4 點學習目標都是看完能做到的事（說出、看懂、分辨、說出），內容都在 overview.md 裡（五站、自製手搖飲範例走完五站、三種角色、評估與限制、設計建議），自製範例有寫「自製」，也沒有提前講各站細節、數字或角色定義。只有 1 項建議（what-if 在這張第一次出現但沒有白話解釋，這是任務單的安排），判定通過。"
+}

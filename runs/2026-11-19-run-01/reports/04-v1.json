@@ -1,0 +1,17 @@
+{
+  "target": "attempts/04-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/04-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "<ol class=\"flow\"> 的第 5 步「解釋結果與 what-if（如果改成這樣會怎樣）」",
+      "problem": "第 5 步比前四步長很多。用 template.html 的尺寸估算（內容寬約 1120px，方塊 24px 字，方塊間距 40px），五個方塊放不進同一行，第 5 步很可能換到第二行，第 4 步後面的箭頭就會指向空白。這只是估算，不是截圖結果，程式檢查也查不到。",
+      "fix": "這張先不用改，L9 看截圖時確認。如果真的換行、箭頭看起來斷掉，可以把「（如果改成這樣會怎樣）」移到流程下方的 <p class=\"note\">（不算列點，仍是 6 個 <li>），或由 Agent C 調整任務單 04。"
+    }
+  ],
+  "summary": "程式檢查通過。角色、標題、data-wiki、data-points 和任務單一致；81% 與「Gurobi 的使用者具研究所學歷」、「過去寫模型需要專家」、加入 LLM 後系統能做的事、五站名稱都和 overview.md 一字不差，第 3 步有加 solver，what-if 有白話解釋，大數字元件照規定寫，剛好 6 個 <li>，沒有講各站由哪個系統負責，也沒有講三種角色。只有 1 項版面建議，判定通過。"
+}

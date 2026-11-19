@@ -14,11 +14,14 @@
 2. 讀任務單，再讀任務單 `data-wiki` 列出的 Wiki 頁面。**只讀這些頁面**，不要用其他知識。
 3. 寫一個 `<section class="slide">`，屬性照任務單：`data-role`、`data-wiki`、`data-points`。
 4. 內容只用 slide-rules 第 4 節的元件，不要寫 `<footer>`、`style` 屬性或 `<script>`。
-5. 寫完先自己跑程式檢查，有錯就改：
+5. 寫完先自己跑兩個程式檢查，有錯就改：
 
    ```bash
    python3 loop/check.py check-slide <你的輸出> --keypoints runs/<run>/keypoints.md
+   python3 loop/check.py render-slide <你的輸出>
    ```
+
+   第二個會把這一張實際放進 1280×720 與手機畫面量版面。放不下時，先改排版（例如把兩欄改成一欄、把表格改成列點），再精簡補充說明；任務單要求講的重點不能刪。
 
 ## 寫作重點
 

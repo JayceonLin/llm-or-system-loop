@@ -1,0 +1,23 @@
+{
+  "target": "attempts/05-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/05-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/05-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "NL4Opt 欄第 2 個列點「這一項的第一名」（跨張，連同第 06 張）",
+      "problem": "05、06 兩個第一名現在分得開了（判斷見 summary）。但第 06 張把「比賽第一名」改成「建模第一名」之後，第 01～19 張都沒有再出現「比賽」或「競賽」，只有第 20 張書目寫「NL4Opt 競賽」。新手從「這一項的第一名」推得出這是一場分好幾項的比賽，只是投影片沒有明說。",
+      "fix": "可選，不改也可以。把「這一項的第一名，」改成「競賽中這一項的第一名，」，依據是 system/01-problem-input.md 的「NL4Opt 競賽把這一步定義成……」。06 的欄太窄，加在 05 比較合適。V2 在 /tmp 試過（沒加 --run）：175→178 字，check-slide 與 render-slide 都通過。"
+    },
+    {
+      "level": "建議",
+      "where": "tasks/05.md、outline.md 第 27 行（不屬於草稿本身）",
+      "problem": "任務單和大綱還是寫「第一名的 F1 分數是 0.939」，和這次改寫後的投影片不一樣。",
+      "fix": "不用退回 L7。請 C 把任務單與大綱改成「這一項的第一名」，並記在 run-log（處理方式同第 03 張的標題）。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。deck-v1 針對這張的那一項已修好：和 slides/05.html 相比，只有第 2 個列點的「第一名的」改成「這一項的第一名，」，和 deck-v1 寫的修法一字不差，也符合 system/01-problem-input.md 的「這個子任務的第一名 F1 分數是 0.939」。字數從 172 增加到 175。新手分不分得出兩個第一名：分得出。05 的「這一項」緊接在「在題目裡標出 6 種元素」後面，指的是標元素這一項，指標是 F1；06 寫「建模第一名」，表頭寫「準確率」，而且兩張的標題分別是第 1 站、第 2 站。站別、項目名稱、指標三方面都不同，不會被讀成同一場比賽有兩個第一名。照任務單：角色 concept、標題、data-wiki、data-points（K05 K06 K02）都一致，5 個重點都有講。兩欄的欄標題只寫 NL4Opt、OptiMUS；抽象模型、具體模型放在 p.note.mt。忠實：逐句對照 01-problem-input.md 與 glossary.md 都正確，沒有出現基準模型或 0.906。新術語「參數、F1、SNOP、JSON、抽象模型、具體模型」第一次出現就有白話解釋；JSON 有標「自製術語表」。元件合規，沒有自己寫 <footer>。V2 在 /tmp 用和 render-slide 相同的組法截圖（沒加 --run）：桌面與手機都沒有截斷，F1、SNOP、JSON 都沒有斷行。和前後張（04 的五站、06 的建模）說法一致，沒有新問題。必須修 0 項，判定通過。"
+}

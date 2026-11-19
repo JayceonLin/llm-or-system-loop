@@ -1,0 +1,17 @@
+{
+  "target": "attempts/17-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/17-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "兩欄的欄標題 <h3>限制</h3>、<h3>設計建議</h3>",
+      "problem": "slide-rules 第 4 節的元件表沒有列出 <h3>。但任務單 17 要求左右欄要有欄標題，slides/template.html 有 h3 的樣式（桌面 30px、手機 19px），第 05、06、10 張草稿也用同樣寫法，版面預覽也正常，所以判定可以接受，不列為必須修。",
+      "fix": "這張不用改。建議 C（或 Whole）把「欄標題：.part 裡的 <h3>」補進 slide-rules 第 4 節的元件表，讓之後的 B 與 V2 有一致的依據。"
+    }
+  ],
+  "summary": "程式檢查通過（176 字、5 個列點）；角色、標題、data-wiki、data-points 與任務單一致，5 項重點都有講，欄標題取代了「限制：」「建議：」，沒有出現「Loop」「本專案」、上下文長度、API 呼叫或錯誤率，每一句都能在 topics/risks-and-design.md 找到，版面預覽沒有超出；必須修 0 項、建議 1 項，判定 pass。"
+}

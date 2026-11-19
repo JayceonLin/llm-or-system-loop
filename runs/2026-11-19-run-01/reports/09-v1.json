@@ -1,0 +1,23 @@
+{
+  "target": "attempts/09-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/09-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面（表格第三列與實際部署）",
+      "problem": "S5：內容放不進 1280×720。補充的 render 檢查報「內容超出版面（高 116px）」「有文字跑出投影片範圍」。「不同類型題目，給 10 個範例」那一列（84%、80%）只露出上半，「實際部署」整段看不到。任務單要求的 84%／80% 與 Azure 部署，在畫面上等於沒講。（補充檢查方法：check-slide 不量版面，我把這張接上頁尾、套進 slides/template.html 存到 /tmp，用 python3 loop/check.py render /tmp/檔名.html 量 1280×720；沒有加 --run，不寫入專案。L9 的 render 會報出同樣的錯誤。）",
+      "fix": "照任務單的全部內容，很難乾淨地放進一張。我在 /tmp 試過：(1) 省略表頭（任務單允許），實際部署改成 <p class=\"small\">，仍超出 12px；(2) 再把上方的例子從 lead 改成 note，才放得下（只剩 13px），但沒有表頭後「GPT-4」只能塞進第一列，讀者會以為只有第一列是 GPT-4；改用 <p class=\"caption\">GPT-4 準確率</p> 又超出 28px。建議 Agent C 先修改任務單 09，例如把「實際部署」移到別張，或刪掉流程圖下方的重複說明，再交給新的 B 重寫。如果 C 決定內容不變，B 至少要做 (1)(2)，並讓 GPT-4 的標示涵蓋整張表。改完照上面的補充檢查方法自己量一次，確認沒有超出。"
+    },
+    {
+      "level": "建議",
+      "where": "流程圖第 4 步",
+      "problem": "流程圖省略了 Wiki 的「執行結果被記錄下來」這一步，所以「Interpreter 讀取紀錄」沒有交代是什麼紀錄，新手可能看不懂。",
+      "fix": "改成「Interpreter 讀取執行紀錄，寫成人看得懂的回答」（多 2 個中文字）。"
+    }
+  ],
+  "summary": "程式檢查通過（中文 171 字、4 個 <li>）。角色、標題、data-wiki、data-points 和任務單一致；引言、四步流程（Safeguard 那步加了 solver，用單向 flow）、重複說明、GPT-4 準確率表（92–93% 照寫範圍，數字欄有 num）、實際部署都有；逐句對照 system/05-explain-and-whatif.md 都正確，沒有出現 5 個情境平均 93%、可解釋性、人機協作或角色標籤；Interpreter 第一次出現有說明它做什麼；元件合規。但補充的版面檢查發現超出 116px，第三列被切掉、實際部署整段看不到，而且照任務單的內容很難放下。1 項必須修（建議 C 先改任務單），另有 1 項建議，判定不通過。"
+}

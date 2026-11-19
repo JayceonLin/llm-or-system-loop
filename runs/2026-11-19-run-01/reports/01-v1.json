@@ -1,0 +1,23 @@
+{
+  "target": "attempts/01-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/01-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "第 2 個 <p class=\"sub\">：大型語言模型後面的括號說明「LLM，能讀懂文字、寫出文字的 AI」",
+      "problem": "回答 B 的疑點：算「寫了 Wiki 沒有的內容」。這張唯一的 data-wiki 是 overview.md，它沒有定義 LLM，只寫「大型語言模型（LLM）加進來之後，系統可以自己讀懂文字、寫出模型與程式」。括號裡有三個部分：(1)「能讀懂文字」可以從這句推得；(2)「寫出文字」把 Wiki 的「寫出模型與程式」放大成泛指所有文字；(3)「AI」這個歸類整個 wiki/ 都沒有寫（wiki 只把「代理人」稱為 AI 程式）。slide-rules 第 1 節規定每一個主張都要寫在引用的 Wiki 頁面，Wiki 沒寫的就不要寫；術語的定義也是主張。本 run 的 wiki/log.md 也有前例：術語沒有白話解釋時，是當成 Wiki 的缺口回 P0 補自製術語表，不是在投影片上自己補。另外，括號說明和同一句後半段連續出現兩次「讀懂文字」，讀起來重複。",
+      "fix": "刪掉括號裡的說明，改成 overview.md 的原句：「加入<strong>大型語言模型</strong>（LLM）之後，系統可以自己讀懂文字、寫出模型與程式。」後半句就是 Wiki 給的白話說明（加入 LLM 後系統能做什麼），可以當作這個術語的白話解釋，任務單的另外兩點也都保留。改完全張中文字從 108 字降為 98 字。不要改用其他頁面的說法（例如 03-code-and-solver.md 的「LLM 擅長讀懂文字」或 glossary.md 的「LLM 讀寫文字」），因為那些頁面不在任務單 01 的 data-wiki。"
+    },
+    {
+      "level": "建議",
+      "where": "任務單 01 與 wiki/topics/glossary.md（給 Agent C 與 Agent Whole）",
+      "problem": "任務單 01 把 LLM 列成要白話解釋的新術語，可是 Wiki 沒有 LLM 的定義，自製術語表也沒有這一條。B 沒有 Wiki 可依據，只好自己寫，才出現上面那一項問題。",
+      "fix": "照上一項的改法，這張就能通過，不必動 Wiki。如果希望封面給 LLM 一個獨立的定義，這是 Wiki 的缺口：依 LOOP.md 第 5 節回到 P0，先和使用者討論，再在 topics/glossary.md 加一條標 [自製] 的 LLM 解釋；然後把 topics/glossary.md 加進任務單 01 的 data-wiki，投影片上也標「自製術語表」。"
+    }
+  ],
+  "summary": "程式檢查通過；角色、標題、data-wiki 和任務單一致，作業研究（OR）的白話解釋照抄 overview.md，封面也沒有數字、五站或求解器。但 LLM 的括號說明「能讀懂文字、寫出文字的 AI」是 Wiki 沒有的定義，所以 B 提出的疑點成立，算寫了 Wiki 沒有的內容。1 項必須修，判定不通過。"
+}

@@ -1,0 +1,17 @@
+{
+  "target": "attempts/16-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/16-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/16-v1.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "第 3 個列點（比目標值）",
+      "problem": "這是上一份報告的建議，草稿沒改，所以仍然成立。「只比最佳值」沒有說和什麼比；topics/evaluation.md 寫的是「只比較求解器算出的最佳值和標準答案」。",
+      "fix": "改成「只比最佳值和標準答案」。上一份報告估的「約 174 字」是以拆掉 split 為前提，現在保留 split，全張是 178 字，直接加 5 個字會變成 183 字，超過 180 字上限。所以要同時在別處省 3 個字以上，例如第 4 點改成「比模型：比較係數，或算相似分數」（省 3 字，全張剛好 180 字）。改完重跑 check-slide 與 render-slide。"
+    }
+  ],
+  "summary": "複查：程式檢查兩項都通過（中文 178 字、6 個 <li>）。上一份報告的必須修已不存在：先前超出 185px，第 5 點後半與第 6 點看不到；現在 render-slide 沒有錯誤，截圖中大數字 54.0% 與 6 個列點都完整，手機版也正常，所以上一份報告提議拆掉 split 的改法不需要了。之前被切掉的兩段，對照 topics/evaluation.md 都一致：「綜述改用 GPT-4o 重測：EasyLP 94.4%」，以及第 6 點「基礎模型、考卷不同，數字不能直接比。先確認考卷可不可靠，再說明用了哪個 LLM、哪份考卷」。其餘內容判斷沿用上一份報告。0 項必須修、1 項建議（沿用，並更正字數提醒），判定通過。（版面目視：V2 在專案外的 /tmp 用和 render-slide 相同的組法（slides/template.html 加自動頁尾）截圖，桌面 1280×720 與手機 390×844 都看過；專案內除了 checks.jsonl 沒有寫任何檔案。）"
+}

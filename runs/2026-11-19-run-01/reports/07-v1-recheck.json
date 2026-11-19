@@ -1,0 +1,10 @@
+{
+  "target": "attempts/07-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/07-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/07-v1.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "複查：程式檢查兩項都通過（中文 177 字、3 個 <li>）。上一份報告唯一的必須修已不存在：先前版面超出 34px，成本說明第二行被切掉，還被操作按鈕蓋住；現在 render-slide 沒有任何錯誤，截圖中成本說明兩行完整，也離右下角的按鈕有一段距離，手機版正常。之前被切掉的是 token 的白話解釋「LLM 讀寫文字時的計算單位，用得越多，通常花的時間與費用也越多，自製術語表」，對照 topics/glossary.md 一致。「4117.1 ± 1509.7」「不含求解器時間」「7 分鐘內完成」也和 system/03-code-and-solver.md 一致。其餘內容判斷沿用上一份報告。沒有新問題，0 項必須修，判定通過。（版面目視：V2 在專案外的 /tmp 用和 render-slide 相同的組法（slides/template.html 加自動頁尾）截圖，桌面 1280×720 與手機 390×844 都看過；專案內除了 checks.jsonl 沒有寫任何檔案。）"
+}

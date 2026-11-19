@@ -29,13 +29,16 @@
 
 ## 模式二：單張投影片
 
-你會拿到投影片草稿路徑、它的任務單 `tasks/NN.md`、重點清單、報告路徑。
+你會拿到投影片草稿路徑、它的任務單 `tasks/NN.md`、重點清單、報告路徑。一次被指派好幾張時，每一張都完整做完下面的步驟，各自寫一份報告、各自判定，不要因為前一張的結果放寬或加嚴下一張。
 
-1. 程式檢查：
+1. 程式檢查（兩個都要跑）：
 
    ```bash
    python3 loop/check.py check-slide <草稿> --keypoints runs/<run>/keypoints.md --run runs/<run>
+   python3 loop/check.py render-slide <草稿> --run runs/<run>
    ```
+
+   `render-slide` 會把這一張套進外框，量桌面 1280×720 與手機版面。
 
 2. **照任務單：** 角色、標題、`data-wiki`、`data-points` 是否和任務單一致；任務單要求講的重點是否都有講到。
 3. **忠實：** 逐句對照引用的 Wiki 頁面，有沒有講錯、誇大，或寫了 Wiki 沒有的內容。

@@ -1,0 +1,17 @@
+{
+  "target": "attempts/19-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/19-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/19-v1.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "第 1 個列點的「what-if」（手機版）",
+      "problem": "手機 390px 的截圖中，「what-if」在連字號處斷成「what-」與「if。」兩行，桌面版正常。render-slide 只在桌面檢查斷字，所以沒有報錯。",
+      "fix": "用 <span class=\"nw\">what-if</span> 包起來（slide-rules 第 4 節：帶連字號的名稱用不換行），不加字。"
+    }
+  ],
+  "summary": "複查：程式檢查兩項都通過（中文 152 字、5 個 <li>）。render-slide 另外印出一則警告（不是錯誤）：「內容只用到版面的 57%」；總結張只有 5 個短列點，任務單也規定不要講新內容，所以不需要處理。上一份報告的必須修已不存在：先前 6 頁的 data-wiki 讓頁尾被截斷 226px，還延伸到操作按鈕底下。現在外框的頁尾只顯示檔名，截圖中 6 個 Wiki 連結排成一行、完整可見，沒有碰到「上一張／下一張」，render-slide 也沒有頁尾或操作元件的錯誤。所以上一份報告要求 C 把 data-wiki 減成 4 頁、改寫第 2 點的做法不需要了，任務單 19 與 data-wiki 維持原樣即可。這張之前沒有文字被切掉，內容判斷沿用上一份報告。0 項必須修、1 項建議（手機版斷字），判定通過。（版面目視：V2 在專案外的 /tmp 用和 render-slide 相同的組法（slides/template.html 加自動頁尾）截圖，桌面 1280×720 與手機 390×844 都看過；專案內除了 checks.jsonl 沒有寫任何檔案。）"
+}

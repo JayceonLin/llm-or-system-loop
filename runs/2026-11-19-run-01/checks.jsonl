@@ -1,1 +1,129 @@
 {"time": "2026-11-19T02:20:21+08:00", "node": "P0 lint", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T02:23:45+08:00", "node": "V1 check-keypoints", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/keypoints-v1.md"}
+{"time": "2026-11-19T02:32:45+08:00", "node": "P0 lint", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T02:37:20+08:00", "node": "V1 check-keypoints", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/keypoints-v2.md"}
+{"time": "2026-11-19T02:47:08+08:00", "node": "V1 check-keypoints", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/keypoints-v3.md"}
+{"time": "2026-11-19T03:04:23+08:00", "node": "P0 lint", "status": "fail", "n_errors": 1, "errors": ["wiki/overview.md:29：含數字但沒有標來源 → 完整比較見[系統比較表](comparisons/systems.md)，6 篇論文的書目見[資料來"]}
+{"time": "2026-11-19T03:04:27+08:00", "node": "P0 lint", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T03:04:39+08:00", "node": "P0 lint", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T03:07:34+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/outline-v2.md"}
+{"time": "2026-11-19T03:24:42+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/outline-v3.md"}
+{"time": "2026-11-19T13:20:06+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/01-v1.html"}
+{"time": "2026-11-19T13:20:06+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/02-v1.html"}
+{"time": "2026-11-19T13:20:06+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/03-v1.html"}
+{"time": "2026-11-19T13:20:06+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/04-v1.html"}
+{"time": "2026-11-19T13:20:06+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v1.html"}
+{"time": "2026-11-19T13:21:17+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/06-v1.html"}
+{"time": "2026-11-19T13:21:17+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/07-v1.html"}
+{"time": "2026-11-19T13:21:17+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/08-v1.html"}
+{"time": "2026-11-19T13:21:17+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/09-v1.html"}
+{"time": "2026-11-19T13:21:17+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/10-v1.html"}
+{"time": "2026-11-19T13:23:00+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v1.html"}
+{"time": "2026-11-19T13:23:00+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/12-v1.html"}
+{"time": "2026-11-19T13:23:00+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/13-v1.html"}
+{"time": "2026-11-19T13:23:00+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/14-v1.html"}
+{"time": "2026-11-19T13:23:00+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/15-v1.html"}
+{"time": "2026-11-19T13:24:51+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v1.html"}
+{"time": "2026-11-19T13:24:51+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/17-v1.html"}
+{"time": "2026-11-19T13:24:51+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/18-v1.html"}
+{"time": "2026-11-19T13:24:51+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v1.html"}
+{"time": "2026-11-19T13:24:51+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v1.html"}
+{"time": "2026-11-19T13:32:09+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/01-v2.html", "warnings": []}
+{"time": "2026-11-19T13:32:12+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/02-v1.html", "warnings": ["桌面 1280×720 02-v1.html「學習目標：看完這份簡報，你能」內容只用到版面的 52%"]}
+{"time": "2026-11-19T13:32:15+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/03-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:19+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/04-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:23+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["桌面 1280×720 05-v1.html「第 1 站：把文字題整理成有」內容超出版面（高 27px、寬 0px）（S5）"], "file": "runs/2026-11-19-run-01/attempts/05-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:27+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 06-v1.html「第 2 站：把元素寫成模型的」內容超出版面（高 278px、寬 0px）（S5）", "桌面 1280×720 06-v1.html「第 2 站：把元素寫成模型的」有文字跑出投影片範圍（S5）"], "file": "runs/2026-11-19-run-01/attempts/06-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:30+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 07-v1.html「第 3 站：LLM 寫程式，」內容超出版面（高 34px、寬 0px）（S5）", "桌面 1280×720 07-v1.html「第 3 站：LLM 寫程式，」操作元件「.nav」蓋到投影片文字（S5）"], "file": "runs/2026-11-19-run-01/attempts/07-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:33+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/08-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:37+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 3, "errors": ["桌面 1280×720 09-v1.html「第 5 站：把結果翻成白話，」內容超出版面（高 116px、寬 0px）（S5）", "桌面 1280×720 09-v1.html「第 5 站：把結果翻成白話，」有文字跑出投影片範圍（S5）", "桌面 1280×720 09-v1.html「第 5 站：把結果翻成白話，」操作元件「.nav」蓋到投影片文字（S5）"], "file": "runs/2026-11-19-run-01/attempts/09-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:40+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 10-v1.html「多代理人：讓好幾個代理人各負」內容超出版面（高 221px、寬 0px）（S5）", "桌面 1280×720 10-v1.html「多代理人：讓好幾個代理人各負」有文字跑出投影片範圍（S5）"], "file": "runs/2026-11-19-run-01/attempts/10-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:44+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["桌面 1280×720 11-v1.html「LLM 的三種角色：翻譯者、」內容超出版面（高 15px、寬 0px）（S5）"], "file": "runs/2026-11-19-run-01/attempts/11-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:47+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 3, "errors": ["桌面 1280×720 12-v1.html「最佳化器另一條路：OPRO 」內容超出版面（高 58px、寬 0px）（S5）", "手機 390×844 12-v1.html「最佳化器另一條路：OPRO 」內容超出版面（高 0px、寬 39px）（S5）", "手機 390×844：整頁出現橫向捲動（S5）"], "file": "runs/2026-11-19-run-01/attempts/12-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:51+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/13-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:54+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 3, "errors": ["桌面 1280×720 14-v1.html「自製範例：手搖飲店一題走完五」內容超出版面（高 191px、寬 0px）（S5）", "桌面 1280×720 14-v1.html「自製範例：手搖飲店一題走完五」有文字跑出投影片範圍（S5）", "桌面 1280×720 14-v1.html「自製範例：手搖飲店一題走完五」操作元件「.nav」蓋到投影片文字（S5）"], "file": "runs/2026-11-19-run-01/attempts/14-v1.html", "warnings": []}
+{"time": "2026-11-19T13:32:57+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 4, "errors": ["桌面 1280×720 15-v1.html「系統比較：沒有一個系統五站全」內容超出版面（高 142px、寬 0px）（S5）", "桌面 1280×720 15-v1.html「系統比較：沒有一個系統五站全」有文字跑出投影片範圍（S5）", "桌面 1280×720 15-v1.html「系統比較：沒有一個系統五站全」操作元件「.nav」蓋到投影片文字（S5）", "手機 390×844 15-v1.html：表格欄太窄，「解釋結果」被拆成好幾行（S5）"], "file": "runs/2026-11-19-run-01/attempts/15-v1.html", "warnings": ["手機 390×844 15-v1.html「系統比較：沒有一個系統五站全」有 1 段文字在手機上超過 20px"]}
+{"time": "2026-11-19T13:33:01+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 16-v1.html「評估：考卷不一定可靠，數字不」內容超出版面（高 185px、寬 0px）（S5）", "桌面 1280×720 16-v1.html「評估：考卷不一定可靠，數字不」有文字跑出投影片範圍（S5）"], "file": "runs/2026-11-19-run-01/attempts/16-v1.html", "warnings": []}
+{"time": "2026-11-19T13:33:04+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/17-v1.html", "warnings": []}
+{"time": "2026-11-19T13:33:08+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/18-v1.html", "warnings": []}
+{"time": "2026-11-19T13:33:11+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 19-v1.html「總結：做 LLM × OR 」頁尾被截斷，看不到全部的 Wiki 連結（S1、S5）", "桌面 1280×720 19-v1.html「總結：做 LLM × OR 」操作元件「.nav」蓋到投影片文字（S5）"], "file": "runs/2026-11-19-run-01/attempts/19-v1.html", "warnings": []}
+{"time": "2026-11-19T13:33:15+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 3, "errors": ["桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」內容超出版面（高 282px、寬 0px）（S5）", "桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」有文字跑出投影片範圍（S5）", "桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」操作元件「.nav」蓋到投影片文字（S5）"], "file": "runs/2026-11-19-run-01/attempts/20-v1.html", "warnings": []}
+{"time": "2026-11-19T13:36:56+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/01-v2.html", "warnings": []}
+{"time": "2026-11-19T13:36:59+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/02-v1.html", "warnings": ["桌面 1280×720 02-v1.html「學習目標：看完這份簡報，你能」內容只用到版面的 42%"]}
+{"time": "2026-11-19T13:37:03+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/03-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:07+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/04-v1.html", "warnings": ["桌面 1280×720 04-v1.html「用到 LLM 的 OR 系統」內容只用到版面的 58%"]}
+{"time": "2026-11-19T13:37:10+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:13+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["桌面 1280×720 06-v1.html「第 2 站：把元素寫成模型的」內容超出版面（高 3px、寬 0px）（S5）"], "file": "runs/2026-11-19-run-01/attempts/06-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:17+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/07-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:20+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/08-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:23+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/09-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:26+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/10-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:30+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:34+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/12-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:37+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/13-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:40+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/14-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:43+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["手機 390×844 15-v1.html：表格欄太窄，「解釋結果」被拆成好幾行（S5）"], "file": "runs/2026-11-19-run-01/attempts/15-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:47+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:50+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/17-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:53+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/18-v1.html", "warnings": []}
+{"time": "2026-11-19T13:37:56+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v1.html", "warnings": ["桌面 1280×720 19-v1.html「總結：做 LLM × OR 」內容只用到版面的 57%"]}
+{"time": "2026-11-19T13:37:59+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 2, "errors": ["桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」內容超出版面（高 86px、寬 0px）（S5）", "桌面 1280×720 20-v1.html「資料來源：6 篇來源，加上自」有文字跑出投影片範圍（S5）"], "file": "runs/2026-11-19-run-01/attempts/20-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:19+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/01-v2.html"}
+{"time": "2026-11-19T13:39:22+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/01-v2.html", "warnings": []}
+{"time": "2026-11-19T13:39:22+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/07-v1.html"}
+{"time": "2026-11-19T13:39:26+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/07-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:26+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/09-v1.html"}
+{"time": "2026-11-19T13:39:29+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/09-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:29+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/10-v1.html"}
+{"time": "2026-11-19T13:39:33+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/10-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:33+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v1.html"}
+{"time": "2026-11-19T13:39:36+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:36+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/12-v1.html"}
+{"time": "2026-11-19T13:39:40+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/12-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:40+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/14-v1.html"}
+{"time": "2026-11-19T13:39:43+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/14-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:43+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v1.html"}
+{"time": "2026-11-19T13:39:47+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v1.html", "warnings": []}
+{"time": "2026-11-19T13:39:47+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v1.html"}
+{"time": "2026-11-19T13:39:50+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v1.html", "warnings": ["桌面 1280×720 19-v1.html「總結：做 LLM × OR 」內容只用到版面的 57%"]}
+{"time": "2026-11-19T18:28:28+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/outline-v4.md"}
+{"time": "2026-11-19T18:28:49+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/06-v2.html"}
+{"time": "2026-11-19T18:28:53+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/06-v2.html", "warnings": []}
+{"time": "2026-11-19T18:28:53+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/15-v2.html"}
+{"time": "2026-11-19T18:28:57+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/15-v2.html", "warnings": []}
+{"time": "2026-11-19T18:28:57+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v2.html"}
+{"time": "2026-11-19T18:29:01+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v2.html", "warnings": []}
+{"time": "2026-11-19T18:31:58+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T18:32:40+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T18:32:51+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 4 張「用到 LLM 的 OR 系統」內容只用到版面的 58%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-19T18:47:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v2.html"}
+{"time": "2026-11-19T18:47:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/06-v3.html"}
+{"time": "2026-11-19T18:47:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v2.html"}
+{"time": "2026-11-19T18:47:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v2.html"}
+{"time": "2026-11-19T18:47:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/18-v2.html"}
+{"time": "2026-11-19T18:47:15+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v2.html"}
+{"time": "2026-11-19T18:47:15+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v3.html"}
+{"time": "2026-11-19T18:47:28+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v2.html", "warnings": []}
+{"time": "2026-11-19T18:47:32+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/06-v3.html", "warnings": []}
+{"time": "2026-11-19T18:47:36+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/11-v2.html", "warnings": []}
+{"time": "2026-11-19T18:47:40+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/16-v2.html", "warnings": []}
+{"time": "2026-11-19T18:47:44+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/18-v2.html", "warnings": []}
+{"time": "2026-11-19T18:47:47+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/19-v2.html", "warnings": ["桌面 1280×720 19-v2.html「總結：做 LLM × OR 」內容只用到版面的 57%"]}
+{"time": "2026-11-19T18:47:51+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v3.html", "warnings": []}
+{"time": "2026-11-19T18:58:08+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T18:58:58+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T18:59:12+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 4 張「用到 LLM 的 OR 系統」內容只用到版面的 58%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-19T19:04:41+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 4 張「用到 LLM 的 OR 系統」內容只用到版面的 58%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-19T19:06:14+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v4.html"}
+{"time": "2026-11-19T19:06:17+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v4.html", "warnings": []}
+{"time": "2026-11-19T19:07:11+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/02-v2.html"}
+{"time": "2026-11-19T19:07:11+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v3.html"}
+{"time": "2026-11-19T19:07:11+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v4.html"}
+{"time": "2026-11-19T19:07:17+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/02-v2.html", "warnings": ["桌面 1280×720 02-v2.html「學習目標：看完這份簡報，你能」內容只用到版面的 42%"]}
+{"time": "2026-11-19T19:07:21+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/05-v3.html", "warnings": []}
+{"time": "2026-11-19T19:07:24+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-19-run-01/attempts/20-v4.html", "warnings": []}
+{"time": "2026-11-19T19:14:13+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T19:14:53+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-19T19:15:06+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 4 張「用到 LLM 的 OR 系統」內容只用到版面的 58%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-19T19:20:22+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 4 張「用到 LLM 的 OR 系統」內容只用到版面的 58%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-19T19:22:15+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}

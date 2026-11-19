@@ -1,0 +1,29 @@
+{
+  "target": "attempts/05-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/05-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "兩欄下方的 <p class=\"note mt\">「這就是抽象模型……」",
+      "problem": "Wiki 的說法是「OptiMUS 把資料分開存放，就是在做抽象模型」。這句放在兩欄下方，「這就是」可能被讀成兩欄的做法都是抽象模型；可是 NL4Opt 是在題目文字裡直接標數字，Wiki 沒有說它是抽象模型。",
+      "fix": "把「這就是」改成「OptiMUS 的做法就是」，只多 2 個中文字（全張約 174 字）。"
+    },
+    {
+      "level": "建議",
+      "where": "左欄第 1 個列點",
+      "problem": "整份簡報裡 NL4Opt 第一次出現在這張。欄標題照任務單只寫英文，列點開頭的「NL4Opt 競賽：」也拿掉了，新手看不出 NL4Opt 是一場比賽，第 2 點突然出現「第一名」會有點突兀。",
+      "fix": "把「在題目裡標出」改成「在競賽題目裡標出」，只多 2 個中文字（01-problem-input.md 寫的是「NL4Opt 競賽把這一步定義成……」）。和上一項一起改，全張約 176 字，仍在 180 字以內。"
+    },
+    {
+      "level": "建議",
+      "where": "欄標題 <h3>NL4Opt</h3>、<h3>OptiMUS</h3>（給 Agent C 與 Agent Whole）",
+      "problem": "slide-rules 第 4 節的元件表沒有「欄標題」，<h3> 不在表上。不過任務單 05 要求要有欄標題，template.html 也有 h3 的樣式，所以 B 用 <h3> 是合理的寫法，不算這張的錯。任務單 06、10、17 也都要欄標題，規範沒寫的話，各張可能各寫各的。",
+      "fix": "這張不用改。建議由 Agent C 或 Whole 在 slide-rules 第 4 節補一列「欄標題：<div class=\"part\"> 裡的第一個元素用 <h3>」，讓之後各張寫法一致。"
+    }
+  ],
+  "summary": "程式檢查通過。角色、標題、data-wiki、data-points 和任務單一致；6 種元素、F1 0.939 與它的白話解釋、6 個欄位的 SNOP、JSON（有保留「自製術語表」）、好處與代價、抽象模型與具體模型都和 Wiki 一致，也沒有出現基準模型或 0.906；參數、F1、SNOP、JSON、抽象模型、具體模型第一次出現都有白話解釋，F1、SNOP、JSON 有用 nw。3 項建議（「這就是」指的是哪一欄不清楚、沒說 NL4Opt 是競賽、欄標題元件規範缺漏），沒有必須修，判定通過。"
+}

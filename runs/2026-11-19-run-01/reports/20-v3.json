@@ -1,0 +1,23 @@
+{
+  "target": "attempts/20-v3.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/20-v3.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/20-v3.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "tasks/20.md「篇名不要包 nw（篇名要能換行）」（不屬於草稿本身）",
+      "problem": "這次照 Whole 的指派，只把 S4 篇名裡的「Chain-of-Experts」包進 nw，篇名的其他部分沒有包。字面上和任務單的寫法不同，但符合任務單的用意（判斷見 summary）。任務單不改的話，之後的 B 或 V2 可能又照字面把它拿掉。",
+      "fix": "不用退回 L7。請 C 把任務單改成「篇名整體不要包 nw，篇名要能換行；篇名裡帶連字號的詞（例如 Chain-of-Experts）可以單獨包 nw」，並記在 run-log。"
+    },
+    {
+      "level": "建議",
+      "where": "桌面 1280×720 的 S4、S6 兩個列點（上一版就有）",
+      "problem": "S4 第一行最後是「ICLR」，「2024」被擠到下一行；S6 第二行只剩「（2023）」。這次改動沒有影響桌面排版，和 screens/desktop-20.png 一樣，20-v2 的報告也提過。",
+      "fix": "可選。照 20-v2 報告的修法：把「ICLR 2024」包成 <span class=\"nw\">ICLR 2024</span>，S6 的 nw 擴大成 arXiv 編號加（2023）。文字不變，篇名仍不包 nw。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。和 slides/20.html、attempts/20-v2.html 相比只改了一個地方：S4 篇名裡的「Chain-of-Experts」包進 nw，文字和字數（63 字）都沒變。deck-v1 針對這張的那一項已修好：V2 用沒加 --run 的 render-slide 量舊版，新規則會報「Chain-of-Experts 在連字號斷行」；新版通過。手機截圖上，S4 篇名在單字之間換成兩行，Chain-of-Experts 沒有被拆開。只把 Chain-of-Experts 包進 nw 可以接受，理由有四點。(1) 任務單禁止篇名包 nw，用意是「篇名要能換行」。現在篇名照樣可以在單字之間換行，只是這一個帶連字號的詞不會被拆開，用意沒有被違反。(2) 任務單自己就允許「帶連字號的名稱（例如 Chain-of-Experts 簡稱）」用 nw，slide-rules 第 4 節也規定帶連字號的名稱用 nw。(3) 不包的話會違反 render 新加的 S5 規則。(4) 去掉標籤後，6 篇的篇名、會議、arXiv 編號、年份 V2 都用程式和 wiki/references.md 逐項比對過，一字不差；冒號仍然接在 Chain-of-Experts 後面。照任務單：角色 refs、標題、data-wiki 都一致，沒有寫 data-points；ul.refs 有 6 個 <li>，作者都寫「第一作者 等」，S3 用「；」，S6 沒有寫「（OptiGuide）」，自製說明用 p.note.mt。簡稱出自 overview.md，沒有 references.md 以外的書目資訊，也沒有講各篇用在第幾站。這張沒有新術語。元件合規，沒有自己寫 <footer>。必須修 0 項，判定通過。"
+}

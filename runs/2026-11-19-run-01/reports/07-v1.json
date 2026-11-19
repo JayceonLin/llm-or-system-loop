@@ -1,0 +1,17 @@
+{
+  "target": "attempts/07-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/07-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "最下方的成本說明（<p class=\"note\">）",
+      "problem": "S5：內容放不進 1280×720。補充的 render 檢查報「內容超出版面（高 34px）」「操作元件「.nav」蓋到投影片文字」。成本說明的第二行（token 的白話解釋與「自製術語表」）被切掉一半，還被右下角的上一張／下一張按鈕蓋住，新術語 token 的解釋在畫面上看不清楚。（補充檢查方法：check-slide 不量版面，我把這張接上頁尾、套進 slides/template.html 存到 /tmp，用 python3 loop/check.py render /tmp/檔名.html 量 1280×720；沒有加 --run，不寫入專案。L9 的 render 會報出同樣的錯誤。）",
+      "fix": "至少省下約 34px。例如把前兩個列點合成一行「LLM 擅長讀懂文字，求解器擅長精確計算；LLM 會算錯，也會重複產生以前的解」，OPRO 那一點、表格與成本說明都不動。我在 /tmp 試排過：中文 172 字、2 個 <li>，放得下，還剩約 38px。這樣會拿掉「為什麼分工：」字樣；想保留的話，要從別處省出同樣的高度（只拿掉 <ul> 的 mt、把成本說明改成 small，我試過仍超出 4px，不夠）。「不含求解器時間」接在「7 分鐘內完成」、4117.1 ± 1509.7 照抄、兩處「自製術語表」都要保留。改完照上面的補充檢查方法自己量一次，確認沒有超出。"
+    }
+  ],
+  "summary": "程式檢查通過（中文 177 字、3 個 <li>）。角色、標題、data-wiki、data-points 和任務單一致，6 個重點都有講到；逐句對照 system/03-code-and-solver.md 與 topics/glossary.md 沒有講錯或誇大，「不含求解器時間」也接在對的位置；Coder、LP 格式檔、token 第一次出現都有白話解釋，兩處保留「自製術語表」；沒有講 OPRO 細節、資料留在求解器、評估器與 Safeguard；元件合規。但補充的版面檢查發現超出 34px，token 的解釋被切掉，還被操作按鈕蓋住。1 項必須修，判定不通過。"
+}

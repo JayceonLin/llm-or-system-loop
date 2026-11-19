@@ -1,0 +1,23 @@
+{
+  "target": "attempts/20-v4.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/20-v4.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/20-v4.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "S6 列點的 nw，以及 tasks/20.md 的「建議元件」（不屬於草稿本身）",
+      "problem": "和 slides/20.html 相比改了兩處，比 deck-v2 的修法多一處。第 1 處是 S4 的「ICLR 2024」包進 nw，這是 deck-v2 的修法。第 2 處是 S6 的 nw 從「arXiv:2307.03875」擴大到「arXiv:2307.03875（2023）」，deck-v2 的 fix 沒有要求這一處。不過 deck-v2 的 problem 已經點名「S6 的（2023）單獨一行也屬於同一類」，20-v2、20-v3 的報告也都建議過這個修法，run-log 也記了 B 的說明。V2 實測沒有副作用：桌面上 S6 第 2 行從只剩「（2023）」變成完整的「arXiv:2307.03875（2023）」，手機排版和正式版完全相同；包的是編號與年份，不是篇名，沒有違反「篇名整體不要包 nw」。所以這一處可以保留。另外，任務單 20 只寫「arXiv 編號、帶連字號的名稱可以用 nw」，沒有寫會議名稱＋年份，也沒有寫 S6 的包法，之後的 B 或 V2 可能照字面把它拿掉。outline.md 沒有標記，文字也沒變，不用改。",
+      "fix": "不用退回 L7，保留這兩處。請 C 在 tasks/20.md 的建議元件補一句：「會議名稱＋年份（例如 ICLR 2024）包 nw；S6 的 arXiv 編號與（2023）包在同一個 nw，避免年份單獨一行」，並在 run-log 註明 S6 是 deck-v2 fix 以外、已經過 V2 驗證的修改。"
+    },
+    {
+      "level": "建議",
+      "where": "loop/check.py 的 render-slide／render 桌面拆行規則（不屬於任何一張投影片）",
+      "problem": "Whole 在 deck-v2 之後把桌面拆行規則改成抓連字號詞與數字，但還是抓不到「ICLR 2024」這種中間是空格的「縮寫＋年份」。V2 用沒加 --run 的 render-slide 量正式版 slides/20.html：它仍然顯示通過，但實際上桌面把它拆成「ICLR｜2024」。所以這次的修正只能靠 V2 在 /tmp 手動量測確認，程式自己驗證不了。",
+      "fix": "不退回 L7／L5，交給 Whole（可選）：在 DESKTOP_JS 的拆行 pattern 加上會議名稱＋年份，例如 /\\b[A-Z][A-Za-z]+ (?:19|20)\\d{2}\\b/，手機也可以加同一條；改完重跑 render，確認全部 20 張只有舊版第 20 張會被抓到。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過，check-slide 與 render-slide 都是 0 個錯誤、0 個警告。V2 用程式比對：去掉標籤後，畫面上的文字和 slides/20.html 完全相同，63 個中文字、6 個 <li>，差別只在上面第 1 項說的兩個 nw。deck-v2 這一項已解決：桌面上 S4 第 2 行是完整的「ICLR 2024」，不再拆開。V2 在 /tmp/v2-l8-batch 用和 render-slide 相同的組法量測並截圖（沒有寫進專案），量了桌面與手機上的 4 個會議名稱＋年份（IJCAI 2025、NeurIPS 2022、ICML 2024、ICLR 2024）、5 個 arXiv 編號（含 3 個帶年份的）、6 位第一作者姓名，都沒有被拆成兩行。手機上「Google DeepMind」在空格處換行，正式版也一樣，屬於一般英文換行，不列入。桌面內容底部在 538px，和正式版相同，每個列點的行數也相同；手機排版和正式版完全相同，沒有截斷，也沒有橫向捲動。照任務單：角色 refs、標題、data-wiki 都一致，沒有寫 data-points；用 ul.refs 寫 6 個 <li>，自製說明用 p.note.mt。作者都寫「第一作者 等」；S3 用「；」；S6 沒有重複寫「（OptiGuide）」；篇名整體沒有包 nw。忠實：V2 用程式逐篇對照 wiki/references.md，6 篇的完整篇名（含彎引號）、會議、arXiv 編號、年份都一字不差，S6 只少了任務單決定省略的「（OptiGuide）」。簡稱「綜述」「OPRO」出自 overview.md；自製說明對應 references.md 的「自製內容不在上表」，以及 glossary.md、tea-shop.md 開頭的自製聲明。沒有 references.md 以外的書目資訊，也沒有講各篇用在第幾站。這張沒有新術語。元件合規，沒有自己寫 <footer>。必須修 0 項、建議 2 項，判定 pass。"
+}

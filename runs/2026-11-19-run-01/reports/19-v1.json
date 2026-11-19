@@ -1,0 +1,17 @@
+{
+  "target": "attempts/19-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/19-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "data-wiki（組裝後自動產生的頁尾）",
+      "problem": "data-wiki 列了 6 頁，組裝時自動產生的頁尾太長：頁尾可用寬度約 870px，6 個路徑多出 226px，最後的 topics/llm-roles.md、topics/evaluation.md 被截掉看不到，文字還延伸到「上一張／下一張」按鈕底下。L9 的 render 會把它報成錯誤「頁尾被截斷，看不到全部的 Wiki 連結（S1、S5）」與「操作元件 .nav 蓋到投影片文字（S5）」。B 是照任務單 19 寫的 data-wiki，問題出在任務單，不是內容。（量測方式：V2 在專案外的 /tmp 用 slides/template.html 和 build 相同的頁尾產生方式組出暫時預覽，再用 check.py render 的 DESKTOP_JS 在 1280×720 量測並截圖；沒有加 --run，專案內沒有寫任何檔案。）另外，專案新增的 python3 loop/check.py render-slide 在 2026-11-19T13:33:11+08:00 對這張的檢查（不是本 V2 執行的，結果在 checks.jsonl）也得到相同結論，錯誤原文：「桌面 1280×720 19-v1.html「總結：做 LLM × OR 」頁尾被截斷，看不到全部的 Wiki 連結（S1、S5）」；「桌面 1280×720 19-v1.html「總結：做 LLM × OR 」操作元件「.nav」蓋到投影片文字（S5）」",
+      "fix": "請 C 先改任務單 19（與 outline.md 第 19 張）的 data-wiki，再請 B 照改。V2 實測：6 頁拿掉任何一頁仍會截斷 6～128px，要減到 4 頁才放得下。例如 overview.md topics/risks-and-design.md topics/llm-roles.md topics/evaluation.md 實測截斷 0px、沒有蓋到按鈕；5 個列點都能在這 4 頁找到依據（五站在 overview.md；計算交給求解器、驗證回圈只修得了小錯、驗證交給不是 LLM 的程式與重試上限在 topics/risks-and-design.md；三種角色在 topics/llm-roles.md；考卷與數字不能直接比在 topics/evaluation.md），<strong>求解器</strong> 也出現在 overview.md 與 topics/risks-and-design.md。用這 4 頁時，第 2 點的「LLM 擅長讀懂文字」只寫在 system/03-code-and-solver.md，要改成 overview.md 的說法，例如「LLM 讀懂文字、寫出模型與程式」。data-points 不用改。"
+    }
+  ],
+  "summary": "程式檢查通過（152 字、5 個列點）；角色、標題、data-wiki、data-points 與任務單一致，5 點都照任務單、沒有新數字，說法都能在列出的 Wiki 頁面找到；但任務單指定的 6 頁 data-wiki 讓組裝後的頁尾被截斷 226px，L9 的 render 會報錯，必須修 1 項（要先改任務單），判定 fail。"
+}

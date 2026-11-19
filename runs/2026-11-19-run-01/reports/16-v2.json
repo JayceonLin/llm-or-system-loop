@@ -1,0 +1,23 @@
+{
+  "target": "attempts/16-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/16-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/16-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "第 5 個列點開頭的「Chain-of-Experts」",
+      "problem": "Chain-of-Experts 沒有包 nw（上一版也沒有）。因為它在列點開頭，目前桌面和手機都沒有斷開，render-slide 也通過。其他張都有把它包進 nw。",
+      "fix": "可選。改成 <span class=\"nw\">Chain-of-Experts</span>，字數不變（這張已經 180 字，不能加字）。"
+    },
+    {
+      "level": "建議",
+      "where": "tasks/16.md、outline.md 第 110 行（不屬於草稿本身）",
+      "problem": "任務單和大綱還是寫「基礎模型不同、考卷不同」，和投影片不一樣。",
+      "fix": "不用退回 L7。請 C 改成「用的 LLM、考卷不同」，並記在 run-log。keypoints.md 的 K21 是使用者在 H1 確認過的版本，不用改。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤、0 個警告）。這張剛好 180 字（上限）、6 個列點（上限）。和 slides/16.html 相比只改了第 5、6 點，deck-v1 針對這張的兩個問題都修好了。(1) 「基礎模型」已經不用了，第 6 點改成「用的 LLM、考卷不同」，依據是 evaluation.md 的「說明用的是哪個 LLM、哪份考卷」。這裡的基礎模型指的就是 GPT-4 和 GPT-4o，說法沒有變。(2) 第 5 點開頭寫出「Chain-of-Experts 的準確率」，依據是 evaluation.md 開頭的「論文報告的「準確率」，就是在這些考卷上答對的比例」。現在錯誤率（第 1 點、大數字說明）和準確率（第 5 點）都有寫明，不會被讀成同一種百分比。說法和前後張一致：第 15 張寫「不同考卷、不同 LLM」，第 18 張 Q3 寫「用的 LLM 不同、考卷不同」，第 19 張寫「數字不能直接比」。照任務單：角色 pitfall、標題、data-wiki、data-points（K19 K20 K21）都一致，6 個重點都有講；錯誤率都有寫「至少」，GPT-4o 有用 nw。忠實：逐句對照 evaluation.md 都正確，沒有出現 EasyLP 8.13%、ComplexLP 23.7%、NLP4LP 題數、87.4%，也沒有講教科書題目。基準資料集、比目標值、比模型第一次出現都有白話解釋。元件合規（大數字只有一個），沒有自己寫 <footer>。V2 在 /tmp 截圖看過（沒加 --run）：桌面 6 點都完整顯示，下面還有空間；手機沒有橫向捲動。之後這張不能再加字。必須修 0 項，判定通過。"
+}

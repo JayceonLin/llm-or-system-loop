@@ -51,24 +51,24 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .slide.active { display: block; }
 .slide-body {
   position: absolute; top: 66px; left: 80px; right: 80px; bottom: 64px;
-  overflow: hidden; font-size: 29px; line-height: 1.6;
+  overflow: hidden; font-size: 25px; line-height: 1.55;
 }
 .slide-src {
-  position: absolute; left: 80px; right: 330px; bottom: 18px; white-space: nowrap; overflow: hidden;
+  position: absolute; left: 80px; right: 300px; bottom: 16px; white-space: nowrap; overflow: hidden;
   font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px;
 }
-.slide-src a { margin-right: 14px; color: var(--muted); }
+.slide-src a { margin-right: 10px; color: var(--muted); white-space: nowrap; }
 
 h1, h2, h3 { font-family: var(--serif); margin: 0; letter-spacing: 0.01em; }
 h1 { font-size: 76px; line-height: 1.15; font-weight: 900; }
-h2 { font-size: 46px; line-height: 1.3; font-weight: 900; margin-bottom: 26px; }
-h3 { font-size: 30px; font-weight: 600; margin-bottom: 8px; }
+h2 { font-size: 40px; line-height: 1.3; font-weight: 900; margin-bottom: 18px; }
+h3 { font-size: 25px; font-weight: 600; margin-bottom: 6px; }
 p { margin: 0 0 14px; }
 ul, ol { margin: 0 0 14px; padding-left: 1.3em; }
-li { margin-bottom: 12px; }
-.lead { font-size: 31px; color: var(--ink); max-width: 30em; }
-.note { font-size: 24px; color: var(--muted); }
-.small { font-size: 22px; color: var(--muted); }
+li { margin-bottom: 8px; }
+.lead { font-size: 27px; color: var(--ink); max-width: 30em; }
+.note { font-size: 21px; color: var(--muted); }
+.small { font-size: 19px; color: var(--muted); }
 
 /* 螢光筆：決策變數、目標、限制式各一種顏色，整份簡報固定 */
 mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowrap; }
@@ -91,15 +91,15 @@ mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowra
 /* 三欄 */
 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .cols.two { grid-template-columns: repeat(2, 1fr); }
-.part { padding: 24px 24px; border-radius: 4px; }
+.part { padding: 16px 18px; border-radius: 4px; }
 .part p { margin: 0; }
-.part .eg { font-size: 23px; color: var(--muted); margin-top: 8px; }
+.part .eg { font-size: 20px; color: var(--muted); margin-top: 8px; }
 
 /* 流程 */
 .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 40px; margin: 18px 0 22px; padding: 0; list-style: none; }
-.flow li { position: relative; margin: 0; padding: 12px 18px; border: 1.5px solid var(--ink); border-radius: 4px; font-size: 24px; background: #fff; }
+.flow li { position: relative; margin: 0; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 4px; font-size: 21px; background: #fff; }
 .flow li:not(:last-child)::after { content: "→"; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); color: var(--muted); }
-.flow.loop li:last-child::after { content: "↺ 回到第一步"; position: absolute; left: calc(100% + 12px); top: 50%; transform: translateY(-50%); color: var(--muted); white-space: nowrap; font-size: 17px; }
+.flow.loop::after { content: "↺ 做完最後一步，回到第一步"; flex-basis: 100%; color: var(--muted); font-size: 17px; }
 .flow li.solver { background: var(--ink); color: #fff; }
 
 /* 角色 */
@@ -107,49 +107,49 @@ mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowra
 .role.t { border-color: var(--translate); }
 .role.o { border-color: var(--optimize); }
 .role.e { border-color: var(--explain); }
-.role h3 { font-size: 34px; }
+.role h3 { font-size: 28px; }
 .role.t h3 { color: var(--translate); }
 .role.o h3 { color: var(--optimize); }
 .role.e h3 { color: var(--explain); }
-.role .who { font-size: 22px; color: var(--muted); margin-top: 10px; }
+.role .who { font-size: 19px; color: var(--muted); margin-top: 10px; }
 .tag { display: inline-block; font-size: 17px; font-family: var(--sans); font-weight: 700; padding: 2px 10px; border-radius: 3px; color: #fff; vertical-align: middle; margin-right: 10px; }
 .tag.t { background: var(--translate); }
 .tag.o { background: var(--optimize); }
 .tag.e { background: var(--explain); }
 
 /* 數字 */
-.stat { font-family: var(--serif); font-size: 112px; font-weight: 900; line-height: 1; }
-.stat-label { font-size: 24px; color: var(--muted); margin-top: 8px; }
+.stat { font-family: var(--serif); font-size: 88px; font-weight: 900; line-height: 1; }
+.stat-label { font-size: 21px; color: var(--muted); margin-top: 8px; }
 .split { display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: start; }
 
 /* 步驟 */
 .steps { list-style: none; padding: 0; counter-reset: s; }
-.steps li { counter-increment: s; position: relative; padding-left: 60px; margin-bottom: 24px; }
-.steps li::before { content: counter(s); position: absolute; left: 0; top: 4px; width: 42px; height: 42px; border-radius: 50%; background: var(--translate); color: #fff; font-weight: 700; text-align: center; line-height: 42px; font-size: 23px; }
+.steps li { counter-increment: s; position: relative; padding-left: 52px; margin-bottom: 12px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 36px; height: 36px; border-radius: 50%; background: var(--translate); color: #fff; font-weight: 700; text-align: center; line-height: 36px; font-size: 20px; }
 
 /* 表格 */
 .table-wrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 24px; }
-th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table { border-collapse: collapse; width: 100%; font-size: 20px; }
+th, td { text-align: left; padding: 7px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-weight: 700; border-bottom: 2px solid var(--ink); }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 
 /* 程式碼與模型 */
-pre { margin: 0; padding: 16px 20px; background: var(--soft); font-family: var(--mono); font-size: 19px; line-height: 1.6; overflow-x: auto; border-radius: 4px; }
-.model { font-family: var(--mono); font-size: 25px; line-height: 1.9; padding: 14px 20px; background: #fff; border: 1px solid var(--line); }
-.problem { font-size: 25px; line-height: 1.75; padding: 16px 20px; background: #fff; border-left: 5px solid var(--ink); }
+pre { margin: 0; padding: 16px 20px; background: var(--soft); font-family: var(--mono); font-size: 17px; line-height: 1.5; overflow-x: auto; border-radius: 4px; }
+.model { font-family: var(--mono); font-size: 21px; line-height: 1.8; padding: 14px 20px; background: #fff; border: 1px solid var(--line); }
+.problem { font-size: 21px; line-height: 1.7; padding: 16px 20px; background: #fff; border-left: 5px solid var(--ink); }
 
 /* 測驗 */
-details { border: 1.5px solid var(--line); border-radius: 4px; padding: 18px 22px; margin-bottom: 18px; background: #fff; }
+details { border: 1.5px solid var(--line); border-radius: 4px; padding: 12px 18px; margin-bottom: 12px; background: #fff; }
 details[open] { border-color: var(--ink); }
 summary { cursor: pointer; font-weight: 500; }
 details p { margin: 10px 0 0; color: var(--explain); }
 
-.mt { margin-top: 24px; }
-.caption { font-size: 22px; color: var(--muted); margin: 0 0 6px; }
+.mt { margin-top: 16px; }
+.caption { font-size: 19px; color: var(--muted); margin: 0 0 6px; }
 .soft { background: var(--soft); }
 .answer { font-weight: 700; border-left: 5px solid var(--explain); padding-left: 14px; }
-.refs { font-size: 23px; line-height: 1.5; }
+.refs { font-size: 19px; line-height: 1.45; }
 .refs li { margin-bottom: 10px; }
 
 /* 操作列 */
@@ -186,6 +186,7 @@ details p { margin: 10px 0 0; color: var(--explain); }
   .flow li { font-size: 15px; padding: 6px 10px; }
   table { font-size: 14px; }
   table.wide { min-width: 560px; }
+  .table-wrap:has(table.wide)::after { content: "← 表格可以左右滑動 →"; display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
   table.wide td:not(:last-child), table.wide th:not(:last-child) { white-space: nowrap; }
   th, td { padding: 6px 8px; }
   pre { font-size: 13px; }

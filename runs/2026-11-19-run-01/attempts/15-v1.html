@@ -1,0 +1,23 @@
+<section class="slide" data-role="compare" data-wiki="comparisons/systems.md overview.md" data-points="K22">
+  <div class="slide-body">
+    <h2>系統比較：沒有一個系統五站全包</h2>
+    <p class="caption">每個系統涵蓋哪幾站</p>
+    <div class="table-wrap">
+      <table class="wide">
+        <thead>
+          <tr><th>系統</th><th>問題輸入</th><th>建模</th><th>寫程式</th><th>驗證修正</th><th>解釋結果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>NL4Opt</td><td>✓</td><td>✓</td><td>轉成求解器格式</td><td>—</td><td>—</td></tr>
+          <tr><td>OptiMUS</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td>—</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+          <tr><td>OptiGuide</td><td>使用者的 <span class="nw">what-if</span> 問題</td><td>沿用既有模型</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>OPRO</td><td colspan="5">不走五站，LLM 直接提出解，用分數回饋</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note mt">OptiMUS 的代表數字：解出的題目接近基本提示的兩倍。</p>
+    <p class="note">版本差異：v1 摘要寫多解出 67%，v2 摘要寫接近兩倍，內文寫提高 91%。</p>
+    <p class="answer">做系統時，可以從不同來源借每一站的做法。各系統的數字來自不同考卷、不同 LLM，<strong>不能拿來比誰比較強</strong>。</p>
+  </div>
+</section>

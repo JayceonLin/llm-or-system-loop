@@ -1,0 +1,23 @@
+{
+  "target": "attempts/12-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/12-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面，最後一個列點「最主要的用途是最佳化提示詞……」",
+      "problem": "S5：桌面 1280×720 放不下，最後一個列點被切掉。check-slide 不量版面，所以我照 build 的組法（slides/template.html 加自動頁尾）把這張放進 /tmp 的暫時預覽檔，用 check.py 的 render 量（沒加 --run，沒有寫進 run 資料夾），也看了截圖。結果是內容超出版面高 58px，截圖裡只看得到「……作者說它不是要贏過專門的求解器，大問題也放不進」，後面被切掉。原因有兩個：標題加上角色標籤後換成兩行（120px），流程圖三步排不進一行，變成兩行（141px）。",
+      "fix": "少掉約 60px。最省事的做法是縮短流程圖三步的文字，讓三步排成一行。我在預覽裡試過改成「LLM 依元提示產生新解，每步最多 8 個」「計算分數」「新解與分數加進元提示」，桌面就放得下，回圈箭頭的「回到第一步」已經表達了「進入下一輪」。也可以用別的方式刪字，但「每一步最多 8 個」「10 個城市 0.0%、50 個城市 11.0%」「從 20 個城市開始」都要保留。"
+    },
+    {
+      "level": "建議",
+      "where": "手機版（390px）的流程圖最後一步",
+      "problem": "預覽的 render 在手機版報了這張寬度超出 39px，整頁也出現橫向捲動。原因是 slides/template.html 用 position:absolute、left:calc(100% + 12px)、white-space:nowrap 把「↺ 回到第一步」畫在最後一步的右邊，最後一步一寬，標籤就跑出畫面。這是元件本身的 CSS 問題，只改文字很難穩定解決：我把三步縮短後，後兩步排到同一行，手機反而超出 56px。這張是 run-01 唯一用 flow loop 的投影片。",
+      "fix": "B 這次不用為它改內容。請 C 或 Whole 決定要不要修 slides/template.html 的手機樣式，例如在手機上讓 .flow.loop 的標籤改成一般排版、放到最後一步下面。不修的話，L9 的 render 會報這個錯。"
+    }
+  ],
+  "summary": "程式檢查通過（174 字、6 個 <li>，都在上限內）。照任務單：角色、標題、角色標籤、data-wiki、data-points 都一致，四個重點都有講到，也沒有講 15、20 個城市的表格、最近鄰居法、GSM8K 或梯度。忠實：元提示的內容、三步流程、每步最多 8 個、0.0%、11.0%、從 20 個城市開始最遠插入法比較好、主要用途與作者的說法，都和 topics/llm-as-optimizer.md、system/03-code-and-solver.md 一致。新術語元提示、旅行推銷員問題都有白話解釋，最遠插入法照任務單用「專門的方法」帶過。元件合規，沒有自己寫 footer。內容沒有問題，但桌面版最後一個列點被切掉（超出 58px），所以判定不通過。"
+}

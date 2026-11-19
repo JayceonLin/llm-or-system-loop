@@ -1,0 +1,23 @@
+{
+  "target": "attempts/15-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/15-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "整張版面，表格下方的版本差異 p.note 與結論 p.answer",
+      "problem": "S5：桌面 1280×720 放不下，版本差異與結論被切掉。check-slide 不量版面，所以我照 build 的組法（slides/template.html 加自動頁尾）把這張放進 /tmp 的暫時預覽檔，用 check.py 的 render 量（沒加 --run，沒有寫進 run 資料夾），也看了截圖。結果是內容超出版面高 142px，文字跑出投影片範圍。截圖裡版本差異那行只露出上半，結論完全看不到。內容區 590px 高：標題、表格說明、表格（369px）就用掉 496px，只剩約 94px，可是兩個 note 加結論需要約 236px。我試過把代表數字與版本差異合成一個 note、結論縮成一行，仍超出 82px。",
+      "fix": "少掉約 140px。B 能做的壓縮不夠，這張要由 C 調整任務單的內容量（L5），再照新的任務單重寫。可以考慮的方向：拿掉表格說明 p.caption（標題已經說了「每個系統涵蓋哪幾站」）、代表數字與版本差異併成一句、把「借每一站的做法」或代表數字移到別張。不管怎麼改，OptiMUS 的 67%、接近兩倍、91% 三個說法都要一起出現或一起不出現（S2）。"
+    },
+    {
+      "level": "必須修",
+      "where": "手機版（390px）表格最後一欄的表頭「解釋結果」",
+      "problem": "預覽的 render 在手機版報錯：表格欄太窄，「解釋結果」被拆成好幾行。原因是 template 在手機上讓 table.wide 除了最後一欄以外都不換行，只有最後一欄被擠窄。",
+      "fix": "表頭寫成 <th><span class=\"nw\">解釋結果</span></th>（slide-rules 第 4 節的「不換行」元件）。我在預覽裡試過，這個錯誤就會消失，表格改成在 table-wrap 裡左右捲動。"
+    }
+  ],
+  "summary": "程式檢查通過（157 字、0 個 <li>）。照任務單：角色、標題、data-wiki、data-points 都一致，比較表的表頭、5 列、每一格（含 OPRO 的 colspan=\"5\"）都和任務單一字不差，表格說明放在表格上方，代表數字、版本差異、結論的位置與元件也照任務單，沒有寫其他系統的數字或三種角色。忠實：涵蓋範圍與 comparisons/systems.md 一致；代表數字「接近基本提示的兩倍」與版本差異的 67%、接近兩倍、91% 三個都寫了；「借每一站的做法」與「不能拿來比誰比較強」都出自 comparisons/systems.md。這張沒有新術語。元件合規，沒有自己寫 footer。內容正確，但桌面版超出 142px，加上手機表頭被拆行，必須修 2 項，判定不通過。"
+}

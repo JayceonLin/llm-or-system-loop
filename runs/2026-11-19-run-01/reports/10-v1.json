@@ -1,0 +1,17 @@
+{
+  "target": "attempts/10-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/10-v1.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "兩欄下方的「Chain-of-Experts 的代價：」小標與兩個代價列點",
+      "problem": "S5：內容放不進 1280×720。補充的 render 檢查報「內容超出版面（高 221px）」「有文字跑出投影片範圍」。兩欄太高，下方的「Chain-of-Experts 的代價：」小標和兩個代價列點全部在畫面外。結果 K24 的兩點代價、新術語上下文長度與 API 呼叫的白話解釋都看不到；Agent Whole 要求「讓新手看得出代價是在講 Chain-of-Experts」，在畫面上也無從成立。（補充檢查方法：check-slide 不量版面，我把這張接上頁尾、套進 slides/template.html 存到 /tmp，用 python3 loop/check.py render /tmp/檔名.html 量 1280×720；沒有加 --run，不寫入專案。L9 的 render 會報出同樣的錯誤。）",
+      "fix": "兩欄各只有約 500px 寬，右欄每個列點都折成兩行。例如把兩欄改成沒有表頭的兩列全寬表格：第一列「OptiMUS｜一個代理人照固定流程做：寫模型、寫程式、執行、測試、修正」，第二列「Chain-of-Experts｜指揮者（一個 LLM）決定下一步請哪位專家；彙整器把各專家的意見合成最後答案；評估器不是 LLM，執行程式與測試案例，把結果轉成回饋」（三個術語保留 <strong>，第一欄只寫英文系統名稱）。表格下方照舊放「Chain-of-Experts 的代價：」小標，緊接兩個代價列點。我在 /tmp 試排過：中文 176 字、2 個 <li>，放得下，還剩約 52px。不論怎麼改，「Chain-of-Experts 的代價」小標都要緊貼在兩個代價列點上方（或把兩點放進 Chain-of-Experts 那一格），不要放到 OptiMUS 旁邊；兩處「自製術語表」保留，不要寫專家人數。改完照上面的補充檢查方法自己量一次，確認沒有超出。"
+    }
+  ],
+  "summary": "程式檢查通過（中文 176 字、5 個 <li>）。角色、標題、data-wiki、data-points 和任務單一致，6 個重點都有；逐句對照 topics/multi-agent.md 與 topics/glossary.md 都正確，沒有寫專家人數、前向思考建構、反向反思或簡報流程；代理人、指揮者、彙整器、上下文長度、API 呼叫第一次出現都有白話解釋，兩處保留「自製術語表」，欄標題只寫英文系統名稱。Agent Whole 的額外要求在文字上已做到：兩點代價上方有「Chain-of-Experts 的代價：」小標，第一點也提到只有 Chain-of-Experts 才有的專家。但補充的版面檢查發現超出 221px，小標和兩點代價全部在畫面外。1 項必須修，判定不通過。"
+}

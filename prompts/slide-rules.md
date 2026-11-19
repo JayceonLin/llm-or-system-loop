@@ -36,7 +36,7 @@
 - **S1 對應 Wiki：** `<section>` 必須有 `data-wiki`（用到的 Wiki 頁面，路徑從 `wiki/` 底下算起）與 `data-points`（這張講的重點編號，例如 `K03 K04`）。封面與資料來源可以不寫 `data-points`。
 - **S2 可追溯：** 投影片上的每一個數字，以及每一個 `<strong>` 標出的術語，都必須一字不差地出現在 `data-wiki` 列出的頁面。數字的範圍、單位、版本要和 Wiki 一致，例如 Wiki 寫「92–93%」，就不能寫成「93%」。Wiki 有「版本差異」時，要嘛兩個數字都寫，要嘛都不寫。
 - **S4 份量：** 最多 6 個 `<li>`（流程圖的每一步也算一個），中文字不超過 180 字。
-- **S5 版面：** 只能用第 4 節的元件，不能寫 `style` 屬性、`<script>`、外部圖片。內容要能放進 1280×720 的畫面。
+- **S5 版面：** 只能用第 4 節的元件，不能寫 `style` 屬性、`<script>`、外部圖片。內容要能放進 1280×720 的畫面，手機上也不能出現整頁橫向捲動。180 字是上限，不是目標；表格、兩欄、流程圖都很佔高度。**每一張都必須通過 `python3 loop/check.py render-slide <檔案>`**，它會把這一張套進外框，實際量桌面與手機版面。
 - **一張一件事：** 標題直接說出這張的重點，例如「第 3 站：計算交給求解器」，不要只寫「第 3 站」。
 
 ## 4. 可用的元件
@@ -62,6 +62,7 @@
 | 列點 | `<ul>`、`<ol class="steps">` | `steps` 用在有先後順序的步驟 |
 | 流程圖 | `<ol class="flow"><li>…</li><li class="solver">…</li></ol>` | 箭頭自動產生；`solver` 是深色方塊；最後一步要回到第一步時用 `<ol class="flow loop">` |
 | 兩欄、三欄 | `<div class="cols two">`、`<div class="cols">`，裡面放 `<div class="part">`；要底色加 `soft` | 並列比較 |
+| 欄標題 | `<h3>` | 兩欄、三欄裡每一欄的小標題 |
 | 模型三部分 | `<div class="part var">`、`part obj`、`part con` | 決策變數、目標、限制式的固定顏色 |
 | 螢光筆 | `<mark class="var">`、`obj`、`con` | 在文字裡標出變數、目標、限制 |
 | 表格 | `<div class="table-wrap"><table>…</table></div>`；比較表加 `<table class="wide">`；數字欄加 `class="num"` | 資料表 |
@@ -72,6 +73,7 @@
 | 結論 | `<p class="answer">` | 例題答案、這張的結論 |
 | 角色標籤 | `<span class="tag t">翻譯者</span>`、`tag o` 最佳化器、`tag e` 解說員 | 放在 `<h2>` 開頭 |
 | 測驗 | `<details><summary>Q1　題目</summary><p>答案與一句理由</p></details>` | 只用在 quiz |
+| 書目 | `<ul class="refs">` | 只用在 refs，字比較小 |
 | 不換行 | `<span class="nw">GPT-4o</span>` | 型號、帶連字號的名稱 |
 | 間距 | 在元素上加 `class="mt"` | 和上一塊拉開距離 |
 

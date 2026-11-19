@@ -1,0 +1,17 @@
+{
+  "target": "attempts/19-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-19-run-01/attempts/19-v2.html --keypoints runs/2026-11-19-run-01/keypoints.md --run runs/2026-11-19-run-01 && python3 loop/check.py render-slide runs/2026-11-19-run-01/attempts/19-v2.html --run runs/2026-11-19-run-01",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "桌面 1280×720 第 5 個列點的最後一行",
+      "problem": "「……數字不能直接」排在第一行，第二行只剩「比。」一個字。上一版就是這樣，這次沒有改到這裡，也不影響理解。這和 deck-v1 提到的「標題最後一行只剩一個字」是同一類問題，Whole 已經決定這次不處理。",
+      "fix": "可選。例如把「直接比」包成 <span class=\"nw\">直接比</span>，字數不變；改完要重跑 render-slide。"
+    }
+  ],
+  "summary": "程式檢查兩項都通過（check-slide 與 render-slide 都是 0 個錯誤）。render-slide 有 1 個警告：桌面只用到版面的 57%。這是列點很短的總結頁，deck-v1 也判斷這樣可以接受。和 slides/19.html 相比只改了一個地方：第 1 點的 what-if 包進 <span class=\"nw\">，文字和字數（152 字）都沒變。deck-v1 針對這張的那一項已修好：V2 用沒加 --run 的 render-slide 量舊版 slides/19.html，新規則會報「what-if 在連字號斷行」；新版通過。V2 也在 /tmp 看過手機截圖，what-if 整個移到下一行，沒有被拆開。照任務單：角色 summary、標題、data-wiki、data-points 都一致，5 個重點都有講，沒有新的數字。忠實：逐句對照 overview.md、03-code-and-solver.md、04-verify-and-repair.md、risks-and-design.md、llm-roles.md、evaluation.md 都正確。和前面的說法一致：五站和第 04 張相同；三種角色和第 11 張相同；「數字不能直接比」和第 15、16、18 張相同。這張沒有新術語。元件合規，沒有自己寫 <footer>。必須修 0 項，判定通過。"
+}

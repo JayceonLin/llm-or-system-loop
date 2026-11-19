@@ -9,6 +9,7 @@
                                                              V2：大綱的結構、份量、可追溯與重點涵蓋
   python3 loop/check.py check-slide <單張投影片> --keypoints <重點清單>
                                                              V2：單張投影片的 S1、S2、S4、S5
+  python3 loop/check.py render-slide <單張投影片>             L8：單張投影片套進外框，量桌面與手機版面
   python3 loop/check.py build --run <run>                    C：把 <run>/slides/ 組成 slides/index.html
   python3 loop/check.py check-slides --keypoints <重點清單>   V2：整份簡報的結構、重複與重點涵蓋
   python3 loop/check.py render                               V2：桌面 1280×720 與手機版面，加 --run 時存截圖
@@ -24,7 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
 RAW = ROOT / "sources"
 SLIDES = ROOT / "slides" / "index.html"
-TYPES = {"step", "topic", "comparison", "example", "overview", "index", "log"}
+TYPES = {"step", "topic", "comparison", "example", "overview", "references", "index", "log"}
 ROLE_ORDER = ["cover", "goals", "prereq", "concept", "example", "compare", "pitfall", "quiz", "summary", "refs"]
 NUM_RE = re.compile(r"\d[\d,]*(?:\.\d+)?")
 
@@ -321,7 +322,7 @@ def check_keypoints(path):
         errors += trace_errors(label, text.replace("**", ""), re.findall(r"\*\*(.+?)\*\*", text), k["wiki"])
     for p in wiki_pages():
         fm = front_matter(p.read_text(encoding="utf8")) or {}
-        if fm.get("type") in ("index", "log"):
+        if fm.get("type") in ("index", "log", "references"):
             continue
         r = p.relative_to(WIKI).as_posix()
         if r not in used_pages:
@@ -408,7 +409,8 @@ def check_slide(path, keypoints=None):
 
 
 def footer_for(wiki_paths):
-    links = "".join(f'<a href="{REPO_BLOB}{w}">{w}</a>' for w in wiki_paths)
+    # 連結文字只顯示檔名，避免頁尾太長被截斷；連結本身仍指向完整路徑
+    links = " ".join(f'<a href="{REPO_BLOB}{w}">{w.rsplit("/", 1)[-1].removesuffix(".md")}</a>' for w in wiki_paths)  # 連結之間要有空白，手機上才能換行
     return f'<footer class="slide-src">依據 Wiki：{links}</footer>'
 
 
@@ -437,6 +439,29 @@ def build(run_dir):
     SLIDES.write_text(out, encoding="utf8")
     print(f"已組裝 {len(parts)} 張 → slides/index.html")
     return []
+
+
+def render_slide(path, run_dir=None):
+    """把單張投影片套進 slides/template.html，量 1280×720 與手機版面（L8 就檢查版面，不等到 L9）。"""
+    import tempfile
+    f = ROOT / path
+    if not f.exists():
+        return [f"{path} 不存在"], []
+    h = f.read_text(encoding="utf8").strip()
+    m = SECTION_RE.search(h)
+    if not m:
+        return [f"{path}：找不到 <section class=\"slide\">"], []
+    wiki = attr(m.group(1), "data-wiki").split()
+    h = re.sub(r'<footer class="slide-src">.*?</footer>', "", h, flags=re.S)
+    h = h.replace("</section>", "  " + footer_for(wiki) + "\n</section>", 1)
+    page = (ROOT / "slides" / "template.html").read_text(encoding="utf8").replace("<!-- SLIDES -->", h)
+    tmp = Path(tempfile.mkdtemp()) / "slide.html"
+    tmp.write_text(page, encoding="utf8")
+    errs, warns = render(None, str(tmp))
+    name = f.name
+    errs = [e.replace("第 1 張", name) for e in errs]
+    warns = [w.replace("第 1 張", name) for w in warns]
+    return errs, warns
 
 
 def check_slides(keypoints=None):
@@ -509,7 +534,9 @@ DESKTOP_JS = """i => {
   }));
   // run-02 看截圖發現：「GPT-4o」在連字號斷行、螢光筆標的詞被拆成兩行
   const split = [];
-  const pat = /[A-Za-z]+-[0-9][0-9A-Za-z.]*|\\d[\\d,]*(?:\\.\\d+)?%?/g;
+  // run-01 整份檢查第 2 次：改成和手機相同，也抓 Chain-of-Experts、what-if 這類全是字母的連字號詞
+  // 第 3 次重寫後 V2 建議：也抓「ICLR 2024」這種會議縮寫加年份被拆開
+  const pat = /[A-Za-z0-9]+(?:-[A-Za-z0-9.]+)+|\\b[A-Z][A-Za-z]*[A-Z] \\d{4}\\b|\\d[\\d,]*(?:\\.\\d+)?%?/g;
   const tw2 = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
   for (let t = tw2.nextNode(); t; t = tw2.nextNode()) {
     if (t.parentElement.closest('pre')) continue;
@@ -593,6 +620,8 @@ def render(run_dir=None, slides_file=None):
             page.on("pageerror", lambda e: console.append(str(e)))
             page.goto(url)
             page.wait_for_timeout(500)
+            # run-01 整份檢查第 2 次：測驗的答案預設收起來，打開後才是最長的版面，所以先全部打開再量
+            page.evaluate("document.querySelectorAll('details').forEach(d => d.open = true)")
             n = page.evaluate("document.querySelectorAll('section.slide').length")
             for i in range(n):
                 page.evaluate(f"window.deck && window.deck.go({i})")
@@ -604,16 +633,31 @@ def render(run_dir=None, slides_file=None):
                         const c = s.querySelector('.slide-body') || s;
                         const f = s.querySelector('.slide-src');
                         // run-02 看截圖發現：頁尾被截斷、資料來源那張的字在手機上太大
+                        // run-01 整份檢查發現：手機上「what-if」「Chain-of-Experts」在連字號斷行
+                        const hy = [];
+                        const tw = document.createTreeWalker(c, NodeFilter.SHOW_TEXT);
+                        for (let t = tw.nextNode(); t; t = tw.nextNode()) {
+                          if (t.parentElement.closest('pre')) continue;
+                          // 整份檢查第 3 次：手機也用和桌面相同的規則（連字號詞、縮寫＋年份、數字）
+                          const re = /[A-Za-z0-9]+(?:-[A-Za-z0-9.]+)+|\\b[A-Z][A-Za-z]*[A-Z] \\d{4}\\b|\\d[\\d,]*(?:\\.\\d+)?%?/g; let m;
+                          while ((m = re.exec(t.textContent))) {
+                            const r = document.createRange(); r.setStart(t, m.index); r.setEnd(t, m.index + m[0].length);
+                            if (new Set(Array.from(r.getClientRects()).filter(x => x.width > 0).map(x => Math.round(x.top / 4))).size > 1) hy.push(m[0]);
+                          }
+                        }
                         const big = Array.from(c.querySelectorAll('p, li, td, summary')).filter(e =>
                             parseFloat(getComputedStyle(e).fontSize) > 20 && !e.closest('.stat')).length;
                         return {h: c.scrollHeight - c.clientHeight, w: c.scrollWidth - c.clientWidth,
-                                footClip: f ? f.scrollWidth - f.clientWidth : 0, big,
+                                footClip: f ? f.scrollWidth - f.clientWidth : 0, big, hy,
                                 title: (s.querySelector('h1,h2')||{}).textContent || ''}; }""", i)
                 tag = f"{label} 第 {i + 1} 張「{o['title'].strip()[:14]}」"
                 if o["h"] > 2 or o["w"] > 2:
                     errors.append(f"{tag}內容超出版面（高 {o['h']}px、寬 {o['w']}px）（S5）")
                 if o["footClip"] > 1:
                     errors.append(f"{tag}頁尾被截斷，看不到全部的 Wiki 連結（S1、S5）")
+                if w <= 760:
+                    for t in sorted(set(o.get("hy", []))):
+                        errors.append(f"{tag}「{t}」被拆成兩行（S5）")
                 if w <= 760 and o["big"]:
                     warnings.append(f"{tag}有 {o['big']} 段文字在手機上超過 20px")
                 if w > 760:
@@ -689,6 +733,11 @@ def main(argv):
         return record(run, "V2 check-outline", check_outline(argv[1], kp), {"file": argv[1]})
     if cmd == "check-slide":
         return record(run, "V2 check-slide", check_slide(argv[1], kp), {"file": argv[1]})
+    if cmd == "render-slide":
+        errs, warns = render_slide(argv[1], run)
+        for wmsg in warns:
+            print("  ⚠", wmsg)
+        return record(run, "L8 render-slide", errs, {"file": argv[1], "warnings": warns})
     if cmd == "build":
         return record(run, "C build", build(run))
     if cmd == "check-slides":

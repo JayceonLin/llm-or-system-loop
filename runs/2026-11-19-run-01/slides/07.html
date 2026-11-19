@@ -1,0 +1,21 @@
+<section class="slide" data-role="concept" data-wiki="system/03-code-and-solver.md topics/glossary.md" data-points="K10 K11 K02">
+  <div class="slide-body">
+    <h2>第 3 站：LLM 寫程式，真正的計算交給求解器</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>系統</th><th>LLM 寫什麼</th></tr></thead>
+        <tbody>
+          <tr><td>OptiMUS</td><td>用 Gurobi 或 cvxpy 寫 Python 程式</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td><strong>LP 格式檔</strong>（求解器可以直接讀的模型文字檔，自製術語表）與 Gurobi 程式</td></tr>
+          <tr><td>OptiGuide</td><td><strong>Coder</strong> 把問題、背景與範例組成提示，讓 LLM 寫程式</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="mt">
+      <li>為什麼分工：LLM 擅長讀懂文字，求解器擅長精確計算</li>
+      <li>LLM 會算錯，也會重複產生以前的解</li>
+      <li>讓 LLM 直接找解的 OPRO，問題變大後就輸給專門的方法</li>
+    </ul>
+    <p class="note">成本：OptiMUS 成功的執行，不含求解器時間，每次都在 7 分鐘內完成；平均用掉 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字時的計算單位，用得越多，通常花的時間與費用也越多，自製術語表）。</p>
+  </div>
+</section>

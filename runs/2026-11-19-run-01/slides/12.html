@@ -1,0 +1,16 @@
+<section class="slide" data-role="concept" data-wiki="topics/llm-as-optimizer.md system/03-code-and-solver.md" data-points="K18">
+  <div class="slide-body">
+    <h2><span class="tag o">最佳化器</span>另一條路：OPRO 讓 LLM 直接提出解，看分數再改進</h2>
+    <p class="lead">提示裡放問題描述，以及之前產生過的解和分數，這就是<strong>元提示</strong>。</p>
+    <ol class="flow loop">
+      <li>LLM 根據元提示產生新的解，每一步最多 8 個</li>
+      <li>計算新解的分數</li>
+      <li>把新解與分數加進元提示，進入下一輪</li>
+    </ol>
+    <ul class="mt">
+      <li><strong>旅行推銷員問題</strong>：拜訪每個城市一次、總路程最短</li>
+      <li>OPRO（<span class="nw">gpt-4</span>）和最佳解的差距：10 個城市 0.0%、50 個城市 11.0%；從 20 個城市開始，專門的方法（最遠插入法）比較好</li>
+      <li>最主要的用途是最佳化提示詞；作者說它不是要贏過專門的求解器，大問題也放不進提示</li>
+    </ul>
+  </div>
+</section>

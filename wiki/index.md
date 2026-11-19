@@ -26,10 +26,14 @@ updated: 2026-11-19
 - [topics/evaluation.md](topics/evaluation.md)：怎麼評估一個系統，資料集錯誤率與數字怎麼看
 - [topics/training-and-data.md](topics/training-and-data.md)：訓練與資料合成，讓 LLM 本身更會建模
 - [topics/risks-and-design.md](topics/risks-and-design.md)：限制、風險與設計建議
+- [topics/glossary.md](topics/glossary.md)：新手術語表（自製），LP、混合整數規劃、token、API 呼叫、JSON 等
 
 ## 比較與範例
 - [comparisons/systems.md](comparisons/systems.md)：系統比較表，每個系統涵蓋哪幾站與代表數字
 - [examples/tea-shop.md](examples/tea-shop.md)：自製範例，手搖飲店走完五站（含可執行程式與 what-if）
+
+## 資料來源
+- [references.md](references.md)：6 篇論文的書目，以及每篇主要用在哪裡
 
 ## 紀錄
 - [log.md](log.md)：討論、ingest、檢查的紀錄
