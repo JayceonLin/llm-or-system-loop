@@ -1,0 +1,10 @@
+{
+  "target": "attempts/11-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/11-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02；python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/11-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "程式檢查全過（168 字、0 個 li），標題、data-wiki、data-points 照任務單，沒有角色標籤也沒有五站地圖；三欄的「做什麼／對應的站／代表系統／適合」逐句對得上 llm-roles.md 的表格與「怎麼用這張表」，重點框「設計系統時，先決定 LLM 要當哪一種角色」出自同一節，螢光標在「先決定」「不走五站」兩個短語而非術語；保留了「三種角色都有『試、檢查、再改』的回圈」（解說員那一份正好對應第 09 張的「這幾步可以重複，直到結果令人滿意」）與「這個分法是本 Wiki 的整理」；Chain-of-Experts、what-if 都包 nw，桌面與手機截圖版面正常。沒有問題。"
+}

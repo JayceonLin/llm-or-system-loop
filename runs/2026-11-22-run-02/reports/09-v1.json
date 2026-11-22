@@ -1,0 +1,17 @@
+{
+  "target": "attempts/09-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/09-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02；python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/09-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "圖例 <p class=\"legend\"> 與流程圖第 4 格「Interpreter 讀取執行紀錄，寫成回答」",
+      "problem": "第 4 格是白底實線方塊，圖例只說明了使用者（虛線白底）、LLM、求解器／資料庫三種顏色，沒有說白底代表什麼。新手看到前一格標了 LLM、這一格沒標，可能以為 Interpreter 不是 LLM；05-explain-and-whatif.md 其實沒寫 Interpreter 是不是 LLM（任務單也因此不上色）。在桌面截圖上，白底實線和使用者的虛線框也只差在框線。",
+      "fix": "圖例最後加一個不帶 class 的 <span>（slide-rules 第 4 節「誰負責」：不加 class 的 span 會畫成白底方塊），例如 <span>未註明</span>。這會多 3 個中文字，從 177 字變成 180 字，剛好到上限；若要保留餘裕可以不改。"
+    }
+  ],
+  "summary": "程式檢查全過（177 字、4 個 li），標題、data-wiki、data-points、五站地圖（here＝解釋結果、前四站 done）都照任務單；流程四步、Coder／Safeguard 與「這幾步可以重複，直到結果令人滿意」、59%／92–93%／84%／80% 與部署說明都和 05-explain-and-whatif.md 一致，長條長度 v59／v92／v84／v80 與數值相符、84% 與 80% 同列一起畫，圖例文字與色塊一致；桌面四步排在同一行，手機無橫向捲動。只有一項建議：白底方塊沒有圖例說明。"
+}

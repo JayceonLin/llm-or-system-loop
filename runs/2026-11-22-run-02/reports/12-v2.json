@@ -1,0 +1,22 @@
+{
+  "target": "attempts/12-v2.html（上一版 attempts/12-v1.html；回應 reports/deck-v1.json 第 5 項建議）",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/12-v2.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/12-v2.html --run runs/2026-11-22-run-02",
+    "errors": [],
+    "warnings": [],
+    "result": "check-slide ✓ 通過；render-slide ✓ 通過（無警告）"
+  },
+  "issues": [],
+  "checked_ok": [
+    "只改了該改的地方：diff 只有圖例多一格 <span>未註明</span>；標題、元提示、回圈流程圖、重點框、caption、長條（v0、v16、v55、v49 best，數值 0.0%、3.2%、11.0%、9.8%）、note、aria-label、螢光 2 處都和 12-v1 相同。",
+    "元件合規：slide-rules 第 4 節「誰負責」寫明「不加 class 的 <span> 會畫成白底方塊，用來說明白底的意思」，圖例只列這張用到的顏色（LLM＋白底）。任務單 12 原本寫「圖例只列 LLM」，這次是照 deck-v1 的建議改，與規範不衝突。",
+    "忠實：llm-as-optimizer.md「每一輪」只寫 LLM 產生新解，第 2、3 步沒寫誰做；04-verify-and-repair.md 的 OPRO 列也只寫「計算每個候選解的分數」，沒有主詞。所以兩格白底標「未註明」是對的，沒有替 Wiki 補上負責者。",
+    "前後一致：寫法和第 10 張圖例的「未註明」一字不差（同為白底方塊）；解決 deck-v1 指出的白底沒說明。04 圖例用「誰負責，後面各站再說明」、09 的白底（Interpreter）仍沒有圖例說明，這兩張不在這次範圍，deck-v1 已記錄。",
+    "字數：177 字（12-v1 174 字 +3），3 個 <li>。",
+    "版面（看過截圖）：桌面圖例一行「LLM／未註明」，3 步流程仍在同一行，回圈虛線與「回到第一步」正常，重點框一行，螢光「從 20 個城市開始」「越小越好」沒斷行；手機圖例一行，流程由上往下、回圈改成一行文字，沒有整頁橫向捲動。與 12-v1 逐張比對，除了圖例多一格外畫面相同。",
+    "沿用、非這次引入：手機上標題「改進」斷成「改／進」、重點框「專門」斷成「專／門」，12-v1 截圖完全一樣；屬於一般文字在中文字之間換行，render 規則不檢查，整份其他張（例如 08 手機重點框「開／始」）也一樣，不列為問題。手機 caption 13px 偏小已在 deck-v1 第 11 項（外框）記錄。"
+  ],
+  "notes": "任務單 tasks/12.md 沒有這次的修改紀錄（仍寫「圖例只列 LLM」），建議 C 補一句以免下次照舊任務單又拿掉。 截圖與量測：/tmp/v2l7b/shoot.py（套進 slides/template.html 的 <!-- SLIDES -->，桌面 1280×720、手機 390 寬，量 .hi、strong、.key、.lead、.legend 的行數與超出），截圖 /tmp/v2l7b/12-v2-desktop.png、12-v2-mobile.png，上一版 12-v1 也一起截圖比對。",
+  "summary": "pass：兩個程式檢查都通過，只在圖例加了「未註明」，和第 10 張寫法一致、符合 Wiki 沒寫誰算分數，沒有引入新問題，必須修 0 項、建議 0 項。"
+}

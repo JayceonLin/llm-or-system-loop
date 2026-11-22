@@ -1,0 +1,23 @@
+{
+  "target": "attempts/05-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/05-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/05-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "右欄第 1 個列點的 SNOP",
+      "problem": "任務單把 SNOP 列為新術語，投影片只寫「使用者填 6 個欄位的 SNOP」，沒有說它是什麼東西。01-problem-input.md 的白話是「一份有 6 個欄位的結構化描述，叫做 SNOP」。新手能從「填 6 個欄位」猜到是表單，但不夠明確。句子是任務單原句，所以列為建議。",
+      "fix": "改成「使用者填 6 個欄位的結構化描述 <strong>SNOP</strong>」（約 +5 字，全張約 174 字，仍在 180 字內）。"
+    },
+    {
+      "level": "建議",
+      "where": "右欄第 3 個列點、左欄第 1 個列點（斷行）",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html，1280×720 與 390 寬；Noto Sans TC 網路字型有載入）：桌面版粗體術語「抽象模型」斷成「抽象模／型」，「參數（題目給的數／字）」與「限／制上限」也斷在詞中間；手機版最後一行只剩「給」一個字。",
+      "fix": "把「抽象模型」包 <span class=\"nw\">；其餘斷行可接受，若要處理可微調列點字數。"
+    }
+  ],
+  "summary": "兩個程式檢查都通過；地圖、標題、重點框、兩欄分工、6 種元素、F1 0.939 與白話、SNOP/JSON、好處與代價、抽象模型的主詞都和 Wiki 及任務單一致，沒有出現基準模型；兩項建議（SNOP 白話不夠明確、粗體術語被斷行）。"
+}

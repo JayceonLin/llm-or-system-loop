@@ -1,0 +1,15 @@
+<section class="slide" data-role="concept" data-wiki="overview.md" data-points="K01">
+  <div class="slide-body">
+    <h2>用到 LLM 的 OR 系統可以拆成五站</h2>
+    <p class="key">系統可以<em class="hi">拆成五站</em>：讀懂文字、寫出模型與程式，<em class="hi">計算交給<span class="nw">求解器</span></em></p>
+    <p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span><span>白底：誰負責，後面各站再說明</span></p>
+    <div class="stations" role="img" aria-label="五站依序是問題輸入、建模、寫程式交給求解器、驗證與修正、解釋結果與 what-if；第 2 站由 LLM 負責，第 3 站由 LLM 寫程式、求解器計算">
+      <div><b>問題輸入</b><small>把文字題整理成有結構的資料</small></div>
+      <div class="llm"><b>建模</b><small>寫出決策變數、<span class="nw">目標函數</span>、限制式</small></div>
+      <div class="solver"><b>寫程式交給<span class="nw">求解器</span></b><small>LLM 寫程式，交給<span class="nw">求解器計算</span></small></div>
+      <div><b>驗證與修正</b><small>執行、檢查，錯了重寫</small></div>
+      <div><b>解釋結果與 <span class="nw">what-if</span></b><small>回答「如果改成這樣會怎樣」</small></div>
+    </div>
+    <p class="note mt">背景：過去寫模型需要專家，Gurobi 的使用者有 81% 具研究所學歷。</p>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+{
+  "target": "attempts/13-v4.html（上一版 attempts/13-v3.html；回應 reports/13-v3.json 的 2 項建議）",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/13-v4.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/13-v4.html --run runs/2026-11-22-run-02",
+    "errors": [],
+    "warnings": [],
+    "result": "check-slide ✓ 通過；render-slide ✓ 通過（無警告）"
+  },
+  "issues": [],
+  "checked_ok": [
+    "只改了該改的地方：diff 13-v3 → 13-v4 只有第 4 行重點框，改成「前面五站都在「怎麼用」LLM，這條研究路線是讓 LLM 本身更會建模」，和 13-v3 報告建議的最小改法一字不差；標題、三欄（資料合成、監督式微調、對齊）、綜述段落（含「以統一方式重測」）、螢光 2 處、note、data-wiki、data-points 都和 13-v3 相同，仍符合任務單 13。",
+    "13-v3 建議 1 已解決：重點框從 26 字縮短（全張 177 → 174 字）；手機從 3 行回到 2 行，「「訓／練 LLM 本身」」的引號詞斷行不見了。重點框中文 21 字，符合任務單「約 20 字以內」。",
+    "13-v3 建議 2 已解決：拿掉了 Wiki 沒有的引號名稱「訓練 LLM 本身」；「這條研究路線是讓 LLM 本身更會建模」對應 topics/training-and-data.md 開頭「另一條研究路線是『讓 LLM 本身更會建模』」，前半句「前面五站都在『怎麼用』LLM」也和同一句原文一致。",
+    "deck-v1 第 7 項仍維持解決：重點框寫「這條研究路線」，緊接在標題「另一條研究路線：……」下面，有明確指涉，不會和 12 的 OPRO「另一條路」混淆。",
+    "重點框沒有 <strong>，螢光仍是 2 處（以統一方式重測、在較難的資料集上勝過），都不在術語上；數字 42.9%、59.5% 未變動，check-slide 追溯通過。",
+    "版面（看過截圖）：桌面 1280×720 重點框一行、沒有超出，下方留白和 13-v3 相同；手機 390 寬沒有整頁橫向捲動，重點框 2 行（在「這條／研究路線」之間換行，屬一般中文換行），粗體術語與螢光都沒斷行。0 個 <li>。"
+  ],
+  "notes": "任務單 tasks/13.md 仍沒有這兩次的修改紀錄，重點框範例仍寫「這條路」（13-v3 報告已提過），本報告以 reports/13-v3.json 的建議與 run-log.md 第 96、97 行作為改動依據。另外 runs/2026-11-22-run-02/slides/13.html 目前仍是舊的「這條路」版本，C 組裝時記得換成 13-v4。截圖與量測：/tmp/v2l7c/shoot.py（套進 slides/template.html 的 <!-- SLIDES -->，桌面 1280×720、手機 390 寬），截圖 /tmp/v2l7c/13-v4-desktop.png、13-v4-mobile.png，上一版 13-v3 也一起重截比對。",
+  "summary": "pass：兩個程式檢查都通過，diff 只有重點框一行，改成 13-v3 報告建議的最小改法，2 項建議都已解決（手機回到 2 行、不再用 Wiki 沒有的引號名稱）；174 字，沒有新問題，必須修 0 項、建議 0 項。"
+}

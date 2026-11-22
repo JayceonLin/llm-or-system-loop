@@ -1,0 +1,23 @@
+{
+  "target": "attempts/12-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/12-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02；python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/12-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "圖例與回圈流程圖第 2、3 格（「計算新解的分數」「把新解與分數放回元提示」）",
+      "problem": "圖例只有 LLM，兩個白底方塊沒有說明。llm-as-optimizer.md 沒寫誰計算分數、誰放回提示，所以不上色是對的，但讀者看不出白底是「沒註明」。",
+      "fix": "圖例加一個不帶 class 的 <span>，例如 <span>未註明</span>（多 3 字，174 → 177 字）。"
+    },
+    {
+      "level": "建議",
+      "where": "回圈流程圖在手機寬度（390px）的虛線「回到第一步」",
+      "problem": "手機上三個方塊各自換行、上下排列，`flow loop` 的虛線仍畫成一條橫線，兩端的豎線落在第 3 格下方左側與右側空白處，沒有接回第 1 格，只能靠「回到第一步」幾個字理解。這是 flow loop 元件的手機樣式問題，B 在這張投影片裡改不了。",
+      "fix": "這張不用改；建議記進 run-log.md，交給模板（flow loop 手機樣式）處理，或加成 render 的新規則。"
+    }
+  ],
+  "summary": "程式檢查全過（174 字、3 個 li），標題（含 tag o）、data-wiki、data-points、第 3 版版面順序（流程圖 → 重點框 → caption → 長條圖 → note）都照任務單，最遠插入法第一次出現就跟著白話「專門的方法」；重點框與 note 對得上 llm-as-optimizer.md 的結果段、限制段與 03-code-and-solver.md，沒寫 15、20 城市數字與最近鄰居法；長條 0.0%／3.2%／11.0%／9.8% 與 Wiki 表格一字不差，v0／v16／v55／v49 一律是數值×5、截圖量出的長度相符，10 與 50 城市都同時畫 OPRO 與最遠插入法，「越小越好」有螢光、aria-label 說明 best 的意思；桌面三步一行。兩項建議：白底方塊沒有圖例說明、手機上回圈虛線沒接回第 1 格（元件層級）。"
+}

@@ -1,0 +1,23 @@
+<section class="slide" data-role="concept" data-wiki="system/03-code-and-solver.md topics/glossary.md" data-points="K10 K11 K02">
+  <div class="slide-body">
+    <div class="map" aria-label="目前在第 3 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="here">寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
+    <h2>第 3 站：LLM 寫程式，真正的計算交給求解器</h2>
+    <p class="key">LLM 擅長讀懂文字，求解器擅長<em class="hi">精確計算</em></p>
+    <p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span></p>
+    <ol class="flow">
+      <li class="llm">LLM 寫呼叫求解器的程式</li>
+      <li class="solver">求解器精確計算</li>
+    </ol>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><td>OptiMUS</td><td>用 Gurobi 或 cvxpy 寫 Python 程式</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td>寫 <span class="nw"><strong>LP 格式檔</strong></span>（求解器可以直接讀的模型文字檔，自製術語表）與 Gurobi 程式</td></tr>
+          <tr><td>OptiGuide</td><td><strong>Coder</strong> 把問題、背景與範例組成提示，讓 LLM 寫程式</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">LLM 會算錯，也會重複產生以前的解；讓 LLM 直接找解的 OPRO，問題變大後就輸給專門的方法。</p>
+    <p class="note">OptiMUS 成功的執行，不含求解器時間，每次都在 <em class="hi">7 分鐘內</em>完成；平均用掉 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字時的計算單位，自製術語表）。</p>
+  </div>
+</section>

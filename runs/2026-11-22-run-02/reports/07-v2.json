@@ -1,0 +1,23 @@
+{
+  "target": "attempts/07-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/07-v2.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/07-v2.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "表格與下方第 1 段 note 之間（桌面與手機）",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html 的 <!-- SLIDES -->，1280×720 與 390 寬；Noto Sans TC、Noto Serif TC 網路字型有載入）：表格最後一列的底線和「LLM 會算錯……」仍然貼在一起（量到間距 0px），看起來像表格的第四列。上一份報告的 mt 建議沒有採用；V2 在 /tmp 複本加上 class=\"mt\" 實測，render-slide 桌面超出 6px，B 的回報屬實。",
+      "fix": "不必為此退回 B（版面已經滿）。若要處理，請 Agent C 決定：例如照任務單刪字順序 (1)(2) 再試能否讓成本那段縮成一行騰出高度，或由外框為 .table-wrap 後面的段落加預設間距。"
+    },
+    {
+      "level": "建議",
+      "where": "手機版的兩處螢光：重點框「精確計算」、成本那段「7 分鐘內」",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html 的 <!-- SLIDES -->，1280×720 與 390 寬；Noto Sans TC、Noto Serif TC 網路字型有載入）：390 寬時斷成「精／確計算」與「7／分鐘內」。重點框與成本那段的斷點在 v1 就存在（這次只多一個半形空格），不是新引入；render-slide 只檢查 <mark> 與短 <strong>，沒有檢查 <em class=\"hi\">，數字規則也只抓到單獨的「7」，所以程式沒抓到。",
+      "fix": "不必退回 B；請 Agent C 考慮把斷行規則擴大到 em.hi。"
+    }
+  ],
+  "summary": "兩個程式檢查都通過（169 字、2 個 li）。上一份的必須修已解決：「每次都在 <em class=\"hi\">7 分鐘內</em>完成」空格放在 em 外面，截圖顯示「每次都在 7 分鐘內完成」。和 v1 相比另外只多了把「LP 格式檔」的 strong 包 nw（配合 render-slide 新增的短 strong 不斷行規則，無害）；外框改成直排後，手機版流程圖箭頭已由上往下，上一份的外框建議也解決了。mt 間距沒有採用，V2 實測加上會超出 6px，B 的回報屬實，表格與 note 貼齊的問題留作建議；另有一項手機螢光斷行建議。"
+}

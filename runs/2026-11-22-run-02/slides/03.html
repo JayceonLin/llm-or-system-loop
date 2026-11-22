@@ -1,0 +1,16 @@
+<section class="slide" data-role="prereq" data-wiki="system/02-modeling.md system/03-code-and-solver.md topics/glossary.md" data-points="K07 K10 K02">
+  <div class="slide-body">
+    <h2>先備知識：模型有三個部分，交給求解器來算</h2>
+    <div class="cols">
+      <div class="part var"><p><strong>決策變數</strong>：你能決定的量，例如每天做幾杯紅茶。</p></div>
+      <div class="part obj"><p><strong>目標函數</strong>：想讓它越大或越小越好的式子，例如利潤。</p></div>
+      <div class="part con"><p><strong>限制式</strong>：不能違反的條件，例如茶葉每天只有這麼多。</p></div>
+    </div>
+    <ul class="mt">
+      <li><strong>求解器</strong>：專門解最佳化模型的軟體，例如 Gurobi。它保證算出最好的答案，或告訴你這題無解。</li>
+      <li><strong>線性規劃</strong>（LP）：目標函數和限制式都是一次式，變數可以是小數。</li>
+      <li><strong>混合整數規劃</strong>：在線性規劃上，再規定某些變數只能是整數。</li>
+    </ul>
+    <p class="note">後兩點的白話解釋出自自製術語表。</p>
+  </div>
+</section>

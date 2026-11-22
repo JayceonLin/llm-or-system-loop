@@ -1,0 +1,20 @@
+<section class="slide" data-role="concept" data-wiki="system/02-modeling.md" data-points="K08 K09">
+  <div class="slide-body">
+    <div class="map" aria-label="目前在第 2 站"><span class="done">問題輸入</span><span class="here">建模</span><span>寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
+    <h2>第 2 站：把元素寫成模型的三種做法</h2>
+    <p class="key">把第 1 站整理好的元素，<em class="hi">寫成數學模型</em></p>
+    <div class="table-wrap">
+      <table>
+        <tr><td>NL4Opt</td><td>先產生<strong>意義表示</strong>（邏輯形式的中間表示），再轉成求解器能讀的格式</td></tr>
+        <tr><td>OptiMUS</td><td>LLM 寫出變數、限制式與目標，輸出給人和下一站都看得懂</td></tr>
+        <tr><td><span class="nw">Chain-of-Experts</span></td><td>術語解釋、各部分擷取、建模知識補充、建模專家等<em class="hi">好幾位專家分工</em>；建模專家寫出完整模型，通常是混合整數規劃</td></tr>
+      </table>
+    </div>
+    <p class="caption mt">NL4Opt 的準確率</p>
+    <div class="bars" role="img" aria-label="NL4Opt 的準確率：建模第一名 UIUC-NLP 0.899，ChatGPT（gpt-3.5-turbo）合併任務 0.927">
+      <p class="bar v90"><span>建模第一名 <span class="nw">UIUC-NLP</span></span><i></i><b>0.899</b></p>
+      <p class="bar v93 best"><span>ChatGPT（<span class="nw">gpt-3.5-turbo</span>）合併任務</span><i></i><b>0.927</b></p>
+    </div>
+    <p class="note">版本差異：依論文表格的數字，ChatGPT 比第一名高 2.8 個百分點；論文討論段寫高 2 個百分點。</p>
+  </div>
+</section>

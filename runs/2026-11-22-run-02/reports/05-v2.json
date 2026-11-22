@@ -1,0 +1,23 @@
+{
+  "target": "attempts/05-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/05-v2.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/05-v2.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "右欄第 3 個列點「OptiMUS 把資料分開放，就是抽象模型」",
+      "problem": "這是上一份報告沒有要求的改動：Wiki（system/01-problem-input.md）與任務單原句是「就是在做抽象模型」。V2 在 /tmp 複本把「在做」加回去實測，render-slide 桌面超出 26px，所以縮字是為了容納 SNOP 白話的必要取捨。判斷意思沒有實質改變：主詞仍是 OptiMUS，冒號後緊接抽象模型的白話（參數先用符號表示，數據之後再給），新手不會讀成 NL4Opt 也是抽象模型。只是字面上把一個做法（資料分開放）等同於一種模型，比原句不精確一點。",
+      "fix": "可以維持。若想更貼近原句又不加字，可改成「OptiMUS 資料分開放，是在做<strong>抽象模型</strong>」（中文字數同樣 12 字，需再跑一次 render-slide 確認）。"
+    },
+    {
+      "level": "建議",
+      "where": "右欄第 2 個列點的螢光「不能用一般文字輸入」（桌面版）",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html 的 <!-- SLIDES -->，1280×720 與 390 寬；Noto Sans TC、Noto Serif TC 網路字型有載入）：螢光短語斷成「不能／用一般文字輸入」。這一點的文字與欄寬和 v1 相同，是原本就有、不是這次引入；render-slide 的斷行規則只檢查 <mark> 與 6 字以內的 <strong>，沒有檢查 <em class=\"hi\">，所以程式沒抓到。",
+      "fix": "不必為此退回 B；請 Agent C 考慮把 render-slide 的斷行規則擴大到 em.hi（短的螢光短語不能斷行）。"
+    }
+  ],
+  "summary": "兩個程式檢查都通過（172 字、5 個 li）。上一份報告的兩項建議都已處理：SNOP 補上 Wiki 的白話「結構化描述」，「抽象模型」包 nw，桌面截圖上不再斷成「抽象模／型」，手機版最後一行也不再只剩「給」。B 另把「就是在做抽象模型」縮成「就是抽象模型」：V2 實測加回「在做」會超出版面 26px，屬必要取捨，意思沒有實質改變（主詞仍是 OptiMUS，後面緊接白話），列為建議；另有一項原本就有的螢光斷行建議。"
+}

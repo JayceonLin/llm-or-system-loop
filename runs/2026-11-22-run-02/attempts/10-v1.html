@@ -1,0 +1,20 @@
+<section class="slide" data-role="concept" data-wiki="topics/multi-agent.md topics/glossary.md" data-points="K17 K24 K02">
+  <div class="slide-body">
+    <h2>多代理人：讓好幾個代理人各負責一件事</h2>
+    <p class="lead"><strong>代理人</strong>是會自己決定下一步、使用工具的 AI 程式。</p>
+    <p class="key"><em class="hi">誰決定下一步</em>：OptiMUS 照固定流程，<span class="nw">Chain-of-Experts</span> 由 LLM（指揮者）決定</p>
+    <p>OptiMUS：一個代理人寫模型、寫程式、執行、測試、修正。</p>
+    <p class="caption mt"><span class="nw">Chain-of-Experts</span> 的分工</p>
+    <p class="legend"><span class="llm">LLM</span><span class="check">程式檢查</span></p>
+    <ol class="flow">
+      <li class="llm"><strong>指揮者</strong>依序挑專家</li>
+      <li>專家留下意見</li>
+      <li><strong>彙整器</strong>合成最後答案</li>
+      <li class="check"><strong>評估器</strong>執行程式與測試</li>
+    </ol>
+    <ul>
+      <li>意見多了，會超過 LLM 的<strong>上下文長度</strong>（一次能讀進來的文字上限，自製術語表）。</li>
+      <li>步驟越多，推理時間與 <strong>API 呼叫</strong>越多（程式透過網路請 LLM 服務做一次工作，自製術語表）。</li>
+    </ul>
+  </div>
+</section>

@@ -99,7 +99,6 @@ mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowra
 .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 40px; margin: 18px 0 22px; padding: 0; list-style: none; }
 .flow li { position: relative; margin: 0; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 4px; font-size: 21px; background: #fff; }
 .flow li:not(:last-child)::after { content: "→"; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); color: var(--muted); }
-.flow.loop::after { content: "↺ 做完最後一步，回到第一步"; flex-basis: 100%; color: var(--muted); font-size: 17px; }
 .flow li.solver { background: var(--ink); color: #fff; }
 
 /* 角色 */
@@ -159,6 +158,54 @@ details p { margin: 10px 0 0; color: var(--explain); }
 .nav button:disabled { color: var(--muted); border-color: var(--soft); cursor: default; }
 .nav .count { color: var(--muted); font-size: 16px; min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
 
+
+/* ---------- run-02：重點與圖例 ---------- */
+:root { --hi: #ffe58a; --key: #b88a00; --llm-soft: #e4ecfb; --check: #17704f; --check-soft: #ddf1e8; }
+/* 重點句：一張最多一個，放這張最該記住的一句 */
+.key { position: relative; margin: 0 0 16px; padding: 12px 18px 12px 92px; background: #fff8dc; border-left: 6px solid var(--key); font-weight: 700; font-size: 25px; line-height: 1.45; }
+.key::before { content: "重點"; position: absolute; left: 18px; top: 13px; font-size: 17px; font-weight: 700; color: #fff; background: var(--key); padding: 1px 9px; border-radius: 3px; line-height: 1.5; }
+/* 重點螢光：一張最多兩處，只標關鍵短語；術語仍用 strong */
+.hi { white-space: nowrap; font-style: normal; font-weight: 700; background: linear-gradient(transparent 58%, var(--hi) 58%); padding: 0 2px; }
+/* 五站地圖：.here 是這一張講的站 */
+.map { display: flex; gap: 0; margin: 0 0 16px; padding: 0; counter-reset: st; }
+.map span { counter-increment: st; flex: 1; position: relative; font-size: 16px; color: var(--muted); padding: 6px 8px 6px 36px; border-top: 4px solid var(--line); white-space: nowrap; }
+.map span::before { content: counter(st); position: absolute; left: 6px; top: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--line); color: #fff; font-weight: 700; font-size: 14px; line-height: 22px; text-align: center; }
+.map span.here { color: var(--ink); font-weight: 700; border-top-color: var(--translate); }
+.map span.here::before { background: var(--translate); }
+.map span.done { border-top-color: #9fb0c3; }
+/* 大五站圖 */
+.stations { display: grid; grid-template-columns: repeat(5, 1fr); gap: 34px; margin: 10px 0 18px; counter-reset: st; }
+.stations > div { counter-increment: st; position: relative; padding: 46px 12px 14px; border: 2px solid var(--ink); border-radius: 6px; background: #fff; text-align: center; font-size: 21px; line-height: 1.35; }
+.stations > div::before { content: counter(st); position: absolute; left: 50%; top: -20px; margin-left: -20px; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #fff; font: 900 22px/40px var(--serif); }
+.stations > div:not(:last-child)::after { content: "→"; position: absolute; right: -29px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 22px; }
+.stations > div b { display: block; font-family: var(--serif); font-size: 23px; margin-bottom: 4px; }
+.stations > div small { display: block; font-size: 16px; color: var(--muted); }
+/* 誰負責：流程圖與五站圖的節點顏色，搭配 .legend */
+.flow li.llm, .stations > div.llm { border-color: var(--translate); background: var(--llm-soft); }
+.flow li.check, .stations > div.check { border-color: var(--check); background: var(--check-soft); }
+.flow li.person, .stations > div.person { border-style: dashed; }
+.stations > div.solver { background: var(--ink); color: #fff; }
+.stations > div.solver small { color: #d6dde6; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 17px; color: var(--muted); margin: 0 0 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend span::before { content: ""; width: 22px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; background: #fff; }
+.legend .llm::before { border-color: var(--translate); background: var(--llm-soft); }
+.legend .solver::before { background: var(--ink); }
+.legend .check::before { border-color: var(--check); background: var(--check-soft); }
+.legend .person::before { border-style: dashed; }
+/* 回圈：在流程下方畫一條回到第一步的線 */
+.flow.loop { padding-bottom: 34px; position: relative; }
+.flow.loop::before { content: ""; position: absolute; left: 24px; right: 24px; bottom: 10px; height: 22px; border: 2px dashed var(--muted); border-top: 0; border-radius: 0 0 8px 8px; }
+.flow.loop::after { content: "回到第一步"; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 0 10px; background: var(--paper); font-size: 15px; line-height: 20px; color: var(--muted); }
+.stations > div.solver::before { background: #fff; color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+/* 長條圖：class v0～v100 決定長度，數值寫在 <b> */
+.bars { margin: 6px 0 14px; }
+.bar { display: grid; grid-template-columns: 360px 1fr 150px; align-items: center; gap: 14px; margin: 0 0 8px; font-size: 20px; line-height: 1.3; }
+.bar i { display: block; height: 22px; background: var(--soft); border-radius: 3px; position: relative; }
+.bar i::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--v) * 1%); background: #9fb0c3; border-radius: 3px; }
+.bar.best i::after { background: var(--translate); }
+.bar b { font-variant-numeric: tabular-nums; }
+.v0{--v:0}.v1{--v:1}.v2{--v:2}.v3{--v:3}.v4{--v:4}.v5{--v:5}.v6{--v:6}.v7{--v:7}.v8{--v:8}.v9{--v:9}.v10{--v:10}.v11{--v:11}.v12{--v:12}.v13{--v:13}.v14{--v:14}.v15{--v:15}.v16{--v:16}.v17{--v:17}.v18{--v:18}.v19{--v:19}.v20{--v:20}.v21{--v:21}.v22{--v:22}.v23{--v:23}.v24{--v:24}.v25{--v:25}.v26{--v:26}.v27{--v:27}.v28{--v:28}.v29{--v:29}.v30{--v:30}.v31{--v:31}.v32{--v:32}.v33{--v:33}.v34{--v:34}.v35{--v:35}.v36{--v:36}.v37{--v:37}.v38{--v:38}.v39{--v:39}.v40{--v:40}.v41{--v:41}.v42{--v:42}.v43{--v:43}.v44{--v:44}.v45{--v:45}.v46{--v:46}.v47{--v:47}.v48{--v:48}.v49{--v:49}.v50{--v:50}.v51{--v:51}.v52{--v:52}.v53{--v:53}.v54{--v:54}.v55{--v:55}.v56{--v:56}.v57{--v:57}.v58{--v:58}.v59{--v:59}.v60{--v:60}.v61{--v:61}.v62{--v:62}.v63{--v:63}.v64{--v:64}.v65{--v:65}.v66{--v:66}.v67{--v:67}.v68{--v:68}.v69{--v:69}.v70{--v:70}.v71{--v:71}.v72{--v:72}.v73{--v:73}.v74{--v:74}.v75{--v:75}.v76{--v:76}.v77{--v:77}.v78{--v:78}.v79{--v:79}.v80{--v:80}.v81{--v:81}.v82{--v:82}.v83{--v:83}.v84{--v:84}.v85{--v:85}.v86{--v:86}.v87{--v:87}.v88{--v:88}.v89{--v:89}.v90{--v:90}.v91{--v:91}.v92{--v:92}.v93{--v:93}.v94{--v:94}.v95{--v:95}.v96{--v:96}.v97{--v:97}.v98{--v:98}.v99{--v:99}.v100{--v:100}
 /* ---------- 手機：改成由上往下閱讀 ---------- */
 @media (max-width: 760px) {
   body { background: var(--paper); }
@@ -184,6 +231,9 @@ details p { margin: 10px 0 0; color: var(--explain); }
   .stat { font-size: 54px; }
   .role h3 { font-size: 21px; }
   .flow li { font-size: 15px; padding: 6px 10px; }
+  /* run-02：手機上流程圖改成由上往下，箭頭朝下，不會指向空白 */
+  .flow { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .flow li:not(:last-child)::after { content: "↓"; right: auto; left: 16px; top: auto; bottom: -21px; transform: none; font-size: 14px; }
   table { font-size: 14px; }
   table.wide { min-width: 560px; }
   .table-wrap:has(table.wide)::after { content: "← 表格可以左右滑動 →"; display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -192,6 +242,24 @@ details p { margin: 10px 0 0; color: var(--explain); }
   pre { font-size: 13px; }
   .steps li { padding-left: 44px; }
   .steps li::before { width: 30px; height: 30px; line-height: 30px; font-size: 16px; }
+  .key { font-size: 17px; padding: 10px 12px 10px 62px; }
+  .key::before { font-size: 13px; left: 10px; top: 11px; padding: 0 6px; }
+  .map { flex-wrap: wrap; }
+  .map span { flex: 0 0 auto; font-size: 12px; padding: 4px 6px 4px 26px; }
+  .map span::before { width: 17px; height: 17px; line-height: 17px; font-size: 11px; left: 4px; top: 5px; }
+  .stations { grid-template-columns: 1fr; gap: 12px; }
+  .stations > div { padding: 10px 12px 10px 54px; text-align: left; font-size: 15px; }
+  .stations > div::before { text-align: center; left: 12px; top: 50%; margin: -15px 0 0; width: 30px; height: 30px; font-size: 16px; line-height: 30px; }
+  .caption { font-size: 13px; }
+  .stations > div:not(:last-child)::after { content: "↓"; right: auto; left: 20px; top: auto; bottom: -18px; transform: none; font-size: 15px; }
+  .stations > div b { font-size: 16px; }
+  .stations > div small, .legend { font-size: 13px; }
+  .bar { grid-template-columns: 1fr 64px; gap: 4px 8px; font-size: 14px; }
+  .bar span { grid-column: 1 / -1; }
+  .bar i { height: 14px; }
+  .flow.loop { padding-bottom: 0; }
+  .flow.loop::before { display: none; }
+  .flow.loop::after { content: "↺ 做完最後一步，回到第一步"; position: static; transform: none; padding: 0; font-size: 12px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   details[open] p { animation: show 0.25s ease-out; }
@@ -247,149 +315,139 @@ details p { margin: 10px 0 0; color: var(--explain); }
 <section class="slide" data-role="concept" data-wiki="overview.md" data-points="K01">
   <div class="slide-body">
     <h2>用到 LLM 的 OR 系統可以拆成五站</h2>
-    <div class="split">
-      <div>
-        <div class="stat">81%</div>
-        <p class="stat-label">Gurobi 的使用者具研究所學歷</p>
-      </div>
-      <ul>
-        <li>過去寫模型需要專家。加入 LLM 後，系統可以自己讀懂文字、寫出模型與程式。</li>
-      </ul>
+    <p class="key">系統可以<em class="hi">拆成五站</em>：讀懂文字、寫出模型與程式，<em class="hi">計算交給<span class="nw">求解器</span></em></p>
+    <p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span><span>白底：誰負責，後面各站再說明</span></p>
+    <div class="stations" role="img" aria-label="五站依序是問題輸入、建模、寫程式交給求解器、驗證與修正、解釋結果與 what-if；第 2 站由 LLM 負責，第 3 站由 LLM 寫程式、求解器計算">
+      <div><b>問題輸入</b><small>把文字題整理成有結構的資料</small></div>
+      <div class="llm"><b>建模</b><small>寫出決策變數、<span class="nw">目標函數</span>、限制式</small></div>
+      <div class="solver"><b>寫程式交給<span class="nw">求解器</span></b><small>LLM 寫程式，交給<span class="nw">求解器計算</span></small></div>
+      <div><b>驗證與修正</b><small>執行、檢查，錯了重寫</small></div>
+      <div><b>解釋結果與 <span class="nw">what-if</span></b><small>回答「如果改成這樣會怎樣」</small></div>
     </div>
-    <ol class="flow mt">
-      <li>問題輸入</li>
-      <li>建模</li>
-      <li class="solver">寫程式交給求解器</li>
-      <li>驗證與修正</li>
-      <li>解釋結果與 <strong>what-if</strong>（如果改成這樣會怎樣）</li>
-    </ol>
+    <p class="note mt">背景：過去寫模型需要專家，Gurobi 的使用者有 81% 具研究所學歷。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>
 </section>
 
 <section class="slide" data-role="concept" data-wiki="system/01-problem-input.md topics/glossary.md" data-points="K05 K06 K02">
   <div class="slide-body">
+    <div class="map" aria-label="目前在第 1 站"><span class="here">問題輸入</span><span>建模</span><span>寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
     <h2>第 1 站：把文字題整理成有結構的資料</h2>
-    <div class="cols two">
-      <div class="part">
+    <p class="key">把文字題整理成之後能建模的資料</p>
+    <div class="cols two mt">
+      <div class="part soft">
         <h3>NL4Opt 競賽</h3>
         <ul>
-          <li>在題目裡標出 6 種元素：變數、<strong>參數</strong>（題目給的數字）、目標方向、目標名稱、限制方向、限制上限</li>
-          <li>這一項的第一名，<strong><span class="nw">F1</span></strong> 分數是 0.939；<span class="nw">F1</span> 同時考慮「標得準」和「沒漏標」，越接近 1 越好</li>
+          <li><em class="hi">標出 6 種元素</em>：變數、<strong>參數</strong>（題目給的數字）、目標方向、目標名稱、限制方向、限制上限</li>
+          <li>這一項的第一名，<strong><span class="nw">F1</span></strong> 分數是 0.939；F1 同時考慮「標得準」和「沒漏標」，越接近 1 越好</li>
         </ul>
       </div>
-      <div class="part">
+      <div class="part soft">
         <h3>OptiMUS</h3>
         <ul>
-          <li>使用者填一份有 6 個欄位的 <strong><span class="nw">SNOP</span></strong>，數值資料另存成 <strong><span class="nw">JSON</span></strong> 檔（用「名稱：值」存資料的文字格式，自製術語表）</li>
-          <li>好處：很長的數據表不用塞進提示；代價：不能直接用一般文字輸入</li>
+          <li>使用者填 6 個欄位的結構化描述 <strong><span class="nw">SNOP</span></strong>，數值另存成 <strong><span class="nw">JSON</span></strong> 檔（用「名稱：值」存資料的格式，自製術語表）</li>
+          <li>好處：長數據表不用塞進提示；代價：<em class="hi">不能用一般文字輸入</em></li>
+          <li>OptiMUS 把資料分開放，就是<strong><span class="nw">抽象模型</span></strong>：參數先用符號表示，數據之後再給</li>
         </ul>
       </div>
     </div>
-    <p class="note mt">這就是<strong>抽象模型</strong>：參數先用符號表示，數據之後再給；<strong>具體模型</strong>則把數值直接寫在題目裡。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/01-problem-input.md">01-problem-input</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
 </section>
 
 <section class="slide" data-role="concept" data-wiki="system/02-modeling.md" data-points="K08 K09">
   <div class="slide-body">
+    <div class="map" aria-label="目前在第 2 站"><span class="done">問題輸入</span><span class="here">建模</span><span>寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
     <h2>第 2 站：把元素寫成模型的三種做法</h2>
-    <div class="cols">
-      <div class="part soft">
-        <h3>NL4Opt</h3>
-        <p>先產生<strong>意義表示</strong>，也就是邏輯形式的中間表示，再轉成求解器能讀的格式。</p>
-        <div class="table-wrap">
-          <table>
-            <tr><th>方法</th><th class="num"><span class="nw">準確率</span></th></tr>
-            <tr><td>建模第一名 <span class="nw">UIUC-NLP</span></td><td class="num">0.899</td></tr>
-            <tr><td>ChatGPT（<span class="nw">gpt-3.5-turbo</span>）合併任務</td><td class="num">0.927</td></tr>
-          </table>
-        </div>
-        <p class="note">版本差異：依表格數字，ChatGPT 比第一名高 2.8 個百分點；論文討論段寫的是高 2 個百分點。</p>
-      </div>
-      <div class="part soft">
-        <h3>OptiMUS</h3>
-        <p>讓 LLM 寫出變數、限制式與目標。</p>
-        <p>輸出是給人和下一站都看得懂的模型文件。</p>
-      </div>
-      <div class="part soft">
-        <h3><span class="nw">Chain-of-Experts</span></h3>
-        <p>把建模拆給好幾位專家：</p>
-        <ul>
-          <li>術語解釋</li>
-          <li>各部分擷取</li>
-          <li>建模知識補充</li>
-          <li>建模專家：寫出完整的數學模型，通常是混合整數規劃</li>
-        </ul>
-      </div>
+    <p class="key">把第 1 站整理好的元素，<em class="hi">寫成數學模型</em></p>
+    <div class="table-wrap">
+      <table>
+        <tr><td>NL4Opt</td><td>先產生<strong>意義表示</strong>（邏輯形式的中間表示），再轉成求解器能讀的格式</td></tr>
+        <tr><td>OptiMUS</td><td>LLM 寫出變數、限制式與目標，輸出給人和下一站都看得懂</td></tr>
+        <tr><td><span class="nw">Chain-of-Experts</span></td><td>術語解釋、各部分擷取、建模知識補充、建模專家等<em class="hi">好幾位專家分工</em>；建模專家寫出完整模型，通常是混合整數規劃</td></tr>
+      </table>
     </div>
+    <p class="caption mt">NL4Opt 的準確率</p>
+    <div class="bars" role="img" aria-label="NL4Opt 的準確率：建模第一名 UIUC-NLP 0.899，ChatGPT（gpt-3.5-turbo）合併任務 0.927">
+      <p class="bar v90"><span>建模第一名 <span class="nw">UIUC-NLP</span></span><i></i><b>0.899</b></p>
+      <p class="bar v93 best"><span>ChatGPT（<span class="nw">gpt-3.5-turbo</span>）合併任務</span><i></i><b>0.927</b></p>
+    </div>
+    <p class="note">版本差異：依論文表格的數字，ChatGPT 比第一名高 2.8 個百分點；論文討論段寫高 2 個百分點。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a></footer>
 </section>
 
 <section class="slide" data-role="concept" data-wiki="system/03-code-and-solver.md topics/glossary.md" data-points="K10 K11 K02">
   <div class="slide-body">
+    <div class="map" aria-label="目前在第 3 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="here">寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
     <h2>第 3 站：LLM 寫程式，真正的計算交給求解器</h2>
+    <p class="key">LLM 擅長讀懂文字，求解器擅長<em class="hi">精確計算</em></p>
+    <p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span></p>
+    <ol class="flow">
+      <li class="llm">LLM 寫呼叫求解器的程式</li>
+      <li class="solver">求解器精確計算</li>
+    </ol>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>系統</th><th>LLM 寫什麼</th></tr></thead>
         <tbody>
           <tr><td>OptiMUS</td><td>用 Gurobi 或 cvxpy 寫 Python 程式</td></tr>
-          <tr><td><span class="nw">Chain-of-Experts</span></td><td><strong>LP 格式檔</strong>（求解器可以直接讀的模型文字檔，自製術語表）與 Gurobi 程式</td></tr>
+          <tr><td><span class="nw">Chain-of-Experts</span></td><td>寫 <span class="nw"><strong>LP 格式檔</strong></span>（求解器可以直接讀的模型文字檔，自製術語表）與 Gurobi 程式</td></tr>
           <tr><td>OptiGuide</td><td><strong>Coder</strong> 把問題、背景與範例組成提示，讓 LLM 寫程式</td></tr>
         </tbody>
       </table>
     </div>
-    <ul class="mt">
-      <li>為什麼分工：LLM 擅長讀懂文字，求解器擅長精確計算</li>
-      <li>LLM 會算錯，也會重複產生以前的解</li>
-      <li>讓 LLM 直接找解的 OPRO，問題變大後就輸給專門的方法</li>
-    </ul>
-    <p class="note">成本：OptiMUS 成功的執行，不含求解器時間，每次都在 7 分鐘內完成；平均用掉 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字時的計算單位，用得越多，通常花的時間與費用也越多，自製術語表）。</p>
+    <p class="note">LLM 會算錯，也會重複產生以前的解；讓 LLM 直接找解的 OPRO，問題變大後就輸給專門的方法。</p>
+    <p class="note">OptiMUS 成功的執行，不含求解器時間，每次都在 <em class="hi">7 分鐘內</em>完成；平均用掉 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字時的計算單位，自製術語表）。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
 </section>
 
 <section class="slide" data-role="concept" data-wiki="system/04-verify-and-repair.md system/02-modeling.md topics/glossary.md" data-points="K12 K13 K02">
   <div class="slide-body">
+    <div class="map" aria-label="目前在第 4 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="done">寫程式交給求解器</span><span class="here">驗證與修正</span><span>解釋結果</span></div>
     <h2>第 4 站：錯了就帶著錯誤訊息重寫，但只修得了小錯</h2>
-    <ul>
-      <li>OptiMUS：LLM 自己產生<strong>單元測試</strong>（一小段自動檢查的程式，自製術語表），把執行錯誤與沒通過的測試交回 LLM 修正</li>
-      <li>Chain-of-Experts：<strong>評估器</strong>執行程式與測試案例，它不是 LLM；錯了用<strong>反向反思</strong>，把專家倒過來逐一檢查</li>
-      <li>OptiGuide：<strong>Safeguard</strong> 檢查 LLM 產生的程式，觸發自我除錯，或停下來回報錯誤</li>
-    </ul>
-    <ul class="mt">
-      <li>漏掉限制式、語法錯誤修得好；一開始就想錯的模型修不了</li>
-      <li>用 <span class="nw">GPT-3.5</span> 時，自動產生的測試常常誤導；多做一兩次改寫或除錯後，效果就不太再提升</li>
-    </ul>
+    <p class="lead"><strong><span class="nw">驗證回圈</span></strong>就是重複「試、檢查、再改」。</p>
+    <p class="key">漏掉限制式、語法錯誤修得好；一開始就想錯的模型<em class="hi">修不了</em></p>
+    <div class="cols">
+      <div class="part soft">
+        <h3>OptiMUS</h3>
+        <p>LLM 自己產生<strong>單元測試</strong>（自動檢查結果的小程式，自製術語表），把執行錯誤與沒通過的測試交回 LLM 修正。</p>
+      </div>
+      <div class="part soft">
+        <h3><span class="nw">Chain-of-Experts</span></h3>
+        <p><strong>評估器</strong>（<em class="hi">不是 LLM</em>）執行程式與測試案例；錯了用<strong><span class="nw">反向反思</span></strong>，把專家倒過來逐一檢查。</p>
+      </div>
+      <div class="part soft">
+        <h3>OptiGuide</h3>
+        <p><strong>Safeguard</strong> 檢查 LLM 產生的程式，觸發自我除錯，或停下來回報錯誤。</p>
+      </div>
+    </div>
+    <p class="note mt">其他極限：<span class="nw">GPT-3.5</span> 自動產生的測試常常誤導；改寫或除錯一兩次後，效果就不太再提升。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/04-verify-and-repair.md">04-verify-and-repair</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/02-modeling.md">02-modeling</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
 </section>
 
 <section class="slide" data-role="concept" data-wiki="system/05-explain-and-whatif.md" data-points="K14 K15">
   <div class="slide-body">
-    <h2>第 5 站：把結果翻成白話，回答 what-if 問題</h2>
-    <p class="lead">例如：某個需求改向供應商 B，成本會怎麼變？</p>
+    <div class="map" aria-label="目前在第 5 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="done">寫程式交給求解器</span><span class="done">驗證與修正</span><span class="here">解釋結果</span></div>
+    <h2>第 5 站：把結果翻成白話，回答 <span class="nw">what-if</span> 問題</h2>
+    <p class="key">問 <span class="nw">what-if</span>（例如改向供應商 B，成本會怎麼變），系統<em class="hi">寫成白話回答</em></p>
+    <p class="legend"><span class="person">使用者</span><span class="llm">LLM</span><span class="solver">求解器／資料庫</span></p>
     <ol class="flow">
-      <li>使用者用文字問 what-if</li>
-      <li><strong>Coder</strong> 組成提示，LLM 寫程式</li>
-      <li class="solver"><strong>Safeguard</strong> 檢查後交給求解器或資料庫</li>
-      <li><strong>Interpreter</strong> 讀取紀錄，寫成人看得懂的回答</li>
+      <li class="person">使用者用文字發問</li>
+      <li class="llm">LLM 寫程式</li>
+      <li class="solver">求解器／資料庫執行</li>
+      <li><strong>Interpreter</strong> 讀取執行紀錄，寫成回答</li>
     </ol>
-    <p class="note">組提示、寫程式、檢查與執行這幾步可以重複，直到結果令人滿意。</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>情況</th><th><span class="nw">GPT-4</span> 準確率</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>沒有給範例</td><td class="num">59%</td></tr>
-          <tr><td>同類型題目，給 5 或 10 個範例</td><td class="num">92–93%</td></tr>
-          <tr><td>不同類型題目，給 10 個範例</td><td class="num">84%（隨機挑）、80%（挑最相近的）</td></tr>
-        </tbody>
-      </table>
+    <p class="note">寫程式前由 <strong>Coder</strong> 組提示，<strong>Safeguard</strong> 檢查後才執行；這幾步可以重複，直到結果令人滿意。</p>
+    <p class="caption mt">OptiGuide 用 <span class="nw">GPT-4</span> 的準確率</p>
+    <div class="bars" role="img" aria-label="OptiGuide 用 GPT-4 的準確率：沒有給範例 59%；同類型題目給 5 或 10 個範例 92–93%；不同類型題目給 10 個範例 84%（隨機挑）、80%（挑最相近的）">
+      <p class="bar v59"><span>沒有給範例</span><i></i><b>59%</b></p>
+      <p class="bar v92 best"><span>同類型，5 或 10 個範例</span><i></i><b>92–93%</b></p>
+      <p class="bar v84"><span>不同類型，10 個範例（隨機挑）</span><i></i><b>84%</b></p>
+      <p class="bar v80"><span>不同類型，10 個範例（挑最相近的）</span><i></i><b>80%</b></p>
     </div>
-    <p class="note">實際部署：用在 Azure 的伺服器供應鏈；以前回答一個 what-if 問題，需要超過 3 位作業人員加上 1 位待命工程師。</p>
+    <p class="note">已部署在 Azure 的伺服器供應鏈；以前回答一個 <span class="nw">what-if</span> 問題，需要<em class="hi">超過 3 位作業人員</em>加上 1 位待命工程師。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/05-explain-and-whatif.md">05-explain-and-whatif</a></footer>
 </section>
@@ -398,24 +456,20 @@ details p { margin: 10px 0 0; color: var(--explain); }
   <div class="slide-body">
     <h2>多代理人：讓好幾個代理人各負責一件事</h2>
     <p class="lead"><strong>代理人</strong>是會自己決定下一步、使用工具的 AI 程式。</p>
-    <div class="cols two">
-      <div class="part soft">
-        <h3>OptiMUS</h3>
-        <p>一個代理人照固定流程做：寫模型、寫程式、執行、測試、修正。</p>
-      </div>
-      <div class="part soft">
-        <h3><span class="nw">Chain-of-Experts</span></h3>
-        <ul>
-          <li><strong>指揮者</strong>：一個 LLM，決定下一步請哪位專家</li>
-          <li><strong>彙整器</strong>：把各專家的意見合成最後答案</li>
-          <li><strong>評估器</strong>：不是 LLM，執行程式與測試案例，把結果轉成回饋</li>
-        </ul>
-      </div>
-    </div>
-    <p class="note mt"><span class="nw">Chain-of-Experts</span> 的代價：</p>
+    <p class="key"><em class="hi">誰決定下一步</em>：OptiMUS 照固定流程，<span class="nw">Chain-of-Experts</span> 由 LLM（指揮者）決定</p>
+    <p>OptiMUS：一個代理人寫模型、寫程式、執行、測試、修正。</p>
+    <p class="caption mt"><span class="nw">Chain-of-Experts</span> 的分工</p>
+    <p class="legend"><span class="llm">LLM</span><span class="check">程式檢查</span><span>未註明</span></p>
+    <ol class="flow">
+      <li class="llm"><strong>指揮者</strong>依序挑專家</li>
+      <li>專家留下意見</li>
+      <li><strong>彙整器</strong>合成最後答案</li>
+      <li class="check"><strong>評估器</strong>執行程式與測試</li>
+    </ol>
+    <p class="note mt">代價：</p>
     <ul>
-      <li>專家意見多了，會超過<strong>上下文長度</strong>（LLM 一次能讀進來的文字上限，自製術語表）</li>
-      <li>步驟越多，推理時間與 <strong>API 呼叫</strong>（程式透過網路請 LLM 服務做一次工作，自製術語表）越多</li>
+      <li>意見多了，會超過 LLM 的<strong>上下文長度</strong>（一次能讀進來的文字上限，自製術語表）。</li>
+      <li>步驟越多，推理時間與 <strong>API 呼叫</strong>越多（程式透過網路請 LLM 服務做一次工作，自製術語表）。</li>
     </ul>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/multi-agent.md">multi-agent</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/glossary.md">glossary</a></footer>
@@ -424,26 +478,25 @@ details p { margin: 10px 0 0; color: var(--explain); }
 <section class="slide" data-role="concept" data-wiki="topics/llm-roles.md" data-points="K16">
   <div class="slide-body">
     <h2>LLM 的三種角色：翻譯者、最佳化器、解說員</h2>
-    <div class="cols">
-      <div class="part">
-        <p><strong>翻譯者</strong>：把文字題變成模型與程式，交給求解器算。</p>
+    <p class="key">設計系統時，<em class="hi">先決定</em> LLM 要當哪一種角色</p>
+    <div class="cols mt">
+      <div class="part soft">
+        <p><strong>翻譯者</strong>：把文字題變成模型與程式，交給求解器算</p>
         <p class="small">第 1～3 站｜NL4Opt、OptiMUS、<span class="nw">Chain-of-Experts</span></p>
+        <p class="small">適合：新問題、要從頭建模</p>
       </div>
-      <div class="part">
-        <p><strong>最佳化器</strong>：不寫模型，自己提出解，看分數再改進。</p>
-        <p class="small">不走五站｜OPRO</p>
+      <div class="part soft">
+        <p><strong>最佳化器</strong>：不寫模型，自己提出解，看分數再改進</p>
+        <p class="small"><em class="hi">不走五站</em>｜OPRO</p>
+        <p class="small">適合：只能評分的問題，但大問題有限制</p>
       </div>
-      <div class="part">
-        <p><strong>解說員</strong>：模型已經有了，幫不會寫程式的人問 what-if，再翻成白話。</p>
+      <div class="part soft">
+        <p><strong>解說員</strong>：模型已經有了，幫不會寫程式的人問 <span class="nw">what-if</span>，再翻成白話</p>
         <p class="small">第 3～5 站｜OptiGuide</p>
+        <p class="small">適合：公司已經有模型</p>
       </div>
     </div>
-    <ul class="mt">
-      <li>新問題、要從頭建模：用翻譯者。</li>
-      <li>只能評分的問題：可以考慮最佳化器，但它在大問題上有限制。</li>
-      <li>公司已經有模型：用解說員。</li>
-    </ul>
-    <p class="note">三種角色都有「試、檢查、再改」的回圈。</p>
+    <p class="note mt">三種角色都有「試、檢查、再改」的回圈。</p>
     <p class="small">這個分法是本 Wiki 的整理，不是某一篇論文提出的。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/llm-roles.md">llm-roles</a></footer>
@@ -452,17 +505,22 @@ details p { margin: 10px 0 0; color: var(--explain); }
 <section class="slide" data-role="concept" data-wiki="topics/llm-as-optimizer.md system/03-code-and-solver.md" data-points="K18">
   <div class="slide-body">
     <h2><span class="tag o">最佳化器</span>另一條路：OPRO 讓 LLM 直接提出解，看分數再改進</h2>
-    <p class="lead">提示裡放問題描述，以及之前產生過的解和分數，這就是<strong>元提示</strong>。</p>
+    <p><strong>元提示</strong>：提示裡放問題描述，與之前的解和分數</p>
+    <p class="legend"><span class="llm">LLM</span><span>未註明</span></p>
     <ol class="flow loop">
-      <li>LLM 根據元提示產生新的解，每一步最多 8 個</li>
+      <li class="llm">LLM 依元提示產生新解，每步最多 8 個</li>
       <li>計算新解的分數</li>
-      <li>把新解與分數加進元提示，進入下一輪</li>
+      <li>把新解與分數放回元提示</li>
     </ol>
-    <ul class="mt">
-      <li><strong>旅行推銷員問題</strong>：拜訪每個城市一次、總路程最短</li>
-      <li>OPRO（<span class="nw">gpt-4</span>）和最佳解的差距：10 個城市 0.0%、50 個城市 11.0%；從 20 個城市開始，專門的方法（最遠插入法）比較好</li>
-      <li>最主要的用途是最佳化提示詞；作者說它不是要贏過專門的求解器，大問題也放不進提示</li>
-    </ul>
+    <p class="key">OPRO <em class="hi">從 20 個城市開始</em>，就輸給專門的方法（最遠插入法）</p>
+    <p class="caption"><strong>旅行推銷員問題</strong>（拜訪每個城市一次、總路程最短）和最佳解的差距，<em class="hi">越小越好</em></p>
+    <div class="bars" role="img" aria-label="和最佳解的差距，越小越好：10 個城市 OPRO 0.0%、最遠插入法 3.2%；50 個城市 OPRO 11.0%、最遠插入法 9.8%。50 個城市時，最遠插入法比 OPRO 更接近最佳解">
+      <p class="bar v0"><span>10 個城市：OPRO（<span class="nw">gpt-4</span>）</span><i></i><b>0.0%</b></p>
+      <p class="bar v16"><span>10 個城市：最遠插入法</span><i></i><b>3.2%</b></p>
+      <p class="bar v55"><span>50 個城市：OPRO（<span class="nw">gpt-4</span>）</span><i></i><b>11.0%</b></p>
+      <p class="bar v49 best"><span>50 個城市：最遠插入法</span><i></i><b>9.8%</b></p>
+    </div>
+    <p class="note">主要用途是最佳化提示詞；作者說它不是要贏過求解器，大問題也放不進提示。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/llm-as-optimizer.md">llm-as-optimizer</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/system/03-code-and-solver.md">03-code-and-solver</a></footer>
 </section>
@@ -470,12 +528,13 @@ details p { margin: 10px 0 0; color: var(--explain); }
 <section class="slide" data-role="concept" data-wiki="topics/training-and-data.md topics/evaluation.md overview.md" data-points="K23">
   <div class="slide-body">
     <h2>另一條研究路線：訓練 LLM 本身更會建模</h2>
+    <p class="key">前面五站都在「怎麼用」LLM，這條研究路線是讓 LLM 本身更會建模</p>
     <div class="cols">
-      <div class="part soft"><p><strong>資料合成</strong>：自動產生更多「題目＋模型」的練習資料。</p></div>
-      <div class="part soft"><p><strong>監督式微調</strong>：用這些資料再訓練 LLM。</p></div>
-      <div class="part soft"><p><strong>對齊</strong>：讓模型的輸出更符合偏好。</p></div>
+      <div class="part soft"><p><strong>資料合成</strong>：自動產生更多「題目＋模型」的練習資料</p></div>
+      <div class="part soft"><p><strong>監督式微調</strong>：用這些資料再訓練 LLM</p></div>
+      <div class="part soft"><p><strong>對齊</strong>：讓模型的輸出更符合偏好</p></div>
     </div>
-    <p class="answer mt"><strong>綜述</strong>（整理整個領域的方法、資料集與未來方向的論文）以統一方式重測：微調過的 <span class="nw">ORLM-LLaMA-3 8B</span> 在 IndustryOR 得到 42.9%、在 ComplexLP 得到 59.5%（兩份都是評估用的考卷），在較難的資料集上勝過 Chain-of-Experts。</p>
+    <p class="mt"><strong>綜述</strong>是整理整個領域方法、資料集與未來方向的論文。它<em class="hi">以統一方式重測</em>，微調過的 <span class="nw">ORLM-LLaMA-3 8B</span> 在 IndustryOR 得到 42.9%、在 ComplexLP 得到 59.5%（兩份都是評估用的考卷），<em class="hi">在較難的資料集上勝過</em> <span class="nw">Chain-of-Experts</span>。</p>
     <p class="note">還沒解決：長的推理過程很難標註；針對最佳化建模的訓練技術研究還不夠。</p>
   </div>
   <footer class="slide-src">依據 Wiki：<a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/training-and-data.md">training-and-data</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/topics/evaluation.md">evaluation</a> <a href="https://github.com/JayceonLin/llm-or-system-loop/blob/main/wiki/overview.md">overview</a></footer>

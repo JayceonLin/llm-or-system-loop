@@ -1,0 +1,13 @@
+<section class="slide" data-role="concept" data-wiki="topics/training-and-data.md topics/evaluation.md overview.md" data-points="K23">
+  <div class="slide-body">
+    <h2>另一條研究路線：訓練 LLM 本身更會建模</h2>
+    <p class="key">前面五站都在「怎麼用」LLM，這條研究路線是讓 LLM 本身更會建模</p>
+    <div class="cols">
+      <div class="part soft"><p><strong>資料合成</strong>：自動產生更多「題目＋模型」的練習資料</p></div>
+      <div class="part soft"><p><strong>監督式微調</strong>：用這些資料再訓練 LLM</p></div>
+      <div class="part soft"><p><strong>對齊</strong>：讓模型的輸出更符合偏好</p></div>
+    </div>
+    <p class="mt"><strong>綜述</strong>是整理整個領域方法、資料集與未來方向的論文。它<em class="hi">以統一方式重測</em>，微調過的 <span class="nw">ORLM-LLaMA-3 8B</span> 在 IndustryOR 得到 42.9%、在 ComplexLP 得到 59.5%（兩份都是評估用的考卷），<em class="hi">在較難的資料集上勝過</em> <span class="nw">Chain-of-Experts</span>。</p>
+    <p class="note">還沒解決：長的推理過程很難標註；針對最佳化建模的訓練技術研究還不夠。</p>
+  </div>
+</section>

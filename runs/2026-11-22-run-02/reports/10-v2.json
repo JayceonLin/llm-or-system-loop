@@ -1,0 +1,10 @@
+{
+  "target": "attempts/10-v2.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/10-v2.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/10-v2.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [],
+  "summary": "兩個程式檢查都通過（176 字、6 個 li）。上一份的兩項建議都已處理，而且只改了這兩處：圖例最後加上不帶 class 的「未註明」（白底方塊），和 multi-agent.md 只寫了指揮者是 LLM、評估器不是 LLM 一致，專家與彙整器不會再被讀成「不是 LLM」；流程圖下方加 <p class=\"note mt\">代價：</p> 引導兩點，對應 multi-agent.md 的「代價」一節，列點數仍是 6。桌面截圖四步一行、重點框一行，「代價：」與列點的關係清楚；手機版流程圖直排、無橫向捲動。"
+}

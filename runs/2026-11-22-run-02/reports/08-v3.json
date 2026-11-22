@@ -1,0 +1,30 @@
+{
+  "target": "attempts/08-v3.html（上一版 attempts/08-v2.html；回應 reports/deck-v1.json 第 6 項建議）",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/08-v3.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/08-v3.html --run runs/2026-11-22-run-02",
+    "errors": [],
+    "warnings": [],
+    "result": "check-slide ✓ 通過；render-slide ✓ 通過（無警告）"
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "標題下的 <p class=\"lead\">「驗證回圈就是不斷『試、檢查、再改』」的「不斷」",
+      "problem": "Wiki 04-verify-and-repair.md 寫的是「重複到通過或達到次數上限」，「設計這一站時可以學的」也強調設定最多重試次數、能停下來回報「而不是無限重試」；第 19 張第 4 點也寫「設定重試上限、能停下來回報」。「不斷」容易讓新手讀成一直重試下去，和 Wiki 的重點方向相反。同一張的 OptiGuide 欄（停下來回報）與其他極限（一兩次後不太再提升）在上下文裡有平衡，所以不判必須修。",
+      "fix": "「不斷」改成「重複」：「驗證回圈就是重複『試、檢查、再改』。」字數不變（仍 180 字），版面不受影響。"
+    }
+  ],
+  "checked_ok": [
+    "lead 是 slide-rules 第 4 節元件表的「大段落 <p class=\"lead\">」，合規；沒有自己寫 <footer>，沒有 style、script。第 4 節寫 lead 的用途是「這張的主要一句話」，這裡拿來放術語定義，和第 10 張（已通過 L8 與 deck-v1）的用法相同，整份一致；重點框仍是剛好 1 個，桌面 lead（27px、一般字重）與重點框（25px、粗體、黃底＋重點標籤）看截圖時重點框仍是最醒目的一句。",
+    "「驗證回圈」的依據：<strong>驗證回圈</strong> 一字不差出現在 data-wiki 的 system/02-modeling.md「要注意」（後面的驗證回圈修得了漏掉的限制式……），check-slide 的 S2 追溯也通過；「試、檢查、再改」是 data-wiki 的 system/04-verify-and-repair.md 標題（第 4 站 驗證與修正：試、檢查、再改），該頁也稱這一站為「這個回圈」。兩頁都在 data-wiki 裡，把兩者連起來不是 Wiki 以外的內容。",
+    "白話解釋：「驗證回圈」第一次出現（整份 01～08 只在這裡第一次出現，grep 確認）就接「試、檢查、再改」，新手看得懂；解決了 deck-v1 第 6 項（18 Q2、19 第 3 點用了這個詞，但 08 從沒說過）。",
+    "刪字後的意思：v2「用 GPT-3.5 時，自動產生的測試常常誤導；多做一兩次改寫或除錯後」→ v3「GPT-3.5 自動產生的測試常常誤導；改寫或除錯一兩次後」，刪掉「用、時、多、做」4 字。OptiMUS 的測試是 LLM 自己產生的（同一張第 1 欄、Wiki 四種做法表），所以用 GPT-3.5 時就是 GPT-3.5 產生的測試，意思和 04-verify-and-repair.md「檢查本身可能是錯的：用 GPT-3.5 時，自動產生的測試常常誤導」與「很快就沒有進步：多做一兩次改寫或除錯後，效果就不太再提升」一致；開頭仍是「其他極限：」，符合任務單。",
+    "只改了該改的地方：diff 只有新增 lead 一行與 note 刪 4 字；地圖、重點框、三欄、螢光 2 處（修不了、不是 LLM）、data-wiki、data-points 都和 08-v2 相同，仍符合任務單 08。",
+    "字數：check.py 的算法實測 180 字（08-v2 171 字 +13 −4），剛好在上限；0 個 <li>。之後這張不能再加任何字。",
+    "版面（看過截圖）：桌面重點框、三欄、note 都在一行或欄內，下方仍留約 70px，地圖進度線看得到（done 灰藍、here 藍）；lead 桌面、手機都是 1 行，「驗證回圈」沒有斷行；手機重點框 2 行，螢光「修不了」「不是 LLM」與粗體「單元測試」「評估器」「反向反思」都沒斷行，沒有整頁橫向捲動。",
+    "前後一致：和 11「三種角色都有『試、檢查、再改』的回圈」、18 Q2（驗證回圈修得好哪種錯……答案和重點框一字不差）、19 第 3 點（驗證回圈只修得了小錯……）用詞一致；07 沒有提到回圈，不衝突；09「這幾步可以重複」是第 5 站，不衝突。"
+  ],
+  "notes": "任務單 tasks/08.md 沒有這次（deck-v1 → L7）的修改紀錄，也沒把「驗證回圈」列進新術語；本報告以 deck-v1 第 6 項與 run-log 的 L9 → L7 紀錄作為改動依據。建議 C 補一段修改紀錄。 截圖與量測：/tmp/v2l7b/shoot.py（套進 slides/template.html 的 <!-- SLIDES -->，桌面 1280×720、手機 390 寬，量 .hi、strong、.key、.lead、.legend 的行數與超出），截圖 /tmp/v2l7b/08-v3-desktop.png、08-v3-mobile.png，上一版 08-v2 也一起截圖比對。",
+  "summary": "pass：兩個程式檢查都通過，lead 是合規元件，「驗證回圈」與「試、檢查、再改」都在 data-wiki 頁面裡，刪 4 字後意思不變，deck-v1 的問題已解決；剛好 180 字，只建議把「不斷」改成「重複」以符合 Wiki 的重試上限（字數不變）。"
+}

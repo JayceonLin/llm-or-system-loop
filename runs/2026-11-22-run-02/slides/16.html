@@ -1,0 +1,19 @@
+<section class="slide" data-role="pitfall" data-wiki="topics/evaluation.md" data-points="K19 K20 K21">
+  <div class="slide-body">
+    <h2>評估：考卷不一定可靠，數字不能直接比</h2>
+    <div class="split">
+      <div>
+        <div class="stat">54.0%</div>
+        <p class="stat-label">IndustryOR 的錯誤率至少有這麼多</p>
+      </div>
+      <ul>
+        <li><strong>基準資料集</strong>是大家共用的考卷。綜述請 11 位專家重新檢查：NL4Opt 錯誤率至少 26.4%；除了 EasyLP，每份都超過 15%</li>
+        <li>錯誤來源：題目有邏輯漏洞、參數定義不清、標準答案本身是錯的</li>
+        <li><strong>比目標值</strong>：只比最佳值；模型錯了也可能剛好算出相同的值</li>
+        <li><strong>比模型</strong>：比較模型的係數，或算相似分數</li>
+        <li>Chain-of-Experts 的準確率：原論文用 <span class="nw">GPT-4</span>，基礎題 LPWP 64.2%、複雜題 ComplexOR 31.4%；綜述改用 <span class="nw">GPT-4o</span> 重測，EasyLP 94.4%</li>
+        <li>用的 LLM、考卷不同，數字不能直接比。先確認考卷可不可靠，再說明用了哪個 LLM、哪份考卷</li>
+      </ul>
+    </div>
+  </div>
+</section>

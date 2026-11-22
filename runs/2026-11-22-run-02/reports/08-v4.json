@@ -1,0 +1,21 @@
+{
+  "target": "attempts/08-v4.html（上一版 attempts/08-v3.html；回應 reports/08-v3.json 的 1 項建議）",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/08-v4.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/08-v4.html --run runs/2026-11-22-run-02",
+    "errors": [],
+    "warnings": [],
+    "result": "check-slide ✓ 通過；render-slide ✓ 通過（無警告）"
+  },
+  "issues": [],
+  "checked_ok": [
+    "只改了該改的地方：diff 08-v3 → 08-v4 只有第 5 行 lead 的「不斷」→「重複」；地圖（here 在驗證與修正、前三站 done）、標題、重點框、三欄（OptiMUS、Chain-of-Experts、OptiGuide）、螢光 2 處（修不了、不是 LLM）、note「其他極限：……」、data-wiki、data-points 都和 08-v3 相同，仍符合任務單 08。",
+    "08-v3 的建議已解決：「重複」和 system/04-verify-and-repair.md 的原句「重複到通過或達到次數上限」「重複到通過或達到最多次數」用詞一致，不再讓新手讀成無限重試，和同頁「設定最多重試次數」「而不是無限重試」及 OptiGuide 欄「停下來回報錯誤」方向相同。",
+    "忠實與白話：<strong>驗證回圈</strong> 仍在 data-wiki（02-modeling.md）裡一字不差，check-slide 的 S2 追溯通過；第一次出現就接「試、檢查、再改」（04-verify-and-repair.md 標題）。",
+    "字數：check.py 算法實測仍是 180 字（同字數替換），0 個 <li>，剛好在上限；之後不能再加字。",
+    "版面（看過截圖）：桌面 1280×720 沒有超出，lead 一行、重點框一行，note 一行，下方仍有留白；手機 390 寬沒有整頁橫向捲動，lead 一行、「驗證回圈」沒斷行，重點框 2 行，螢光與粗體術語都沒斷行。量測結果和 08-v3 完全相同。",
+    "沒有新問題：「重複」在整份裡另見於 07 note（LLM 重複產生以前的解）與 09 note（這幾步可以重複），意思不同或一致，不衝突；和 11、18 Q2、19 第 3 點的「驗證回圈」用詞仍一致。"
+  ],
+  "notes": "任務單 tasks/08.md 仍沒有 deck-v1 → L7 與 08-v3 → 08-v4 的修改紀錄（08-v3 報告已提過），本報告以 reports/08-v3.json 的建議與 run-log.md 第 95、97 行作為改動依據。截圖與量測：/tmp/v2l7c/shoot.py（套進 slides/template.html 的 <!-- SLIDES -->，桌面 1280×720、手機 390 寬），截圖 /tmp/v2l7c/08-v4-desktop.png、08-v4-mobile.png，上一版 08-v3 也一起重截比對。",
+  "summary": "pass：兩個程式檢查都通過，diff 只有「不斷」→「重複」，和 Wiki「重複到通過或達到次數上限」一致，08-v3 的建議已解決；字數仍 180、版面與上一版相同，沒有新問題，必須修 0 項、建議 0 項。"
+}

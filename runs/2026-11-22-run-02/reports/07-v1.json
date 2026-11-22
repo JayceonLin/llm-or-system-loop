@@ -1,0 +1,29 @@
+{
+  "target": "attempts/07-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/07-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/07-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "第 2 段 note「每次都在<em class=\"hi\">7 分鐘內</em>完成」",
+      "problem": "「在」和數字「7」之間少了半形空格，違反 slide-rules 第 5 節「中文與英文、數字之間空一個半形空格」；截圖上顯示為「每次都在7 分鐘內完成」。這是五張裡唯一一處句子內的空格缺漏（其他相鄰處都是不同方塊的邊界）。",
+      "fix": "改成「每次都在 <em class=\"hi\">7 分鐘內</em>完成」，空格放在 <em> 外面；不影響字數。"
+    },
+    {
+      "level": "建議",
+      "where": "表格與下方第 1 段 note 之間",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html，1280×720 與 390 寬；Noto Sans TC 網路字型有載入）：桌面與手機版的表格底線幾乎貼著「LLM 會算錯……」那一段，兩塊沒有間距，看起來像表格的第四列。",
+      "fix": "第 1 段 note 加 class=\"mt\"（<p class=\"note mt\">）。"
+    },
+    {
+      "level": "建議",
+      "where": "流程圖（手機版，外框問題，不是 Agent B 寫錯）",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html，1280×720 與 390 寬；Noto Sans TC 網路字型有載入）：390 寬時兩個方塊放不進一行，第一個方塊後面的「→」指向右邊空白，第二個方塊掉到下一行，箭頭方向和實際位置不符。這是 slides/template.html 的 .flow 在手機版仍用水平箭頭造成的，所有用 <ol class=\"flow\"> 的投影片都可能遇到。",
+      "fix": "不要退回 Agent B；請 Agent C 或使用者決定是否在外框的手機版把 .flow 改成直排、箭頭改成向下（像 .stations 的手機版）。"
+    }
+  ],
+  "summary": "兩個程式檢查都通過，分工流程圖與圖例（llm→solver）、表格三列、OPRO 與成本兩段（「成功的執行」「不含求解器時間」接在 7 分鐘、4117.1 ± 1509.7 照抄）都和 Wiki 一致；但「每次都在7 分鐘內」少一個半形空格，違反第 5 節，列為必須修，另有兩項建議。"
+}

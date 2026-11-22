@@ -37,6 +37,12 @@
 - **S2 可追溯：** 投影片上的每一個數字，以及每一個 `<strong>` 標出的術語，都必須一字不差地出現在 `data-wiki` 列出的頁面。數字的範圍、單位、版本要和 Wiki 一致，例如 Wiki 寫「92–93%」，就不能寫成「93%」。Wiki 有「版本差異」時，要嘛兩個數字都寫，要嘛都不寫。
 - **S4 份量：** 最多 6 個 `<li>`（流程圖的每一步也算一個），中文字不超過 180 字。
 - **S5 版面：** 只能用第 4 節的元件，不能寫 `style` 屬性、`<script>`、外部圖片。內容要能放進 1280×720 的畫面，手機上也不能出現整頁橫向捲動。180 字是上限，不是目標；表格、兩欄、流程圖都很佔高度。**每一張都必須通過 `python3 loop/check.py render-slide <檔案>`**，它會把這一張套進外框，實際量桌面與手機版面。
+- **S6 重點與圖例（run-02 新增，只適用 `concept`）：**
+  - 剛好 1 個重點框 `<p class="key">`，寫這張最該記住的一句話，通常就是標題的白話版或結論。
+  - 螢光標示 `<em class="hi">` 最多 2 處，只標關鍵短語（例如「精確計算」「提高到 92–93%」）。**術語仍然用 `<strong>`**，兩者不要混用。
+  - 至少一個圖：五站大圖、流程圖、長條圖、兩欄或三欄、表格。能畫成圖的就不要寫成一串列點，例如先後順序畫成流程圖、數字比較畫成長條圖。
+  - 標題是「第 N 站：……」的投影片，要在 `<h2>` 上方放五站地圖，`here` 標在這一站，前面的站標 `done`。地圖不算進 180 字。
+  - 流程圖的方塊用顏色標出**誰負責**（`llm`、`solver`、`check`、`person`），並在上方放 `<p class="legend">` 說明顏色。顏色要和 Wiki 寫的分工一致，例如 Chain-of-Experts 的評估器不是 LLM，就不能標成 `llm`。
 - **一張一件事：** 標題直接說出這張的重點，例如「第 3 站：計算交給求解器」，不要只寫「第 3 站」。
 
 ## 4. 可用的元件
@@ -76,6 +82,13 @@
 | 書目 | `<ul class="refs">` | 只用在 refs，字比較小 |
 | 不換行 | `<span class="nw">GPT-4o</span>` | 型號、帶連字號的名稱 |
 | 間距 | 在元素上加 `class="mt"` | 和上一塊拉開距離 |
+| 重點框 | `<p class="key">一句話</p>` | 一張一個；畫面上會自動加「重點」標籤（S6） |
+| 重點螢光 | `<em class="hi">短語</em>` | 一張最多兩處，不能用在術語上（S6） |
+| 五站地圖 | `<div class="map" aria-label="目前在第 3 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="here">寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>` | 放在站別投影片的 `<h2>` 上方，5 個 `<span>` 照順序 |
+| 五站大圖 | `<div class="stations" role="img" aria-label="…"><div class="llm"><b>站名</b><small>一句說明</small></div>…</div>` | 5 個 `<div>`，編號與箭頭自動產生；`llm`、`solver`、`check`、`person` 標出誰負責 |
+| 誰負責 | 流程圖 `<li class="llm">`、`solver`、`check`、`person`，搭配 `<p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span><span class="check">程式檢查</span><span class="person">使用者</span></p>` | 圖例只列這張有用到的顏色；不加 class 的 `<span>` 會畫成白底方塊，用來說明白底的意思 |
+| 回圈 | `<ol class="flow loop">` | 下方自動畫一條虛線「回到第一步」，用在會重複的步驟 |
+| 長條圖 | `<p class="caption">說明</p><div class="bars" role="img" aria-label="…"><p class="bar v59"><span>標籤</span><i></i><b>59%</b></p>…</div>` | `vNN` 是長條長度（0～100，取整數），`<b>` 寫 Wiki 上的原始數值；最想強調的那一條加 `best`。一張最多 4 條 |
 
 ## 5. 文字風格
 

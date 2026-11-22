@@ -1,0 +1,21 @@
+<section class="slide" data-role="concept" data-wiki="topics/llm-as-optimizer.md system/03-code-and-solver.md" data-points="K18">
+  <div class="slide-body">
+    <h2><span class="tag o">最佳化器</span>另一條路：OPRO 讓 LLM 直接提出解，看分數再改進</h2>
+    <p><strong>元提示</strong>：提示裡放問題描述，與之前的解和分數</p>
+    <p class="legend"><span class="llm">LLM</span><span>未註明</span></p>
+    <ol class="flow loop">
+      <li class="llm">LLM 依元提示產生新解，每步最多 8 個</li>
+      <li>計算新解的分數</li>
+      <li>把新解與分數放回元提示</li>
+    </ol>
+    <p class="key">OPRO <em class="hi">從 20 個城市開始</em>，就輸給專門的方法（最遠插入法）</p>
+    <p class="caption"><strong>旅行推銷員問題</strong>（拜訪每個城市一次、總路程最短）和最佳解的差距，<em class="hi">越小越好</em></p>
+    <div class="bars" role="img" aria-label="和最佳解的差距，越小越好：10 個城市 OPRO 0.0%、最遠插入法 3.2%；50 個城市 OPRO 11.0%、最遠插入法 9.8%。50 個城市時，最遠插入法比 OPRO 更接近最佳解">
+      <p class="bar v0"><span>10 個城市：OPRO（<span class="nw">gpt-4</span>）</span><i></i><b>0.0%</b></p>
+      <p class="bar v16"><span>10 個城市：最遠插入法</span><i></i><b>3.2%</b></p>
+      <p class="bar v55"><span>50 個城市：OPRO（<span class="nw">gpt-4</span>）</span><i></i><b>11.0%</b></p>
+      <p class="bar v49 best"><span>50 個城市：最遠插入法</span><i></i><b>9.8%</b></p>
+    </div>
+    <p class="note">主要用途是最佳化提示詞；作者說它不是要贏過求解器，大問題也放不進提示。</p>
+  </div>
+</section>

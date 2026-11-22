@@ -1,0 +1,68 @@
+{"time": "2026-11-22T23:07:06+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:07:45+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:24:56+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:26:22+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:37:11+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:37:47+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-22T23:43:53+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/04-v1.html"}
+{"time": "2026-11-22T23:43:57+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/04-v1.html", "warnings": []}
+{"time": "2026-11-22T23:43:57+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v1.html"}
+{"time": "2026-11-22T23:44:02+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v1.html", "warnings": []}
+{"time": "2026-11-22T23:44:02+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/06-v1.html"}
+{"time": "2026-11-22T23:44:07+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/06-v1.html", "warnings": []}
+{"time": "2026-11-22T23:44:08+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/07-v1.html"}
+{"time": "2026-11-22T23:44:12+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/07-v1.html", "warnings": []}
+{"time": "2026-11-22T23:44:12+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v1.html"}
+{"time": "2026-11-22T23:44:15+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v1.html", "warnings": []}
+{"time": "2026-11-22T23:45:01+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/09-v1.html"}
+{"time": "2026-11-22T23:45:05+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/09-v1.html", "warnings": []}
+{"time": "2026-11-22T23:45:05+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/10-v1.html"}
+{"time": "2026-11-22T23:45:09+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/10-v1.html", "warnings": []}
+{"time": "2026-11-22T23:45:09+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/11-v1.html"}
+{"time": "2026-11-22T23:45:13+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/11-v1.html", "warnings": []}
+{"time": "2026-11-22T23:45:13+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/12-v1.html"}
+{"time": "2026-11-22T23:45:16+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/12-v1.html", "warnings": []}
+{"time": "2026-11-22T23:45:16+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v1.html"}
+{"time": "2026-11-22T23:45:20+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v1.html", "warnings": []}
+{"time": "2026-11-22T23:49:40+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v2.html"}
+{"time": "2026-11-22T23:49:44+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["桌面 1280×720 05-v1.html「第 1 站：把文字題整理成有」「抽象模型」被拆成兩行（S5）"], "file": "runs/2026-11-22-run-02/attempts/05-v1.html", "warnings": []}
+{"time": "2026-11-22T23:49:44+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v2.html"}
+{"time": "2026-11-22T23:49:45+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v2.html", "warnings": []}
+{"time": "2026-11-22T23:49:48+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v2.html", "warnings": []}
+{"time": "2026-11-22T23:49:50+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v2.html"}
+{"time": "2026-11-22T23:49:54+08:00", "node": "L8 render-slide", "status": "fail", "n_errors": 1, "errors": ["桌面 1280×720 05-v2.html「第 1 站：把文字題整理成有」內容超出版面（高 26px、寬 0px）（S5）"], "file": "runs/2026-11-22-run-02/attempts/05-v2.html", "warnings": []}
+{"time": "2026-11-22T23:51:04+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v2.html"}
+{"time": "2026-11-22T23:51:07+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:25+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/04-v2.html"}
+{"time": "2026-11-23T03:46:32+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/04-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:32+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v2.html"}
+{"time": "2026-11-23T03:46:36+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/05-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:36+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/07-v2.html"}
+{"time": "2026-11-23T03:46:39+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/07-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:39+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v2.html"}
+{"time": "2026-11-23T03:46:42+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:42+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/10-v2.html"}
+{"time": "2026-11-23T03:46:45+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/10-v2.html", "warnings": []}
+{"time": "2026-11-23T03:46:46+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v2.html"}
+{"time": "2026-11-23T03:46:49+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v2.html", "warnings": []}
+{"time": "2026-11-23T03:50:29+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T03:51:00+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T03:51:50+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T03:52:01+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-23T03:58:41+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T03:58:51+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}
+{"time": "2026-11-23T04:02:20+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v3.html"}
+{"time": "2026-11-23T04:02:23+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v3.html", "warnings": []}
+{"time": "2026-11-23T04:02:23+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/12-v2.html"}
+{"time": "2026-11-23T04:02:27+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/12-v2.html", "warnings": []}
+{"time": "2026-11-23T04:02:27+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v3.html"}
+{"time": "2026-11-23T04:02:30+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v3.html", "warnings": []}
+{"time": "2026-11-23T04:07:13+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v4.html"}
+{"time": "2026-11-23T04:07:16+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/08-v4.html", "warnings": []}
+{"time": "2026-11-23T04:07:16+08:00", "node": "V2 check-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v4.html"}
+{"time": "2026-11-23T04:07:20+08:00", "node": "L8 render-slide", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/attempts/13-v4.html", "warnings": []}
+{"time": "2026-11-23T04:11:01+08:00", "node": "V2 check-outline", "status": "pass", "n_errors": 0, "errors": [], "file": "runs/2026-11-22-run-02/outline.md"}
+{"time": "2026-11-23T04:11:02+08:00", "node": "C build", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T04:11:02+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T04:11:38+08:00", "node": "V2 check-deck", "status": "pass", "n_errors": 0, "errors": []}
+{"time": "2026-11-23T04:11:48+08:00", "node": "V2 render", "status": "pass", "n_errors": 0, "errors": [], "warnings": ["桌面 1280×720 第 2 張「學習目標：看完這份簡報，你能」內容只用到版面的 42%", "桌面 1280×720 第 19 張「總結：做 LLM × OR 」內容只用到版面的 57%"], "file": "slides/index.html"}

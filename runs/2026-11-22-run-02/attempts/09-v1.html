@@ -1,0 +1,23 @@
+<section class="slide" data-role="concept" data-wiki="system/05-explain-and-whatif.md" data-points="K14 K15">
+  <div class="slide-body">
+    <div class="map" aria-label="目前在第 5 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="done">寫程式交給求解器</span><span class="done">驗證與修正</span><span class="here">解釋結果</span></div>
+    <h2>第 5 站：把結果翻成白話，回答 <span class="nw">what-if</span> 問題</h2>
+    <p class="key">問 <span class="nw">what-if</span>（例如改向供應商 B，成本會怎麼變），系統<em class="hi">寫成白話回答</em></p>
+    <p class="legend"><span class="person">使用者</span><span class="llm">LLM</span><span class="solver">求解器／資料庫</span></p>
+    <ol class="flow">
+      <li class="person">使用者用文字發問</li>
+      <li class="llm">LLM 寫程式</li>
+      <li class="solver">求解器／資料庫執行</li>
+      <li><strong>Interpreter</strong> 讀取執行紀錄，寫成回答</li>
+    </ol>
+    <p class="note">寫程式前由 <strong>Coder</strong> 組提示，<strong>Safeguard</strong> 檢查後才執行；這幾步可以重複，直到結果令人滿意。</p>
+    <p class="caption mt">OptiGuide 用 <span class="nw">GPT-4</span> 的準確率</p>
+    <div class="bars" role="img" aria-label="OptiGuide 用 GPT-4 的準確率：沒有給範例 59%；同類型題目給 5 或 10 個範例 92–93%；不同類型題目給 10 個範例 84%（隨機挑）、80%（挑最相近的）">
+      <p class="bar v59"><span>沒有給範例</span><i></i><b>59%</b></p>
+      <p class="bar v92 best"><span>同類型，5 或 10 個範例</span><i></i><b>92–93%</b></p>
+      <p class="bar v84"><span>不同類型，10 個範例（隨機挑）</span><i></i><b>84%</b></p>
+      <p class="bar v80"><span>不同類型，10 個範例（挑最相近的）</span><i></i><b>80%</b></p>
+    </div>
+    <p class="note">已部署在 Azure 的伺服器供應鏈；以前回答一個 <span class="nw">what-if</span> 問題，需要<em class="hi">超過 3 位作業人員</em>加上 1 位待命工程師。</p>
+  </div>
+</section>

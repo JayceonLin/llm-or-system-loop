@@ -189,11 +189,15 @@ def parse_slides(html_text):
         attrs, inner = m.group(1), m.group(2)
         footer = (re.search(r'<footer class="slide-src">(.*?)</footer>', inner, re.S) or [None, ""])[1]
         main = re.sub(r'<footer class="slide-src">.*?</footer>', " ", inner, flags=re.S)
+        # 五站地圖是每張站別投影片都一樣的導覽，不算進字數（run-02）
+        counted = re.sub(r'<div class="map"[^>]*>.*?</div>', " ", main, flags=re.S)
         text = htmllib.unescape(re.sub(r"<[^>]+>", " ", main))
+        counted_text = htmllib.unescape(re.sub(r"<[^>]+>", " ", counted))
         strongs = [htmllib.unescape(re.sub(r"<[^>]+>", "", s)).strip() for s in re.findall(r"<strong>(.*?)</strong>", main, re.S)]
         title = htmllib.unescape(re.sub(r"<[^>]+>", "", (re.search(r"<h[12][^>]*>(.*?)</h[12]>", main, re.S) or [None, ""])[1])).strip()
         slides.append({"role": attr(attrs, "data-role"), "wiki": attr(attrs, "data-wiki").split(),
                        "points": attr(attrs, "data-points").split(), "footer": footer, "text": text,
+                       "counted_text": counted_text, "html": main,
                        "strong": strongs, "bullets": len(re.findall(r"<li[\s>]", main)), "title": title,
                        "inline_style": bool(re.search(r"\sstyle=", main)), "script": "<script" in main})
     return slides
@@ -245,6 +249,29 @@ def structure_errors(roles, label="簡報"):
     return errors
 
 
+VISUALS = ("stations", "flow", "bars", "cols", "table-wrap", "split")
+
+
+def emphasis_errors(label, s):
+    """S6（run-02 新增）：概念投影片要有一個重點框、最多兩處螢光、至少一個圖；站別投影片要有五站地圖。"""
+    if s["role"] != "concept":
+        return []
+    h, errors = s.get("html", ""), []
+    keys = len(re.findall(r'class="key"', h))
+    if keys != 1:
+        errors.append(f"{label}：概念投影片要剛好 1 個重點框 <p class=\"key\">，目前 {keys} 個（S6）")
+    his = len(re.findall(r'class="hi"', h))
+    if his > 2:
+        errors.append(f"{label}：螢光標示 .hi 最多 2 處，目前 {his} 處（S6）")
+    if not any(re.search(rf'class="[^"]*\b{v}\b', h) for v in VISUALS):
+        errors.append(f"{label}：概念投影片至少要有一個圖（五站圖、流程圖、長條圖、欄位或表格）（S6）")
+    if re.match(r"第 \d 站", s["title"]):
+        m = re.search(r'<div class="map".*?</div>', h, re.S)
+        if not m or len(re.findall(r'class="here"', m.group(0))) != 1 or m.group(0).count("<span") != 5:
+            errors.append(f"{label}：站別投影片要在標題上方放五站地圖，5 站、剛好 1 個 here（S6）")
+    return errors
+
+
 def slide_errors(label, s, key_ids=None):
     """單張投影片的 S1、S2、S4 檢查（V2 的程式部分）。"""
     errors = []
@@ -264,9 +291,10 @@ def slide_errors(label, s, key_ids=None):
     errors += trace_errors(label, s["text"], s["strong"], s["wiki"])
     if s["bullets"] > 6:
         errors.append(f"{label}：{s['bullets']} 個列點，最多 6 個（S4）")
-    cjk = len(re.findall(r"[一-鿿]", s["text"]))
+    cjk = len(re.findall(r"[一-鿿]", s.get("counted_text", s["text"])))
     if cjk > 180:
         errors.append(f"{label}：中文 {cjk} 字，最多 180 字（S4）")
+    errors += emphasis_errors(label, s)
     if s["inline_style"] or s["script"]:
         errors.append(f"{label}：不能寫 style 屬性或 <script>，只能用規定的元件（S5）")
     return errors
@@ -546,7 +574,10 @@ DESKTOP_JS = """i => {
       if (new Set(Array.from(r.getClientRects()).filter(x => x.width > 0).map(x => Math.round(x.top / 4))).size > 1) split.push(m[0]);
     }
   }
-  body.querySelectorAll('mark').forEach(mk => { if (lines(mk) > 1) split.push(mk.textContent.trim()); });
+  // run-02 整份檢查：螢光 .hi 也不能斷行（07 手機「精／確計算」）
+  body.querySelectorAll('mark, .hi').forEach(mk => { if (lines(mk) > 1) split.push(mk.textContent.trim()); });
+  // run-02 V2 看截圖發現：短的粗體術語被拆成兩行（目標函／數、反向／反思）
+  body.querySelectorAll('strong').forEach(st => { const tx = st.textContent.trim(); if (tx.length <= 6 && lines(st) > 1) split.push(tx); });
   const footClip = foot ? foot.scrollWidth - foot.clientWidth : 0;
   const outside = slideText.filter(t => t.bottom > stage.bottom + 1 || t.right > stage.right + 1).length;
   const kids = Array.from(body.querySelectorAll('*')).filter(e => e.getClientRects().length);
@@ -645,6 +676,13 @@ def render(run_dir=None, slides_file=None):
                             if (new Set(Array.from(r.getClientRects()).filter(x => x.width > 0).map(x => Math.round(x.top / 4))).size > 1) hy.push(m[0]);
                           }
                         }
+                        // run-02 整份檢查：手機上螢光 .hi 與 6 字以內的粗體術語也不能斷行
+                        c.querySelectorAll('.hi, strong').forEach(e => { const tx = e.textContent.trim();
+                          if (e.matches('strong') && tx.length > 6) return;
+                          const rs = []; const w = document.createTreeWalker(e, NodeFilter.SHOW_TEXT);
+                          for (let t = w.nextNode(); t; t = w.nextNode()) { const r = document.createRange(); r.selectNodeContents(t);
+                            for (const x of r.getClientRects()) if (x.width > 0) rs.push(Math.round(x.top / 4)); }
+                          if (new Set(rs).size > 1) hy.push(tx); });
                         const big = Array.from(c.querySelectorAll('p, li, td, summary')).filter(e =>
                             parseFloat(getComputedStyle(e).fontSize) > 20 && !e.closest('.stat')).length;
                         return {h: c.scrollHeight - c.clientHeight, w: c.scrollWidth - c.clientWidth,

@@ -1,0 +1,23 @@
+<section class="slide" data-role="pitfall" data-wiki="topics/risks-and-design.md" data-points="K24 K25">
+  <div class="slide-body">
+    <h2>限制與設計建議：計算交給求解器，驗證交給程式</h2>
+    <div class="cols two">
+      <div class="part">
+        <h3>限制</h3>
+        <ul>
+          <li>模型可能一開始就想錯；題目越複雜，正確率越低</li>
+          <li>把公司資料直接交給 LLM 有外流風險；OptiGuide 讓資料留在求解器與資料庫</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h3>設計建議</h3>
+        <ul>
+          <li>計算交給求解器，不讓 LLM 心算</li>
+          <li>驗證交給不是 LLM 的程式；錯了要帶著錯誤訊息重做</li>
+          <li>設定重試上限、能停下來回報、保留人的判斷，並用可靠的題目評估</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note mt">做這份簡報的流程也照這些建議設計：產生者和驗證者分開、每一步都有重做次數上限、關鍵處停下來給人確認。</p>
+  </div>
+</section>

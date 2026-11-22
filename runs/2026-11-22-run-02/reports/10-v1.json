@@ -1,0 +1,23 @@
+{
+  "target": "attempts/10-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/10-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02；python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/10-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "圖例與流程圖第 2、3 格（「專家留下意見」「彙整器合成最後答案」）",
+      "problem": "第 1 格指揮者標了 LLM、第 4 格評估器標了程式檢查，中間兩格是白底，圖例沒說白底的意思。新手很容易推論「專家和彙整器不是 LLM」，但 multi-agent.md 只寫了指揮者是 LLM、評估器不是 LLM，沒寫專家與彙整器是什麼，白底應該是「沒註明」而不是「不是 LLM」。",
+      "fix": "圖例最後加一個不帶 class 的 <span>，例如 <span>未註明</span>（多 3 字，171 → 174 字，仍在上限內）。"
+    },
+    {
+      "level": "建議",
+      "where": "流程圖下方的兩個列點（上下文長度、API 呼叫）",
+      "problem": "兩點前面沒有任何引導，接在流程圖後面，看不出它們是多代理人的「代價」；multi-agent.md 是放在「代價」一節。新手可能把它們當成流程的補充說明。",
+      "fix": "在 <ul> 前加一個短標示，例如 <p class=\"note mt\">代價：</p>，或在第一點開頭加「代價：」（多 2 字，仍在 180 字內；列點數不變，仍是 6 個 li）。"
+    }
+  ],
+  "summary": "程式檢查全過（171 字、6 個 li），標題、data-wiki、data-points、版面順序（代理人白話 → 重點框 → OptiMUS 一句 → caption「Chain-of-Experts 的分工」→ 圖例 → 流程圖 → 代價）都照任務單；評估器標成 check（程式檢查）而不是 llm，指揮者標 llm，和 multi-agent.md 的分工一致，沒寫專家人數與兩個方向的名稱；上下文長度與 API 呼叫的白話照自製術語表並標明出處；桌面四步一行、重點框一行，手機無橫向捲動。兩項建議：白底方塊沒有圖例說明、代價兩點缺引導。"
+}

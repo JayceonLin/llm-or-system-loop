@@ -1,0 +1,23 @@
+<section class="slide" data-role="concept" data-wiki="system/04-verify-and-repair.md system/02-modeling.md topics/glossary.md" data-points="K12 K13 K02">
+  <div class="slide-body">
+    <div class="map" aria-label="目前在第 4 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="done">寫程式交給求解器</span><span class="here">驗證與修正</span><span>解釋結果</span></div>
+    <h2>第 4 站：錯了就帶著錯誤訊息重寫，但只修得了小錯</h2>
+    <p class="lead"><strong><span class="nw">驗證回圈</span></strong>就是重複「試、檢查、再改」。</p>
+    <p class="key">漏掉限制式、語法錯誤修得好；一開始就想錯的模型<em class="hi">修不了</em></p>
+    <div class="cols">
+      <div class="part soft">
+        <h3>OptiMUS</h3>
+        <p>LLM 自己產生<strong>單元測試</strong>（自動檢查結果的小程式，自製術語表），把執行錯誤與沒通過的測試交回 LLM 修正。</p>
+      </div>
+      <div class="part soft">
+        <h3><span class="nw">Chain-of-Experts</span></h3>
+        <p><strong>評估器</strong>（<em class="hi">不是 LLM</em>）執行程式與測試案例；錯了用<strong><span class="nw">反向反思</span></strong>，把專家倒過來逐一檢查。</p>
+      </div>
+      <div class="part soft">
+        <h3>OptiGuide</h3>
+        <p><strong>Safeguard</strong> 檢查 LLM 產生的程式，觸發自我除錯，或停下來回報錯誤。</p>
+      </div>
+    </div>
+    <p class="note mt">其他極限：<span class="nw">GPT-3.5</span> 自動產生的測試常常誤導；改寫或除錯一兩次後，效果就不太再提升。</p>
+  </div>
+</section>

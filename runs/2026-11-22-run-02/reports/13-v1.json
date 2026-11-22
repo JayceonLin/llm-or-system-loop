@@ -1,0 +1,17 @@
+{
+  "target": "attempts/13-v1.html",
+  "verdict": "fail",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/13-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02；python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/13-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "必須修",
+      "where": "<h2> 標題",
+      "problem": "草稿寫「另一條路：訓練 LLM 本身更會建模」，任務單 13 與 outline.md 第 13 張的標題是「另一條研究路線：訓練 LLM 本身更會建模」，和任務單不一致（模式二第 2 步）。而且上一張（第 12 張）的標題也是「另一條路：OPRO……」，兩張連續以「另一條路：」開頭，新手會以為是同一條路的兩張；「研究路線」也正是 training-and-data.md 開頭的說法（「另一條研究路線是『讓 LLM 本身更會建模』」）。",
+      "fix": "標題改成「另一條研究路線：訓練 LLM 本身更會建模」。多 2 個中文字，168 → 170 字，和任務單 C 試寫實測一致，仍在 180 字內；重點框的「這條路」不用改。"
+    }
+  ],
+  "summary": "程式檢查全過（168 字、0 個 li），內容本身忠實：三欄白話照 training-and-data.md，綜述的白話照 overview.md，42.9%、59.5%、「以統一方式重測」「在較難的資料集上勝過 Chain-of-Experts」與兩項未解決問題都對得上，沒畫成長條、沒放例子名稱與強化學習建議，螢光標在短語不在術語，桌面與手機截圖版面正常；但標題沒照任務單寫成「另一條研究路線」，還和第 12 張的「另一條路：」重複開頭，必須修 1 項。"
+}

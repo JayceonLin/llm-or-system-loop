@@ -1,0 +1,18 @@
+<section class="slide" data-role="concept" data-wiki="system/03-code-and-solver.md topics/glossary.md" data-points="K10 K11 K02">
+  <div class="slide-body">
+    <div class="map" aria-label="目前在第 3 站"><span class="done">問題輸入</span><span class="done">建模</span><span class="here">寫程式交給求解器</span><span>驗證與修正</span><span>解釋結果</span></div>
+    <h2>第 3 站：LLM 寫程式，真正的計算交給求解器</h2>
+    <p class="key">LLM 擅長<em class="hi">讀懂文字</em>，求解器擅長<em class="hi">精確計算</em>，所以分工。</p>
+    <p class="legend"><span class="llm">LLM</span><span class="solver">求解器</span></p>
+    <ol class="flow">
+      <li class="llm">模型</li>
+      <li class="llm">寫 Python 程式或 <strong>LP 格式檔</strong></li>
+      <li class="solver">求解器算出最佳解</li>
+    </ol>
+    <p class="small"><strong>LP 格式檔</strong>：求解器可以直接讀的模型文字檔（自製術語表）。</p>
+    <ul>
+      <li>讓 LLM 自己算：會算錯，也會重複產生以前的解</li>
+      <li>成本：OptiMUS 成功的執行，不含求解器時間，每次都在 7 分鐘內完成；平均 4117.1 ± 1509.7 個 <strong>token</strong>（LLM 讀寫文字的計算單位）</li>
+    </ul>
+  </div>
+</section>

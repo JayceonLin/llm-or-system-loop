@@ -1,0 +1,23 @@
+{
+  "target": "attempts/04-v1.html",
+  "verdict": "pass",
+  "program_check": {
+    "command": "python3 loop/check.py check-slide runs/2026-11-22-run-02/attempts/04-v1.html --keypoints runs/2026-11-22-run-02/keypoints.md --run runs/2026-11-22-run-02 ; python3 loop/check.py render-slide runs/2026-11-22-run-02/attempts/04-v1.html --run runs/2026-11-22-run-02",
+    "errors": []
+  },
+  "issues": [
+    {
+      "level": "建議",
+      "where": "重點框「LLM 讀懂文字、寫出模型與程式」對照五站大圖第 1 站",
+      "problem": "重點框把「讀懂文字」的主詞寫成 LLM，但同一張的五站大圖刻意讓第 1 站「問題輸入」不上色（任務單理由：overview.md 那句的主詞是「系統」，第 05 張是使用者填 SNOP）。新手可能把「LLM 讀懂文字」對到第 1 站，和白底圖例的安排互相拉扯。overview.md 原句是「LLM 加進來之後，系統可以自己讀懂文字、寫出模型與程式」。這句是任務單指定的，所以列為建議。",
+      "fix": "交給 Agent C 決定是否維持；若要改，可讓主詞回到系統，例如「系統可以拆成五站：讀懂文字、寫出模型與程式，計算交給求解器」（仍在 26 字內），LLM 的角色由第 2、3 站的顏色表達。"
+    },
+    {
+      "level": "建議",
+      "where": "五站大圖第 2 站 small（桌面版）",
+      "problem": "截圖（V2 自行用 Playwright 套 slides/template.html，1280×720 與 390 寬；Noto Sans TC 網路字型有載入）：「寫出決策變數、目標函數、限制式」在桌面版斷成「目標函／數、限制式」，把「目標函數」拆在兩行。任務單說 C 試寫時斷行沒問題，但這次實際渲染會拆開術語。",
+      "fix": "把「目標函數」包 <span class=\"nw\">，或把「限制式」前的頓號後斷行；手機版不受影響。"
+    }
+  ],
+  "summary": "兩個程式檢查都通過；站名、顏色（只有第 2 站 llm、第 3 站 solver）、白底圖例、81% 的位置與重點框都照任務單且有 Wiki 依據，只有兩項建議（重點框主詞與第 1 站不上色的張力、桌面版「目標函數」被斷開）。"
+}

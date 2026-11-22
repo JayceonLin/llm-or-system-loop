@@ -99,7 +99,6 @@ mark { padding: 0 0.15em; border-radius: 3px; color: inherit; white-space: nowra
 .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 40px; margin: 18px 0 22px; padding: 0; list-style: none; }
 .flow li { position: relative; margin: 0; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 4px; font-size: 21px; background: #fff; }
 .flow li:not(:last-child)::after { content: "→"; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); color: var(--muted); }
-.flow.loop::after { content: "↺ 做完最後一步，回到第一步"; flex-basis: 100%; color: var(--muted); font-size: 17px; }
 .flow li.solver { background: var(--ink); color: #fff; }
 
 /* 角色 */
@@ -159,6 +158,54 @@ details p { margin: 10px 0 0; color: var(--explain); }
 .nav button:disabled { color: var(--muted); border-color: var(--soft); cursor: default; }
 .nav .count { color: var(--muted); font-size: 16px; min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
 
+
+/* ---------- run-02：重點與圖例 ---------- */
+:root { --hi: #ffe58a; --key: #b88a00; --llm-soft: #e4ecfb; --check: #17704f; --check-soft: #ddf1e8; }
+/* 重點句：一張最多一個，放這張最該記住的一句 */
+.key { position: relative; margin: 0 0 16px; padding: 12px 18px 12px 92px; background: #fff8dc; border-left: 6px solid var(--key); font-weight: 700; font-size: 25px; line-height: 1.45; }
+.key::before { content: "重點"; position: absolute; left: 18px; top: 13px; font-size: 17px; font-weight: 700; color: #fff; background: var(--key); padding: 1px 9px; border-radius: 3px; line-height: 1.5; }
+/* 重點螢光：一張最多兩處，只標關鍵短語；術語仍用 strong */
+.hi { white-space: nowrap; font-style: normal; font-weight: 700; background: linear-gradient(transparent 58%, var(--hi) 58%); padding: 0 2px; }
+/* 五站地圖：.here 是這一張講的站 */
+.map { display: flex; gap: 0; margin: 0 0 16px; padding: 0; counter-reset: st; }
+.map span { counter-increment: st; flex: 1; position: relative; font-size: 16px; color: var(--muted); padding: 6px 8px 6px 36px; border-top: 4px solid var(--line); white-space: nowrap; }
+.map span::before { content: counter(st); position: absolute; left: 6px; top: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--line); color: #fff; font-weight: 700; font-size: 14px; line-height: 22px; text-align: center; }
+.map span.here { color: var(--ink); font-weight: 700; border-top-color: var(--translate); }
+.map span.here::before { background: var(--translate); }
+.map span.done { border-top-color: #9fb0c3; }
+/* 大五站圖 */
+.stations { display: grid; grid-template-columns: repeat(5, 1fr); gap: 34px; margin: 10px 0 18px; counter-reset: st; }
+.stations > div { counter-increment: st; position: relative; padding: 46px 12px 14px; border: 2px solid var(--ink); border-radius: 6px; background: #fff; text-align: center; font-size: 21px; line-height: 1.35; }
+.stations > div::before { content: counter(st); position: absolute; left: 50%; top: -20px; margin-left: -20px; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #fff; font: 900 22px/40px var(--serif); }
+.stations > div:not(:last-child)::after { content: "→"; position: absolute; right: -29px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 22px; }
+.stations > div b { display: block; font-family: var(--serif); font-size: 23px; margin-bottom: 4px; }
+.stations > div small { display: block; font-size: 16px; color: var(--muted); }
+/* 誰負責：流程圖與五站圖的節點顏色，搭配 .legend */
+.flow li.llm, .stations > div.llm { border-color: var(--translate); background: var(--llm-soft); }
+.flow li.check, .stations > div.check { border-color: var(--check); background: var(--check-soft); }
+.flow li.person, .stations > div.person { border-style: dashed; }
+.stations > div.solver { background: var(--ink); color: #fff; }
+.stations > div.solver small { color: #d6dde6; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 17px; color: var(--muted); margin: 0 0 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend span::before { content: ""; width: 22px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; background: #fff; }
+.legend .llm::before { border-color: var(--translate); background: var(--llm-soft); }
+.legend .solver::before { background: var(--ink); }
+.legend .check::before { border-color: var(--check); background: var(--check-soft); }
+.legend .person::before { border-style: dashed; }
+/* 回圈：在流程下方畫一條回到第一步的線 */
+.flow.loop { padding-bottom: 34px; position: relative; }
+.flow.loop::before { content: ""; position: absolute; left: 24px; right: 24px; bottom: 10px; height: 22px; border: 2px dashed var(--muted); border-top: 0; border-radius: 0 0 8px 8px; }
+.flow.loop::after { content: "回到第一步"; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); padding: 0 10px; background: var(--paper); font-size: 15px; line-height: 20px; color: var(--muted); }
+.stations > div.solver::before { background: #fff; color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+/* 長條圖：class v0～v100 決定長度，數值寫在 <b> */
+.bars { margin: 6px 0 14px; }
+.bar { display: grid; grid-template-columns: 360px 1fr 150px; align-items: center; gap: 14px; margin: 0 0 8px; font-size: 20px; line-height: 1.3; }
+.bar i { display: block; height: 22px; background: var(--soft); border-radius: 3px; position: relative; }
+.bar i::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--v) * 1%); background: #9fb0c3; border-radius: 3px; }
+.bar.best i::after { background: var(--translate); }
+.bar b { font-variant-numeric: tabular-nums; }
+.v0{--v:0}.v1{--v:1}.v2{--v:2}.v3{--v:3}.v4{--v:4}.v5{--v:5}.v6{--v:6}.v7{--v:7}.v8{--v:8}.v9{--v:9}.v10{--v:10}.v11{--v:11}.v12{--v:12}.v13{--v:13}.v14{--v:14}.v15{--v:15}.v16{--v:16}.v17{--v:17}.v18{--v:18}.v19{--v:19}.v20{--v:20}.v21{--v:21}.v22{--v:22}.v23{--v:23}.v24{--v:24}.v25{--v:25}.v26{--v:26}.v27{--v:27}.v28{--v:28}.v29{--v:29}.v30{--v:30}.v31{--v:31}.v32{--v:32}.v33{--v:33}.v34{--v:34}.v35{--v:35}.v36{--v:36}.v37{--v:37}.v38{--v:38}.v39{--v:39}.v40{--v:40}.v41{--v:41}.v42{--v:42}.v43{--v:43}.v44{--v:44}.v45{--v:45}.v46{--v:46}.v47{--v:47}.v48{--v:48}.v49{--v:49}.v50{--v:50}.v51{--v:51}.v52{--v:52}.v53{--v:53}.v54{--v:54}.v55{--v:55}.v56{--v:56}.v57{--v:57}.v58{--v:58}.v59{--v:59}.v60{--v:60}.v61{--v:61}.v62{--v:62}.v63{--v:63}.v64{--v:64}.v65{--v:65}.v66{--v:66}.v67{--v:67}.v68{--v:68}.v69{--v:69}.v70{--v:70}.v71{--v:71}.v72{--v:72}.v73{--v:73}.v74{--v:74}.v75{--v:75}.v76{--v:76}.v77{--v:77}.v78{--v:78}.v79{--v:79}.v80{--v:80}.v81{--v:81}.v82{--v:82}.v83{--v:83}.v84{--v:84}.v85{--v:85}.v86{--v:86}.v87{--v:87}.v88{--v:88}.v89{--v:89}.v90{--v:90}.v91{--v:91}.v92{--v:92}.v93{--v:93}.v94{--v:94}.v95{--v:95}.v96{--v:96}.v97{--v:97}.v98{--v:98}.v99{--v:99}.v100{--v:100}
 /* ---------- 手機：改成由上往下閱讀 ---------- */
 @media (max-width: 760px) {
   body { background: var(--paper); }
@@ -184,6 +231,9 @@ details p { margin: 10px 0 0; color: var(--explain); }
   .stat { font-size: 54px; }
   .role h3 { font-size: 21px; }
   .flow li { font-size: 15px; padding: 6px 10px; }
+  /* run-02：手機上流程圖改成由上往下，箭頭朝下，不會指向空白 */
+  .flow { flex-direction: column; align-items: flex-start; gap: 22px; }
+  .flow li:not(:last-child)::after { content: "↓"; right: auto; left: 16px; top: auto; bottom: -21px; transform: none; font-size: 14px; }
   table { font-size: 14px; }
   table.wide { min-width: 560px; }
   .table-wrap:has(table.wide)::after { content: "← 表格可以左右滑動 →"; display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -192,6 +242,24 @@ details p { margin: 10px 0 0; color: var(--explain); }
   pre { font-size: 13px; }
   .steps li { padding-left: 44px; }
   .steps li::before { width: 30px; height: 30px; line-height: 30px; font-size: 16px; }
+  .key { font-size: 17px; padding: 10px 12px 10px 62px; }
+  .key::before { font-size: 13px; left: 10px; top: 11px; padding: 0 6px; }
+  .map { flex-wrap: wrap; }
+  .map span { flex: 0 0 auto; font-size: 12px; padding: 4px 6px 4px 26px; }
+  .map span::before { width: 17px; height: 17px; line-height: 17px; font-size: 11px; left: 4px; top: 5px; }
+  .stations { grid-template-columns: 1fr; gap: 12px; }
+  .stations > div { padding: 10px 12px 10px 54px; text-align: left; font-size: 15px; }
+  .stations > div::before { text-align: center; left: 12px; top: 50%; margin: -15px 0 0; width: 30px; height: 30px; font-size: 16px; line-height: 30px; }
+  .caption { font-size: 13px; }
+  .stations > div:not(:last-child)::after { content: "↓"; right: auto; left: 20px; top: auto; bottom: -18px; transform: none; font-size: 15px; }
+  .stations > div b { font-size: 16px; }
+  .stations > div small, .legend { font-size: 13px; }
+  .bar { grid-template-columns: 1fr 64px; gap: 4px 8px; font-size: 14px; }
+  .bar span { grid-column: 1 / -1; }
+  .bar i { height: 14px; }
+  .flow.loop { padding-bottom: 0; }
+  .flow.loop::before { display: none; }
+  .flow.loop::after { content: "↺ 做完最後一步，回到第一步"; position: static; transform: none; padding: 0; font-size: 12px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   details[open] p { animation: show 0.25s ease-out; }
